@@ -5,7 +5,6 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import javax.imageio.ImageIO;
@@ -34,15 +33,17 @@ public class LoginController {
         return "login/login";
     }
 
+    /**
+     * 首页
+     * @return
+     */
     @GetMapping(value = "index")
     public String index() {
-
         return "index";
     }
 
     /**
      * 生成验证码
-     *
      * @param response
      * @return
      * @throws Exception
