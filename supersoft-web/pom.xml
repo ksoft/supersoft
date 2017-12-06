@@ -1,22 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>supersoft</artifactId>
         <groupId>com.datuzi</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>supersoft-web</artifactId>
-    <packaging>war</packaging>
-    <name>supersoft-web Maven Webapp</name>
-    <url>http://maven.apache.org</url>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <org.apache.zookeeper.version>3.4.6</org.apache.zookeeper.version>
-    </properties>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.datuzi</groupId>
+	<artifactId>supersoft-web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>supersoft-web</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
 
     <dependencies>
         <dependency>
@@ -84,6 +89,13 @@
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
         </dependency>
+        <!--热启动，热部署依赖包-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>1.5.2.RELEASE</version>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
@@ -94,4 +106,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>

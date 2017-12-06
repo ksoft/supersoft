@@ -7,6 +7,7 @@ spring:
     name: supersoft-consumer
   cache:
     type: redis
+
 swaggerVersion: 1.0
 logging:
   config: classpath:config/logback-spring.xml
@@ -22,7 +23,7 @@ spring.jackson:
   date-format: yyyy-MM-dd HH:mm:ss
 
 supersoft:
-  staticPath: http://localhost:8092
+  staticPath:
 ---
 #development profile
 spring:

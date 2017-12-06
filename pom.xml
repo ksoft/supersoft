@@ -18,8 +18,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>1.5.3.RELEASE</version>
+        <relativePath/>
     </parent>
 
     <properties>
@@ -100,17 +100,10 @@
             <artifactId>persistence-api</artifactId>
             <version>1.0.2</version>
         </dependency>
-        <!--热启动，热部署依赖包-->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <version>1.5.1.RELEASE</version>
-            <optional>true</optional>
-        </dependency>-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
+            <version>1.2.0</version>
         </dependency>
 
         <!-- Swagger -->
