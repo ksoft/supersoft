@@ -1,0 +1,282 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100px;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    margin: 0 auto;
+    word-wrap: break-word;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #fff;
+    font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, STHeiti, "\5B8B\4F53", "Arial Narrow", HELVETICA;
+}
+
+body, html {
+    -webkit-touch-callout: none;
+    -webkit-overflow-scrolling: touch;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: 400;
+}
+
+img {
+    border: 0;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle
+}
+input,select{
+    border:none;
+    outline:none
+}
+textarea{
+    resize:none;
+    outline:none;
+    border:none;
+    overflow-y:hidden
+}
+ol, ul {
+    list-style: none
+}
+
+address, cite, dfn, em, i, var {
+    font-style: normal
+}
+
+a {
+    text-decoration: none
+}
+
+a:active, a:focus {
+    outline: 0
+}
+
+b, em, i {
+    font-style: normal;;
+    font-weight: normal;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+article, aside, details, figcaption, figure, footer, header, main, nav, section, summary {
+    display: block;
+}
+.top{
+    width:100%;
+    height:0.7rem;
+    float:left;
+    background:#e50012
+}
+.topLogo{
+    width:2.31rem;
+    height:0.7rem;
+    margin:0 auto;
+}
+.topLogo img{
+    width:100%;
+    height:0.7rem;
+    float:left;
+    overflow:hidden
+}
+.middle{
+    width:100%;
+    float:left;
+    padding-bottom:0.1rem;
+    background:#f1f1f1
+}
+.middleD{
+    width:100%;
+    height:1.25rem;
+    float:left;
+    padding:0.1rem 0;
+    position:relative;
+}
+.middleD p{
+    width:90%;
+    float:left;
+    margin-left:0.44rem;
+    display:inline;
+    line-height:0.44rem;
+}
+.middleD p span{
+    float:left;
+    color:#666;
+    font-size:0.22rem;
+}
+.middleD p b{
+    float:left;
+    margin-left:0.1rem;
+    display:inline;
+    color:#333;
+    font-size:0.3rem;
+}
+.middlePosition{
+    width:21%;
+    position:absolute;
+    top:0.5rem;
+    right:0.44rem;
+    text-align:center;
+}
+.middlePosition h6{
+    width:100%;
+    float:left;
+    color:#f03300;
+    font-size:0.3rem;
+}
+.middlePosition label{
+    width:100%;
+    float:left;
+    color:#666;
+    font-size:0.18rem;
+}
+.middle img{
+    width:100%;
+    float:left;
+    margin-top:0.1rem;
+}
+.dajiashuo{
+    width:100%;
+    float:left;
+}
+.djsTitle{
+    width:100%;
+    height:0.69rem;
+    float:left;
+    line-height:0.69rem;
+    border-bottom:0.01rem #d2d2d2 solid
+}
+.djsTitle span{
+    width:0.3rem;
+    height:0.29rem;
+    float:left;
+    margin-top:0.2rem;
+    margin-left:0.44rem;
+    display:inline;
+    background:url(../img/djs.png) no-repeat;
+    background-size:contain;
+}
+.djsTitle b{
+    float:left;
+    margin-left:0.1rem;
+    display:inline;
+    color:#e50012;
+    font-size:0.3rem;
+}
+.djsBox{
+    width:100%;
+    float:left;
+}
+.djsBoxLi{
+    width:100%;
+    float:left;
+    border-bottom:0.01rem #d2d2d2 solid
+}
+.djsBoxDiv{
+    width:88%;
+    margin:0.25rem auto;
+}
+.djsBoxDivLeft{
+    float:left;
+}
+.djsBoxDivLeft img{
+    width:0.72rem;
+    height:0.72rem;
+    float:left;
+    overflow:hidden;
+}
+.djsBoxDivRight{
+    width:80%;
+    float:left;
+    margin-left:0.1rem;
+}
+.djsBoxDivRight b{
+    width:100%;
+    float:left;
+    color:#ff7800;
+    font-size:0.3rem;
+}
+.djsBoxDivRight p{
+    width:100%;
+    float:left;
+    color:#333;
+    font-size:0.3rem;
+}
+.djsBoxDivRight label{
+    width:100%;
+    float:left;
+    color:#999;
+    font-size:0.22rem;
+}
+.djsBoxDivRight ol{
+    width:100%;
+    float:left;
+}
+.djsBoxDivRight ol li{
+    float:left;
+    margin-top:0.08rem;
+    margin-right:0.08rem;
+    display:inline;
+}
+.djsBoxDivRight ol li img{
+    width:1.7rem;
+    height:1.7rem;
+    float:left;
+    overflow:hidden;
+}
+.djsBoxDivRightDiv{
+    width:100%;
+    height:0.6rem;
+    line-height:0.6rem;
+    float:left;
+    cursor:pointer
+}
+.djsBoxDivRightDiv h5{
+    float:left;
+    color:#999;
+    font-size:0.22rem;
+}
+.djsBoxDivRightDiv h4{
+    float:right;
+    margin-right:10%;
+    color:#666;
+    font-size:0.3rem;
+}
+.djsBoxDivRightDiv h4.djsBoxDivRightColor{
+    color:#ff5000;
+}
+.djsBoxDivRightDiv h4 b{
+    width:0.36rem;
+    height:0.4rem;
+    float:left;
+    margin-top:0.12rem;
+    overflow:hidden;
+    background:url(../img/z1.png) no-repeat;
+    background-size:contain;
+}
+.djsBoxDivRightDiv h4 b.djsBoxDivRightB{
+    background:url(../img/z2.png) no-repeat;
+    background-size:contain;
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
+	<title>微信宣传页</title>
+	<style th:inline="text">
+	 *{
+		margin: 0;
+		padding: 0;
+	}
+
+	html {
+		font-size: 100px;
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	body {
+		min-width: 320px;
+		margin: 0 auto;
+		word-wrap: break-word;
+		-webkit-user-select: none;
+		-webkit-tap-highlight-color: transparent;
+		background-color: #fff;
+		font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, STHeiti, "\5B8B\4F53", "Arial Narrow", HELVETICA;
+	}
+
+	body, html {
+		-webkit-touch-callout: none;
+		-webkit-overflow-scrolling: touch;
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-size: 100%;
+		font-weight: 400;
+	}
+
+	img {
+		border: 0;
+		max-width: 100%;
+		height: auto;
+		vertical-align: middle
+	}
+	input,select{
+		border:none;
+		outline:none
+	}
+	textarea{
+		resize:none;
+		outline:none;
+		border:none;
+		overflow-y:hidden
+	}
+	ol, ul {
+		list-style: none
+	}
+
+	address, cite, dfn, em, i, var {
+		font-style: normal
+	}
+
+	a {
+		text-decoration: none
+	}
+
+	a:active, a:focus {
+		outline: 0
+	}
+
+	b, em, i {
+		font-style: normal;;
+		font-weight: normal;
+	}
+
+	table {
+		border-collapse: collapse;
+		border-spacing: 0
+	}
+
+	article, aside, details, figcaption, figure, footer, header, main, nav, section, summary {
+		display: block;
+	}
+	.top{
+		width:100%;
+		height:8.6rem;
+		/*background:url(../static/img/gr_1.png) no-repeat;*/
+		background:url([[${staticPath}+'/img/gr_1.png']]) no-repeat;
+		background-size:contain
+	}
+	.middle{
+		width:100%;
+		margin-top:0.48rem;
+	}
+	.midBox{
+		width:50%;
+		float:left;
+	}
+	.midBox_1{
+		width:0.84rem;
+		height:0.84rem;
+		float:left;
+		margin-left:0.44rem;
+		display:inline;
+		/*background:url(../static/img/gr_2.png) no-repeat;*/
+		background:url([[${staticPath}+'/img/gr_2.png']]) no-repeat;
+		background-size:contain
+	}
+	.midBox_2{
+		width:0.84rem;
+		height:0.84rem;
+		float:left;
+		margin-left:0.44rem;
+		display:inline;
+		/*background:url(../static/img/gr_3.png) no-repeat;*/
+		background:url([[${staticPath}+'/img/gr_3.png']]) no-repeat;
+		background-size:contain
+	}
+	.midText{
+		width:60%;
+		float:left;
+		margin-left:0.22rem;
+		display:inline;
+	}
+	.midText p{
+		width:100%;
+		height:0.42rem;
+		float:left;
+		line-height:0.42rem;
+		font-size:0.3rem;
+		color:#f67502;
+	}
+	.midText span{
+		width:100%;
+		height:0.42rem;
+		float:left;
+		line-height:0.42rem;
+		font-size:0.22rem;
+		color:#000;
+	}
+	.line{
+		width:90%;
+		height:0.02rem;
+		float:left;
+		margin-top:0.44rem;
+		margin-left:5%;
+		display:inline;
+		background:#e5e5e5;
+	}
+	.footer{
+		width:100%;
+		float:left;
+		margin-top:0.42rem;
+		margin-bottom:0.5rem;
+	}
+	.footer b{
+		width:1.7rem;
+		height:0.76rem;
+		float:left;
+		text-indent:0.4rem;
+		margin-left:0.46rem;
+		display:inline;
+		/*background:url(../../static/img/gr_4.png) no-repeat;*/
+		background:url([[${staticPath}+'/img/gr_4.png']]) no-repeat;
+		background-size:contain;
+		color:#f67502;
+		font-size:0.2rem;
+		line-height:0.76rem;
+	}
+	.footer div{
+		width:70%;
+		float:left;
+	}
+	.footer div p{
+		width:90%;
+		height:0.38rem;
+		float:left;
+		margin-left:4%;
+		display:inline;
+		line-height:0.38rem;
+		color:#999;
+		font-size:0.22rem;
+	}
+	</style>
+</head>
+<body>
+	<div class="top"></div>
+	<div class="middle">
+		<div class="midBox">
+			<b class="midBox_1"></b>
+			<div class="midText">
+				<p>合作服务区内</p>
+				<span>换备胎，补胎免费</span>
+			</div>
+		</div>
+		<div class="midBox">
+			<b class="midBox_2"></b>
+			<div class="midText">
+				<p>广东部分地区</p>
+				<span>路&nbsp;上&nbsp;救&nbsp;援&nbsp;免&nbsp;费</span>
+			</div>
+		</div>
+	</div>
+	<div class="line"></div>
+	<div class="footer">
+		<b>温馨提示</b>
+		<div>
+			<p>每条轮胎只享受一次免费服务</p>
+			<p>一个车牌一个自然年内只有三次免费服务机会</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+	(function (doc, win) {
+	  var docEl = doc.documentElement,
+	    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	    recalc = function () {
+	      var clientWidth = docEl.clientWidth;
+	      if (!clientWidth) return;
+	      docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+	    };
+
+	  if (!doc.addEventListener) return;
+	  win.addEventListener(resizeEvt, recalc, false);
+	  doc.addEventListener('DOMContentLoaded', recalc, false);
+	})(document, window);
+	</script>
+</body>
+</html>

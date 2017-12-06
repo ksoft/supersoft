@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="lazyLoadingEnabled" value="false" />
+    </settings>
+
+
+
+    <typeAliases>
+        <!-- 实体别名 -->
+
+        <!-- vo别名 -->
+
+    </typeAliases>
+
+
+    <!-- 打印SQL插件 -->
+    <plugins>
+        <plugin interceptor="com.ksoft.kdm.interceptor.MybatisInterceptor"></plugin>
+    </plugins>
+
+    <!-- 注意：配置拦截器的时候需要注意plugins的位置,plugins位置顺序如下：（否则会解析报错） -->
+    <!-- "configuration" 的内容必须匹配 "(properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,plugins?,environments?,databaseIdProvider?,mappers?) -->
+</configuration>

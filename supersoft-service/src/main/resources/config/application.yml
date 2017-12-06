@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: dev
+  session:
+    store-type: none
+  application:
+      name: supersoft-provider
+logging:
+  config: classpath:config/logback-spring.xml
+server:
+  port: 8081
+  tomcat:
+    access_log_enabled: true
+    basedir: target/tomcat
+---
+#development profile
+spring:
+  profiles: dev
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/kdm?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+security:
+  basic:
+    enabled: true #开启认证，客户端调用服务时，需要在http header里加  Authorization属性，值为:Basic Base64(user.name+:+user.passwrod)
+  user:
+    name: serviceuser
+    password: 123456
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eurekauser:123456@localhost:8761/eureka  #注册 中心已经开启认证
+  instance:
+    prefer-ip-address: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2

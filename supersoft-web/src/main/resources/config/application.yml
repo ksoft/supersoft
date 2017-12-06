@@ -1,0 +1,85 @@
+spring:
+  profiles:
+    active: dev
+  session:
+    store-type: none
+  application:
+    name: supersoft-consumer
+  cache:
+    type: redis
+swaggerVersion: 1.0
+logging:
+  config: classpath:config/logback-spring.xml
+server:
+  port: 8092
+  tomcat:
+    access_log_enabled: true
+    basedir: target/tomcat
+
+#Jackson配置
+spring.jackson:
+  #default-property-inclusion: non_default
+  date-format: yyyy-MM-dd HH:mm:ss
+
+supersoft:
+  staticPath: http://localhost:8092
+---
+#development profile
+spring:
+  profiles: dev
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0 # Redis数据库索引（默认为0）
+    password:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+      timeout: 0
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eurekauser:123456@localhost:8761/eureka  #注册 中心已经开启认证
+  instance:
+    prefer-ip-address: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
+swagger:
+    doc-version: ${swaggerVersion}
+    enabled: true
+
+kaptcha:
+  session:
+    key: kaptcha.code
+  #border: no
+  #渲染效果：水纹：WaterRipple；鱼眼：FishEyeGimpy；阴影：ShadowGimpy
+  obscurificator:
+    impl: com.google.code.kaptcha.impl.WaterRipple
+  #不要噪点
+  noise:
+    impl: com.google.code.kaptcha.impl.NoNoise
+  image:
+    width: 90
+    height: 33
+  textproducer:
+    font:
+      size: 25
+      color: black
+    char:
+      length: 4
+      space: 5
+  #和登录框背景颜色一致
+  background:
+    clear:
+      from: 247,247,247
+      to: 247,247,247
+
+
+management:
+  security:
+    enabled: false

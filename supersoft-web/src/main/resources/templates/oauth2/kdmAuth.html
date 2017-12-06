@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>KDM--登陆</title>
+    <link th:href="${staticPath}+'/css/login.css'" rel="stylesheet" type="text/css" href="../../static/css/login.css"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link th:href="${staticPath}+'/css/bootstrap.min.css?v=3.3.6'" rel="stylesheet"/>
+    <link th:href="${staticPath}+'/css/font-awesome.css?v=4.4.0'" rel="stylesheet"/>
+    <link th:href="${staticPath}+'/css/animate.css'" rel="stylesheet"/>
+    <link th:href="${staticPath}+'/css/style.css?v=4.1.0'" rel="stylesheet"/>
+</head>
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <div>
+
+            <h1 class="logo-name">H+</h1>
+
+        </div>
+        <h3>欢迎使用 H+</h3>
+        <input type="hidden" id="client_id" th:value="${client_id}"/>
+        <input type="hidden" id="response_type" th:value="${response_type}"/>
+        <input type="hidden" id="redirect_uri" th:value="${redirect_uri}"/>
+        <form id="loginForm" class="m-t" role="form" action="">
+            <div class="form-group">
+                <input type="text" id="username" class="form-control" placeholder="用户名"/>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" class="form-control" placeholder="密码" required=""/>
+            </div>
+            <div class="loginDivX">
+                <div class="loginDivX_1">
+                    <b class="loginDivB"><img th:src="${staticPath}+'/img/yzm.png'" src="../../static/img/yzm.png"/></b>
+                    <input id="valid-code" type="text" class="loginDivInp loginDivInp_2" placeholder="请输入验证码" />
+                </div>
+                <div  class="loginDivX_2"><img class="verify-code" th:src="@{/img/code}" src="" alt="验证码" title="点击更换验证码"/></div>
+            </div>
+            <div class="next">
+                <b class="next_1" id="rem-me"></b>
+                <span class="next_2">下次自动登录</span>
+                <span  class="next_3 verify-code">点击可更换验证码</span>
+            </div>
+
+            <div th:text="${message}" class="prompt err-msg">帐号或密码输入错误</div>
+            <button type="button" id="login" class="btn btn-primary block full-width m-b">登 录</button>
+
+
+            <p class="text-muted text-center"> <a href="../login/login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
+            </p>
+
+        </form>
+    </div>
+
+</div>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<!--统计代码，可删除-->
+
+</body>
+<!-- 全局js -->
+<script type="text/javascript" th:src="${staticPath}+'/js/libs/jquery.min.js?v=2.1.4'" src="../../static/js/libs/jquery.min.js"></script>
+<script type="text/javascript" th:src="${staticPath}+'/js/bootstrap.min.js?v=3.3.6'"></script>
+<script type="text/javascript" th:src="${staticPath}+'/js/libs/jquery.md5.js'" src="../../static/js/libs/jquery.min.js"></script>
+<script type="text/javascript" th:src="${staticPath}+'/js/libs/jquery.cookie.js'" src="../../static/js/libs/jquery.min.js"></script>
+<script th:inline="javascript">
+    $(function(){
+
+        $("body").keydown(function() {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                login();
+            }
+        });
+
+        $('#yzm').focus(function(){
+            var text_val=$(this).val();
+            if(text_val=='请输入验证码')
+            {
+                $(this).val('');
+            }
+        });
+        $('#yzm').blur(function(){
+            var text_val=$(this).val();
+            if(text_val=='')
+            {
+                $(this).val('请输入验证码');
+            }
+        });
+        $("#login").click(function () {
+            login();
+        });
+        $(".verify-code").click(function(){
+            refreshCode();
+        });
+    });
+    function login() {
+        var rem = "off";
+        if($("b#rem-me").hasClass("next_1")){
+            rem = "on";
+        }
+        if($.trim($("#username").val())==''){
+            alert("请输入用户名");
+            return;
+        }
+        if($.trim($("#password").val())==''){
+            alert("请输入密码");
+            return;
+        }
+        if($.trim($("input#valid-code").val())==''){
+            alert("验证码为空");
+            return;
+        }
+        var client_id=$("#client_id").val();
+        var response_type=$("#response_type").val();
+        var redirect_uri=$("#redirect_uri").val();
+
+        var data={
+            username:$("#username").val(),
+            password:$("#password").val(),
+            remember:rem,
+            code:$("input#valid-code").val()
+        };
+        $.ajax({
+            url:"/auth/login",
+            type:'post',
+            data:data,
+            success:function (result) {
+                console.log(result)
+                if(result.success){
+                    /*<![CDATA[*/
+                    window.location.href="/oauth/authorize?client_id="+client_id+"&response_type="+response_type+"&redirect_uri="+redirect_uri;
+                    /*]]>*/
+                }else {
+                    $("div.err-msg").text(result.message);
+                    refreshCode();
+                }
+            }
+        })
+    }
+
+    function refreshCode() {
+        $("img.verify-code").attr("src","/img/code?timestamp="+new Date().getTime());
+    }
+</script>
+</html>

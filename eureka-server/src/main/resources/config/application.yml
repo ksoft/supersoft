@@ -1,0 +1,16 @@
+server:
+  port: 8761
+security:
+  basic:
+    enabled: true #开启认证
+  user:
+    name: eurekauser
+    password: 123456
+eureka:
+  server:
+    enableSelfPreservation: false
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://eurekauser:123456@localhost:8761/eureka
