@@ -57,7 +57,7 @@ swagger:
 kaptcha:
   session:
     key: kaptcha.code
-  #border: no
+  border: yes
   #渲染效果：水纹：WaterRipple；鱼眼：FishEyeGimpy；阴影：ShadowGimpy
   obscurificator:
     impl: com.google.code.kaptcha.impl.WaterRipple

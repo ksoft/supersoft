@@ -1,93 +1,167 @@
-html{height: 100%;}
-body.signin {
-    background: #18c8f6;
-    height: auto;
-    background:url("../img/login-background.jpg") no-repeat center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: rgba(255,255,255,.95);
+@charset "utf-8";
+/*
+* @Author: Larry
+* @Date:   2016-12-15 17:20:54
+* @Last Modified by:   qinsh
+* @Last Modified time: 2016-12-20 11:16:07
+* +----------------------------------------------------------------------
+* | LarryBlogCMS [ LarryCMS网站内容管理系统 ]
+* | Copyright (c) 2016-2017 http://www.larrycms.com All rights reserved.
+* | Licensed ( http://www.larrycms.com/licenses/ )
+* | Author: qinshouwei <313492783@qq.com>
+* +----------------------------------------------------------------------
+*/
+@font-face {
+    font-family: 'adminthemesregular';
+    src: url('font/adminthemes-webfont.eot');
+    src: url('font/adminthemes-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/adminthemes-webfont.woff2') format('woff2'),
+         url('font/adminthemes-webfont.woff') format('woff'),
+         url('font/adminthemes-webfont.ttf') format('truetype'),
+         url('font/adminthemes-webfont.svg#adminthemesregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
-
-.signinpanel {
-    width: 750px;
-    margin: 10% auto 0 auto;
+.layui-canvs{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: -1;
 }
-
-.signinpanel .logopanel {
-    float: none;
-    width: auto;
-    padding: 0;
-    background: none;
+.layui-layout-login{
+    width:350px;
+    height:auto;
+    overflow:hidden;
+    margin:10% auto 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    box-shadow:0 -15px 30px #0d957a;
+    border-radius:5px;
+    z-index: 1000;
 }
-
-.signinpanel .signin-info ul {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
+.layui-layout-login h1{
+	font-size:25px;
+	font-weight:bold;
+	text-align:center;
+	color:#45bda6;
+	text-shadow:0 0 1px #0e947a;
+	margin-bottom:15px;
 }
-
-.signinpanel .form-control {
-    display: block;
-    margin-top: 15px;
+.layui-layout-login h1 strong{
+	display:block;
 }
-
-.signinpanel .uname {
-    background: #fff url(../img/user.png) no-repeat 95% center;color:#333;
+.layui-layout-login h1 em{
+	display:block;
+	font-size:16px;
+	margin-top:8px;
 }
-
-.signinpanel .pword {
-    background: #fff url(../img/locked.png) no-repeat 95% center;color:#333;
+.layui-layout-login .larry-login{
+	margin:10px 0;
+	height:42px;
+	overflow:hidden;
+	position:relative;
 }
-
-.signinpanel .btn {
-    margin-top: 15px;
+.larry-login .login_txtbx{
+	font-size:14px;
+	height:26px;
+	line-height:26px;
+	padding:8px 5%;
+	width:90%;
+	text-indent:2em;
+	border:none;
+	background:#5cbdaa;
+	color:white;
 }
-
-.signinpanel form {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255,255,255,.3);
-    -moz-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
-    -webkit-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
-    box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    padding: 30px;
+.larry-login  .login_txtbx::-webkit-input-placeholder {
+	color:#f4f4f4;
+	line-height:inherit;
+} 
+.larry-login  .login_txtbx:-moz-placeholder {
+	color:#f4f4f4;
+	line-height:inherit;
+} 
+.larry-login  .login_txtbx::-moz-placeholder {
+	color:#f4f4f4;
+	line-height:inherit;
 }
-
-.signup-footer{border-top: solid 1px rgba(255,255,255,.3);margin:20px 0;padding-top: 15px;}
-
-@media screen and (max-width: 768px) {
-    .signinpanel,
-    .signuppanel {
-        margin: 0 auto;
-        width: 420px!important;
-        padding: 20px;
-    }
-    .signinpanel form {
-        margin-top: 20px;
-    }
-    .signup-footer {
-        margin-bottom: 10px;
-    }
-    .signuppanel .form-control {
-        margin-bottom: 10px;
-    }
-    .signup-footer .pull-left,
-    .signup-footer .pull-right {
-        float: none !important;
-        text-align: center;
-    }
-    .signinpanel .signin-info ul {
-        display: none;
-    }
+.larry-login  .login_txtbx:focus{
+	background:#55b7a4;
 }
-@media screen and (max-width: 320px) {
-    .signinpanel,
-    .signuppanel {
-        margin:0 20px;
-        width:auto;
-    }
+.larry-login:before{
+	font-family:'adminthemesregular';
+	position:absolute;
+	top:0;
+	left:10px;
+	height:42px;
+	line-height:42px;
+	font-size:20px;
+	color:#0c9076;
+}
+.layui-user-icon:before{content:"u";}
+.layui-pwd-icon:before{content:"p";}
+.layui-val-icon:before{content:"n";}
+.layui-code-box{
+	width:100%;
+	height: 42px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	background:#5cbdaa;
+	font-size:14px;
+	height:26px;
+	line-height:26px;
+}
+.layui-code-box input.login_txtbx{
+	width:45%;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	float: left;
+	color:white;
+	outline:none;
+	border:none;
+}
+.layui-code-box input.login_txtbx:focus{
+	font-size: 20px;
+}
+.layui-code-box  .verifyImg{
+	display: block;
+	width: 43%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	cursor: pointer;
+}
+.layui-submit .submit_btn{
+	width:100%;
+	height:42px;
+	border:none;
+	font-size:16px;
+	background:#FF5722;
+	color:#f8f8f8;
+	cursor: pointer;
+}
+.submit_btn:hover{
+	background:#009688;
+	color:#f4f4f4;
+}
+.layui-login-text{
+	margin:10px 0;
+	height:60px;
+	overflow:hidden;
+	position:relative;
+}
+.layui-login-text p{
+	color:#53c6b0;
+	font-size:14px;
+	text-align:center;
+	margin:5px 0;
+}
+.layui-login-text a{
+	color:#53c6b0;
+	font-size:14px;
+}
+.layui-login-text a:hover{
+	text-decoration: underline;
 }
