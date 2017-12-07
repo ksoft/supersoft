@@ -1,10 +1,19 @@
 package com.datuzi.supersoft.controller;
 
+import com.datuzi.dto.LoginUserDto;
+import com.datuzi.dto.ResponseDto;
+import com.datuzi.dto.ResponseDtoFactory;
+import com.datuzi.service.LoginService;
 import com.datuzi.supersoft.constants.Constants;
+import com.datuzi.supersoft.dto.LoginDto;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import javax.imageio.ImageIO;
@@ -23,14 +32,31 @@ import java.io.OutputStream;
 public class LoginController {
     @Autowired
     private DefaultKaptcha defaultKaptcha;
+    @Autowired
+    private LoginService loginService;
 
     /**
      * 本系统登录
      * @return
      */
-    @GetMapping(value = "login")
-    public String login(){
-        return "login/login";
+    @PostMapping(value = "login")
+    @ResponseBody
+    public ResponseDto<Boolean> login(LoginDto loginDto, HttpSession session){
+        String code=session.getAttribute(Constants.SESSION_KEY_KAPTCHA).toString();
+        if(StringUtils.isEmpty(code)){
+            return ResponseDtoFactory.toError("验证码不能为空");
+        }
+        if(!code.equals(loginDto.getCode())){
+            return ResponseDtoFactory.toError("验证码不正确");
+        }
+        LoginUserDto loginUserDto=new LoginUserDto();
+        BeanUtils.copyProperties(loginDto,loginUserDto);
+
+        ResponseDto<Boolean> result=loginService.login(loginUserDto);
+        if(result.getCode()==0 && result.getData().equals(Boolean.TRUE)){
+            return ResponseDtoFactory.toSuccess("登录成功",Boolean.TRUE);
+        }
+        return ResponseDtoFactory.toError("登录失败");
     }
 
     /**

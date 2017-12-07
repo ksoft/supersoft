@@ -21,10 +21,10 @@
 		 <em>Management System</em>
 	</h1>
 	<div class="layui-user-icon larry-login">
-		 <input type="text" name="user_name" placeholder="账号" class="login_txtbx"/>
+		 <input type="text" id="userName" name="userName" placeholder="账号" class="login_txtbx"/>
 	</div>
 	<div class="layui-pwd-icon larry-login">
-		 <input type="password" name="password" placeholder="密码" class="login_txtbx"/>
+		 <input type="password" id="password" name="password" placeholder="密码" class="login_txtbx"/>
 	</div>
     <div class="layui-val-icon larry-login">
         <div class="layui-code-box">
@@ -32,6 +32,7 @@
             <img class="verifyImg" th:src="@{/img/code}" src="" alt="验证码" title="点击更换验证码"/>
         </div>
     </div>
+    <div th:text="${message}" class="prompt err-msg"></div>
     <div class="layui-submit larry-login">
     	<input type="button" value="立即登陆" id="login" class="submit_btn"/>
     </div>
@@ -47,15 +48,15 @@ $(function(){
             login();
         }
     });
-
-    $('#yzm').focus(function(){
+    $('#code').focus(function(){
+        $("div.err-msg").text("");
         var text_val=$(this).val();
         if(text_val=='请输入验证码')
         {
             $(this).val('');
         }
     });
-    $('#yzm').blur(function(){
+    $('#code').blur(function(){
         var text_val=$(this).val();
         if(text_val=='')
         {
@@ -65,16 +66,12 @@ $(function(){
     $("#login").click(function () {
         login();
     });
-    $(".verify-code").click(function(){
+    $(".verifyImg").click(function(){
         refreshCode();
     });
 
     function login() {
-        var rem = "off";
-        if($("b#rem-me").hasClass("next_1")){
-            rem = "on";
-        }
-        if($.trim($("#username").val())==''){
+        if($.trim($("#userName").val())==''){
             alert("请输入用户名");
             return;
         }
@@ -82,21 +79,21 @@ $(function(){
             alert("请输入密码");
             return;
         }
-        if($.trim($("input#valid-code").val())==''){
+        if($.trim($("#code").val())==''){
             alert("验证码为空");
             return;
         }
         var data={
-            username:$("#username").val(),
+            userName:$("#userName").val(),
             password:$("#password").val(),
-            remember:rem,
-            code:$("input#valid-code").val()
+            code:$("#code").val()
         };
         $.ajax({
-            url:"/auth/login",
+            url:"/login",
             type:'post',
             data:data,
             success:function (result) {
+                console.log(result)
                 if(result.success){
                     window.location.href="/index";
                 }else {
@@ -108,7 +105,9 @@ $(function(){
     }
 
     function refreshCode() {
-        $("img.verify-code").attr("src","/img/code?timestamp="+new Date().getTime());
+        $("div.err-msg").text("");
+        $("#code").val("");
+        $("img.verifyImg").attr("src","/img/code?timestamp="+new Date().getTime());
     }
 });
 </script>
