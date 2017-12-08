@@ -21,7 +21,8 @@ public class AppConfig {
     @Bean(name="messageSource")
     public ResourceBundleMessageSource resourceBundleMessageSource(){
         ResourceBundleMessageSource source=new ResourceBundleMessageSource();
-        source.setBasename("supersoft");//国际化文件以supersoft开头
+        //国际化文件以supersoft开头
+        source.setBasename("supersoft");
         return source;
     }
 }
