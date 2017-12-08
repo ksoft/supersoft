@@ -74,12 +74,12 @@
     <div class="layui-side larrycms-left" id="larry-side">
         <div class="layui-side-scroll" >
             <!-- 管理员信息      -->
-            <!--<div class="user-info">
+            <div class="user-info">
                  <div class="photo">
-                     <img src="images/user.jpg" alt="">
+                     <img th:src="${staticPath}+'/images/user.jpg'" alt="">
                  </div>
                  <p>admin您好！欢迎登录</p>
-            </div>-->
+            </div>
             <!-- 系统菜单 -->
             <div class="sys-menu-box" >
                 <ul class="layui-nav layui-nav-tree" id="larrySideNav" lay-filter="side" >
