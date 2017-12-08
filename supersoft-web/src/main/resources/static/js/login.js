@@ -54,15 +54,15 @@ layui.use(['jquery','layer','form'],function(){
 
         function login() {
             if($.trim($("#userCode").val())==''){
-                layer.tips('请输入用户名', '#userCode',{tips:[2,"red"]});
+                layer.tips('请输入用户名', '#userCode',{tips:[4,"orange"]});
                 return;
             }
             if($.trim($("#password").val())==''){
-                layer.tips('请输入密码', '#password',{tips:[2,"red"]});
+                layer.tips('请输入密码', '#password',{tips:[4,"orange"]});
                 return;
             }
             if($.trim($("#code").val())==''){
-                layer.tips('验证码为空', '#code',{tips:[2,"red"]});
+                layer.tips('验证码为空', '#code',{tips:[4,"orange"]});
                 return;
             }
             var data={
