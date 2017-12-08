@@ -1,6 +1,6 @@
 var navtab;
 layui.config({
-    base: '../backstage/js/lib/' //layui自定义layui组件目录
+    base: '/js/lib/' //layui自定义layui组件目录
 }).extend({
     larry: 'larry',
     navtab: 'navtab',
