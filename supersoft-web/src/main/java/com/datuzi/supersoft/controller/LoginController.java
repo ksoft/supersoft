@@ -1,10 +1,10 @@
 package com.datuzi.supersoft.controller;
 
+import com.datuzi.constant.Constants;
 import com.datuzi.dto.LoginUserDto;
 import com.datuzi.dto.ResponseDto;
 import com.datuzi.dto.ResponseDtoFactory;
 import com.datuzi.service.LoginService;
-import com.datuzi.supersoft.constants.Constants;
 import com.datuzi.supersoft.dto.LoginDto;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang.StringUtils;

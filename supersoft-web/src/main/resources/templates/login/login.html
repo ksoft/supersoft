@@ -2,22 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title th:text="#{app.name}">后台登录</title>
+    <title th:text="#{app.name}">后台登录</title>
+	<meta name="keywords" content="LarryCMS后台登录界面" />
+    <meta name="description" content="LarryCMS Version:1.09" />
+	<meta name="Author" content="larry" />
 	<meta name="renderer" content="webkit">	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
 	<meta name="apple-mobile-web-app-capable" content="yes">	
-	<meta name="format-detection" content="telephone=no">
-    <link th:href="${staticPath}+'/vendor/layui/css/layui.css'" rel="stylesheet"/>
-    <link th:href="${staticPath}+'/css/login.css'" rel="stylesheet"/>
-    <script type="text/javascript" th:src="${staticPath}+'/vendor/jquery/jquery.js'"></script>
-    <script type="text/javascript" th:src="${staticPath}+'/vendor/layui/layui.all.js'"></script>
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="Shortcut Icon" href="/favicon.ico" />
+	<link rel="stylesheet" type="text/css" th:href="${staticPath}+'/plugins/layui/css/layui.css'" media="all">
+	<link rel="stylesheet" type="text/css" th:href="${staticPath}+'/css/login.css'" media="all">
+    <script type="text/javascript" th:src="${staticPath}+'/plugins/layui/layui.js'"></script>
+    <script type="text/javascript" th:src="${staticPath}+'/plugins/jquery/jquery-1.12.4.min.js'"></script>
+    <script type="text/javascript" th:src="${staticPath}+'/plugins/jquery/jparticle.jquery.js'"></script>
+    <script type="text/javascript" th:src="${staticPath}+'/js/login.js'"></script>
 </head>
 <body>
+<div class="larry-canvas" id="canvas"></div>
 <div class="layui-layout layui-layout-login">
 	<h1>
-		 <strong th:text="#{app.name}"></strong>
+        <strong th:text="#{app.name}"></strong>
 		 <em>Management System</em>
 	</h1>
 	<div class="layui-user-icon larry-login">
@@ -37,79 +44,79 @@
     	<input type="button" value="立即登陆" id="login" class="submit_btn"/>
     </div>
     <div class="layui-login-text">
-    	<p>© 2016-2017 SuperSoft 版权所有</p>
+        <p>© 2016-2017 SuperSoft 版权所有</p>
         <p>QQ: <a href="http://www.datuzi.vip" title="">1158575655</a></p>
     </div>
 </div>
 <script type="text/javascript">
-$(function(){
-    $("body").keydown(function() {
-        if (event.keyCode == "13") {//keyCode=13是回车键
-            login();
-        }
-    });
-    $('#code').focus(function(){
-        $("div.err-msg").text("");
-        var text_val=$(this).val();
-        if(text_val=='请输入验证码')
-        {
-            $(this).val('');
-        }
-    });
-    $('#code').blur(function(){
-        var text_val=$(this).val();
-        if(text_val=='')
-        {
-            $(this).val('请输入验证码');
-        }
-    });
-    $("#login").click(function () {
-        login();
-    });
-    $(".verifyImg").click(function(){
-        refreshCode();
-    });
-
-    function login() {
-        if($.trim($("#userName").val())==''){
-            alert("请输入用户名");
-            return;
-        }
-        if($.trim($("#password").val())==''){
-            alert("请输入密码");
-            return;
-        }
-        if($.trim($("#code").val())==''){
-            alert("验证码为空");
-            return;
-        }
-        var data={
-            userName:$("#userName").val(),
-            password:$("#password").val(),
-            code:$("#code").val()
-        };
-        $.ajax({
-            url:"/login",
-            type:'post',
-            data:data,
-            success:function (result) {
-                console.log(result)
-                if(result.success){
-                    window.location.href="/index";
-                }else {
-                    $("div.err-msg").text(result.message);
-                    refreshCode();
-                }
+    $(function(){
+        $("body").keydown(function() {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                login();
             }
-        })
-    }
+        });
+        $('#code').focus(function(){
+            $("div.err-msg").text("");
+            var text_val=$(this).val();
+            if(text_val=='请输入验证码')
+            {
+                $(this).val('');
+            }
+        });
+        $('#code').blur(function(){
+            var text_val=$(this).val();
+            if(text_val=='')
+            {
+                $(this).val('请输入验证码');
+            }
+        });
+        $("#login").click(function () {
+            login();
+        });
+        $(".verifyImg").click(function(){
+            refreshCode();
+        });
 
-    function refreshCode() {
-        $("div.err-msg").text("");
-        $("#code").val("");
-        $("img.verifyImg").attr("src","/img/code?timestamp="+new Date().getTime());
-    }
-});
+        function login() {
+            if($.trim($("#userName").val())==''){
+                alert("请输入用户名");
+                return;
+            }
+            if($.trim($("#password").val())==''){
+                alert("请输入密码");
+                return;
+            }
+            if($.trim($("#code").val())==''){
+                alert("验证码为空");
+                return;
+            }
+            var data={
+                userName:$("#userName").val(),
+                password:$("#password").val(),
+                code:$("#code").val()
+            };
+            $.ajax({
+                url:"/login",
+                type:'post',
+                data:data,
+                success:function (result) {
+                    console.log(result)
+                    if(result.success){
+                        window.location.href="/index";
+                    }else {
+                        $("div.err-msg").text(result.message);
+                        refreshCode();
+                    }
+                }
+            })
+        }
+
+        function refreshCode() {
+            $("div.err-msg").text("");
+            $("#code").val("");
+            $("img.verifyImg").attr("src","/img/code?timestamp="+new Date().getTime());
+        }
+    });
 </script>
 </body>
 </html>
