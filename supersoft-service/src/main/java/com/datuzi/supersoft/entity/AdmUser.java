@@ -22,9 +22,9 @@ import java.io.Serializable;
 public class AdmUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String userName;
+    private String userCode;
     private String password;
-    private String name;
+    private String userName;
     private String email;
     private String roleCode;
 }

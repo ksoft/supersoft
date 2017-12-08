@@ -20,7 +20,7 @@ public class RestLoginController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public ResponseDto<Boolean> login(@RequestBody LoginUserDto loginUserDto) {
-        AdmUser user=admUserRepository.findAdmUserByUserNameAndPassword(loginUserDto.getUserName(),loginUserDto.getPassword());
+        AdmUser user=admUserRepository.findAdmUserByUserCodeAndPassword(loginUserDto.getUserCode(),loginUserDto.getPassword());
         if(user!=null){
             return ResponseDtoFactory.toSuccess(Boolean.TRUE);
         }

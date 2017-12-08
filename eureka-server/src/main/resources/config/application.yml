@@ -7,8 +7,12 @@ security:
     name: eurekauser
     password: 123456
 eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
   server:
     enableSelfPreservation: false
+    eviction-interval-timer-in-ms: 3000
   client:
     register-with-eureka: false
     fetch-registry: false

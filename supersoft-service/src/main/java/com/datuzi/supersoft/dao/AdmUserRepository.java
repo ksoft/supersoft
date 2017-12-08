@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 public interface AdmUserRepository extends CrudRepository<AdmUser,Long> {
     /**
      * 查找用户
-     * @param userName
+     * @param userCode
      * @param password
      * @return
      */
-    AdmUser findAdmUserByUserNameAndPassword(String userName,String password);
+    AdmUser findAdmUserByUserCodeAndPassword(String userCode,String password);
 }

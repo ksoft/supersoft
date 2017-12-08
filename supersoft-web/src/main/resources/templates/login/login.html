@@ -28,7 +28,7 @@
 		 <em>Management System</em>
 	</h1>
 	<div class="layui-user-icon larry-login">
-		 <input type="text" id="userName" name="userName" placeholder="账号" class="login_txtbx"/>
+		 <input type="text" id="userCode" name="userCode" placeholder="账号" class="login_txtbx"/>
 	</div>
 	<div class="layui-pwd-icon larry-login">
 		 <input type="password" id="password" name="password" placeholder="密码" class="login_txtbx"/>
@@ -78,7 +78,7 @@
         });
 
         function login() {
-            if($.trim($("#userName").val())==''){
+            if($.trim($("#userCode").val())==''){
                 alert("请输入用户名");
                 return;
             }
@@ -91,7 +91,7 @@
                 return;
             }
             var data={
-                userName:$("#userName").val(),
+                userCode:$("#userCode").val(),
                 password:$("#password").val(),
                 code:$("#code").val()
             };

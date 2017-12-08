@@ -45,10 +45,8 @@ eureka:
     serviceUrl:
       defaultZone: http://eurekauser:123456@localhost:8761/eureka  #注册 中心已经开启认证
   instance:
-    prefer-ip-address: true
-    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
+     leaseRenewalIntervalInSeconds: 5 # 续约更新时间间隔（默认30秒）
+     leaseExpirationDurationInSeconds: 10 # 续约到期时间（默认90秒）
 
 swagger:
     doc-version: ${swaggerVersion}
