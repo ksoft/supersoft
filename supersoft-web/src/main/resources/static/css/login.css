@@ -13,12 +13,12 @@ html,body{
 }
 @font-face {
     font-family: 'adminthemesregular';
-    src: url('font/adminthemes-webfont.eot');
-    src: url('font/adminthemes-webfont.eot?#iefix') format('embedded-opentype'),
-    url('font/adminthemes-webfont.woff2') format('woff2'),
-    url('font/adminthemes-webfont.woff') format('woff'),
-    url('font/adminthemes-webfont.ttf') format('truetype'),
-    url('font/adminthemes-webfont.svg#adminthemesregular') format('svg');
+    src: url('font/adminThemes/adminthemes-webfont.eot');
+    src: url('font/adminThemes/adminthemes-webfont.eot?#iefix') format('embedded-opentype'),
+    url('font/adminThemes/adminthemes-webfont.woff2') format('woff2'),
+    url('font/adminThemes/adminthemes-webfont.woff') format('woff'),
+    url('font/adminThemes/adminthemes-webfont.ttf') format('truetype'),
+    url('font/adminThemes/adminthemes-webfont.svg#adminthemesregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }

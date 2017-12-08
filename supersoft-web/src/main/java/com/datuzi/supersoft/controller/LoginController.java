@@ -65,7 +65,16 @@ public class LoginController {
      */
     @GetMapping(value = "index")
     public String index() {
-        return "index";
+        return "index/index";
+    }
+
+    /**
+     * 首页中间
+     * @return
+     */
+    @GetMapping(value = "main")
+    public String main() {
+        return "main/main";
     }
 
     /**
