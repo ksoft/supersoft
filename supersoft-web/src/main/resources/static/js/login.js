@@ -45,52 +45,5 @@ layui.use(['jquery','layer','form'],function(){
                 $(this).val('请输入验证码');
             }
         });
-        $("#login").click(function () {
-            login();
-        });
-        $(".verifyImg").click(function(){
-            refreshCode();
-        });
-
-        function login() {
-            if($.trim($("#userCode").val())==''){
-                layer.tips('请输入用户名', '#userCode',{tips:[4,"orange"]});
-                return;
-            }
-            if($.trim($("#password").val())==''){
-                layer.tips('请输入密码', '#password',{tips:[4,"orange"]});
-                return;
-            }
-            if($.trim($("#code").val())==''){
-                layer.tips('验证码为空', '#code',{tips:[4,"orange"]});
-                return;
-            }
-            var data={
-                userCode:$("#userCode").val(),
-                password:$("#password").val(),
-                code:$("#code").val()
-            };
-            $.ajax({
-                url:"/login",
-                type:'post',
-                data:data,
-                success:function (result) {
-                    console.log(result)
-                    if(result.success){
-                        window.location.href="/index";
-                    }else {
-                        $("div.err-msg").text(result.message);
-                        refreshCode();
-                    }
-                }
-            })
-        }
-
-        function refreshCode() {
-            $("div.err-msg").text("");
-            $("#code").val("");
-            $("img.verifyImg").attr("src","/img/code?timestamp="+new Date().getTime());
-        }
     });
-
 });

@@ -18,4 +18,6 @@ public final class Constants {
 
     public static final String SERVICE_CONSUMER="";
 
+    public static final String TOKEN="token";
+
 }

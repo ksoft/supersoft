@@ -10,6 +10,7 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.UUID;
 
 /**
  * 登录接口
@@ -35,13 +38,25 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    /**
+     * 首页
+     * @return
+     */
+    @GetMapping(value = "toLogin")
+    public String toLogin() {
+        return "login/login";
+    }
+
     /**
      * 本系统登录
      * @return
      */
     @PostMapping(value = "login")
     @ResponseBody
-    public ResponseDto<Boolean> login(LoginDto loginDto, HttpSession session){
+    public ResponseDto<Boolean> login(LoginDto loginDto, HttpSession session,HttpServletResponse response){
         String code=session.getAttribute(Constants.SESSION_KEY_KAPTCHA).toString();
         if(StringUtils.isEmpty(code)){
             return ResponseDtoFactory.toError("验证码不能为空");
@@ -54,6 +69,11 @@ public class LoginController {
 
         ResponseDto<Boolean> result=loginService.login(loginUserDto);
         if(result.getCode()==0 && result.getData().equals(Boolean.TRUE)){
+            String token=UUID.randomUUID().toString();
+            redisTemplate.opsForValue().set(Constants.TOKEN, token);
+            response.addHeader(Constants.TOKEN,token);
+            Cookie cookie=new Cookie(Constants.TOKEN,token);
+            response.addCookie(cookie);
             return ResponseDtoFactory.toSuccess("登录成功",Boolean.TRUE);
         }
         return ResponseDtoFactory.toError("登录失败");

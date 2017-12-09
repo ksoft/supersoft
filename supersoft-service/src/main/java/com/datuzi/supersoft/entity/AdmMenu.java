@@ -1,13 +1,12 @@
 package com.datuzi.supersoft.entity;
 
+import com.datuzi.enums.MenuType;
+import com.datuzi.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -17,15 +16,17 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "ADM_MENUS")
+@Entity
 public class AdmMenu implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String text;
-    private Long parentId;
-    private String href;
+    private String title;
     private String icon;
-    private String status;
+    private Boolean spread;
+    private Long pid;
+    private Long roleCode;
+    private Status status;
+    private MenuType type;
 
 }

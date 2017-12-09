@@ -2,6 +2,7 @@ package com.datuzi.supersoft.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -41,7 +42,7 @@ public class ThymeleafConfig implements ApplicationContextAware {
     public ViewResolver viewResolver() {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         Map<String, Object> variables = new HashMap<String, Object>();
-        variables.put("staticPath", config.getStaticPath());
+        variables.put("contextPath", config.getContextPath());
         resolver.setStaticVariables(variables);
         resolver.setTemplateEngine(templateEngine());
         resolver.setCharacterEncoding("UTF-8");

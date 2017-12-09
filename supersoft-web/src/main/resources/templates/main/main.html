@@ -12,24 +12,25 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
 	<meta name="apple-mobile-web-app-capable" content="yes">	
 	<meta name="format-detection" content="telephone=no">	
-	<link rel="Shortcut Icon" th:href="${staticPath}+'/favicon.ico'"/>
+	<link rel="Shortcut Icon" th:href="@{/favicon.ico}"/>
 	<!-- load css -->
-    <link rel="stylesheet" type="text/css" th:href="${staticPath}+'/plugins/bootstrap/css/bootstrap.min.css'" media="all">
-    <link rel="stylesheet" type="text/css" th:href="${staticPath}+'/plugins/layui/css/layui.css'" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/layui/css/layui.css}" media="all">
 	<!-- <link rel="stylesheet" type="text/css" href="/common/css/larry.css" media="all"> 基于flex布局 未完待续-->
-    <link rel="stylesheet" type="text/css" th:href="${staticPath}+'/css/global.css'" media="all">
-    <link rel="stylesheet" type="text/css" th:href="${staticPath}+'/css/index.css'" media="all">
-    <link rel="stylesheet" type="text/css" th:href="${staticPath}+'/css/common.css'" media="all">
-    <link rel="stylesheet" type="text/css" th:href="${staticPath}+'/css/main.css'" media="all">
-    <script type="text/javascript" th:src="${staticPath}+'/plugins/layui/layui.js'"></script>
-    <script type="text/javascript" th:src="${staticPath}+'/plugins/jquery/jquery-3.2.0.min.js'"></script>
-    <script type="text/javascript" th:src="${staticPath}+'/plugins/bootstrap/js/bootstrap.min.js'"></script>
-    <script type="text/javascript" th:src="${staticPath}+'/plugins/jquery/jquery.leoweather.min.js'"></script>
-    <script type="text/javascript" th:src="${staticPath}+'/plugins/echarts/echarts.min.js'"></script>
-    <script type="text/javascript" th:src="${staticPath}+'/js/common.js'"></script>
-    <script type="text/javascript" th:src="${staticPath}+'/js/main.js'"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/global.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" media="all">
+    <script type="text/javascript" th:src="@{/plugins/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/jquery/jquery-3.2.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/jquery/jquery.leoweather.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/echarts/echarts.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </head>
 <body>
+
 <div class="larry-grid larry-wrapper">
     <div class="row" id="infoSwitch"> 
         <blockquote class="layui-elem-quote col-md-12 head-con">

@@ -7,15 +7,18 @@ spring:
     name: supersoft-consumer
   cache:
     type: redis
+  thymeleaf:
+    cache: false
 
 swaggerVersion: 1.0
 logging:
   config: classpath:config/logback-spring.xml
 server:
-  port: 8092
+  port: 8082
   tomcat:
     access_log_enabled: true
     basedir: target/tomcat
+  context-path:
 
 #Jackson配置
 spring.jackson:
@@ -23,7 +26,7 @@ spring.jackson:
   date-format: yyyy-MM-dd HH:mm:ss
 
 supersoft:
-  staticPath:
+  contextPath: http://localhost:${server.port}${server.context-path}
 ---
 #development profile
 spring:
