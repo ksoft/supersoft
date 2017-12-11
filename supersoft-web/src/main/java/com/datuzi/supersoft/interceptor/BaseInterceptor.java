@@ -45,12 +45,13 @@ public class BaseInterceptor implements HandlerInterceptor {
                 for(Cookie cookie:cookies){
                     if(Constants.TOKEN.equals(cookie.getName())){
                         token=cookie.getValue();
+                        break;
                     }
                 }
             }
         }
-        String serverToken=redisTemplate.opsForValue().get(Constants.TOKEN).toString();
-        if(!StringUtils.isEmpty(token) && !StringUtils.isEmpty(serverToken) && token.equals(serverToken)){
+        Object serverToken=redisTemplate.opsForValue().get(Constants.TOKEN);
+        if(!StringUtils.isEmpty(token) && !StringUtils.isEmpty(serverToken) && token.equals(serverToken.toString())){
             return true;
         }else{
             response.setCharacterEncoding("UTF-8");
