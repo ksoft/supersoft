@@ -1,6 +1,6 @@
 package com.datuzi.supersoft.interceptor;
 
-import com.datuzi.utils.Base64Util;
+import com.datuzi.supersoft.utils.Base64Util;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;

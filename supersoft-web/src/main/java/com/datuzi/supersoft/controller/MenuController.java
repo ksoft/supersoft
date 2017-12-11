@@ -1,12 +1,11 @@
 package com.datuzi.supersoft.controller;
 
-import com.datuzi.dto.*;
-import com.datuzi.service.AdmMenuService;
+import com.datuzi.supersoft.dto.*;
+import com.datuzi.supersoft.feign.AdmMenuFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ import java.util.List;
 @RequestMapping("/menu")
 public class MenuController {
     @Autowired
-    private AdmMenuService admMenuService;
+    private AdmMenuFeign admMenuFeign;
 
     /**
      * 本顶部菜单
@@ -25,7 +24,7 @@ public class MenuController {
     @PostMapping(value = "/topMenu")
     @ResponseBody
     public ResponseDto<List<TopMenuDto>> topMenu(){
-        ResponseDto<List<TopMenuDto>> responseDto=admMenuService.topMenu(1L);
+        ResponseDto<List<TopMenuDto>> responseDto= admMenuFeign.topMenu(1L);
         return ResponseDtoFactory.toSuccess(responseDto.getData());
     }
 
@@ -36,7 +35,7 @@ public class MenuController {
     @PostMapping(value = "/leftMenuByTopMenu/{pid}")
     @ResponseBody
     public ResponseDto<List<LeftMenuDto>> leftMenuByTopMenu(@PathVariable("pid") Long pid){
-        ResponseDto<List<LeftMenuDto>> responseDto=admMenuService.leftMenu(pid);
+        ResponseDto<List<LeftMenuDto>> responseDto= admMenuFeign.leftMenu(pid);
         return ResponseDtoFactory.toSuccess(responseDto.getData());
 
         /*List<LeftMenuDto> list=new ArrayList<>();

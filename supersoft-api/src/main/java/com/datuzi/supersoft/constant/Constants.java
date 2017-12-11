@@ -1,4 +1,4 @@
-package com.datuzi.constant;
+package com.datuzi.supersoft.constant;
 
 import lombok.NoArgsConstructor;
 

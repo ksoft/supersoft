@@ -19,8 +19,6 @@ public class AdmRoleMenu implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private AdmRole roleId;
-    @ManyToOne
-    private AdmMenu menuId;
+    private Long roleId;
+    private Long menuId;
 }

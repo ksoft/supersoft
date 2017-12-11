@@ -1,6 +1,6 @@
-package com.datuzi.dto;
+package com.datuzi.supersoft.dto;
 
-import com.datuzi.enums.RespCode;
+import com.datuzi.supersoft.enums.RespCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

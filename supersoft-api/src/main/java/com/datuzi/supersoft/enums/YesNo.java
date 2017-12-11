@@ -1,17 +1,17 @@
-package com.datuzi.enums;
+package com.datuzi.supersoft.enums;
 
 /**
- * Created by 27度 on 2017/12/9 0009.
+ * @author zhangjianbo
+ * @date 2017/12/8
  */
-public enum Status {
-    INIT(0,"初始"),
-    VALID(1,"有效"),
-    INVALID(2,"无效 ");
+public enum YesNo {
+    YES(0,"是"),
+    NO(1,"否");
 
     private Integer key;
     private String value;
 
-    Status(Integer key,String value){
+    YesNo(Integer key,String value){
         this.key=key;
         this.value=value;
     }

@@ -1,4 +1,4 @@
-package com.datuzi.enums;
+package com.datuzi.supersoft.enums;
 
 /**
  * Created by 27度 on 2017/12/9 0009.

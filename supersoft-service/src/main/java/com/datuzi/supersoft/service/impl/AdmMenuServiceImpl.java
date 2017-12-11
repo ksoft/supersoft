@@ -1,7 +1,7 @@
 package com.datuzi.supersoft.service.impl;
 
-import com.datuzi.dto.*;
-import com.datuzi.service.AdmMenuService;
+import com.datuzi.supersoft.dto.*;
+import com.datuzi.supersoft.service.AdmMenuService;
 import com.datuzi.supersoft.dao.AdmMenuRepository;
 import com.datuzi.supersoft.entity.AdmMenu;
 import org.springframework.beans.BeanUtils;

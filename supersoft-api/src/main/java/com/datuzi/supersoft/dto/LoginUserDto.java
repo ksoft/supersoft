@@ -1,4 +1,4 @@
-package com.datuzi.dto;
+package com.datuzi.supersoft.dto;
 
 import lombok.Data;
 

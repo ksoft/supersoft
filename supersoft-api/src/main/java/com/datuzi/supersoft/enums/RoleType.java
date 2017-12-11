@@ -1,21 +1,16 @@
-package com.datuzi.enums;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package com.datuzi.supersoft.enums;
 
 /**
- * @author zhangjianbo
- * @date 2017/12/8
+ * Created by 27度 on 2017/12/9 0009.
  */
-public enum YesNo {
-    YES(0,"是"),
-    NO(1,"否");
+public enum RoleType {
+    SYSTEM(0,"超级管理员"),
+    ADMIN(1,"管理员");
 
     private Integer key;
     private String value;
 
-    YesNo(Integer key,String value){
+    RoleType(Integer key, String value){
         this.key=key;
         this.value=value;
     }

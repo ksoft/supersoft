@@ -1,11 +1,8 @@
 package com.datuzi.supersoft.controller;
 
-import com.datuzi.constant.Constants;
-import com.datuzi.dto.LoginUserDto;
-import com.datuzi.dto.ResponseDto;
-import com.datuzi.dto.ResponseDtoFactory;
-import com.datuzi.service.LoginService;
-import com.datuzi.supersoft.dto.LoginDto;
+import com.datuzi.supersoft.constant.Constants;
+import com.datuzi.supersoft.dto.*;
+import com.datuzi.supersoft.feign.LoginFeign;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -36,7 +33,7 @@ public class LoginController {
     @Autowired
     private DefaultKaptcha defaultKaptcha;
     @Autowired
-    private LoginService loginService;
+    private LoginFeign loginFeign;
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -67,8 +64,8 @@ public class LoginController {
         LoginUserDto loginUserDto=new LoginUserDto();
         BeanUtils.copyProperties(loginDto,loginUserDto);
 
-        ResponseDto<Boolean> result=loginService.login(loginUserDto);
-        if(result.getCode()==0 && result.getData().equals(Boolean.TRUE)){
+        ResponseDto<AdmUserDto> result= loginFeign.login(loginUserDto);
+        if(result.getCode()==0 && result.isSuccess()){
             String token=UUID.randomUUID().toString();
             redisTemplate.opsForValue().set(Constants.TOKEN, token);
             response.addHeader(Constants.TOKEN,token);

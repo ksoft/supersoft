@@ -1,16 +1,17 @@
-package com.datuzi.enums;
+package com.datuzi.supersoft.enums;
 
 /**
  * Created by 27度 on 2017/12/9 0009.
  */
-public enum RoleType {
-    SYSTEM(0,"超级管理员"),
-    ADMIN(1,"管理员");
+public enum Status {
+    INIT(0,"初始"),
+    VALID(1,"有效"),
+    INVALID(2,"无效 ");
 
     private Integer key;
     private String value;
 
-    RoleType(Integer key, String value){
+    Status(Integer key,String value){
         this.key=key;
         this.value=value;
     }

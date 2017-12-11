@@ -1,4 +1,4 @@
-package com.datuzi.utils;
+package com.datuzi.supersoft.utils;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;

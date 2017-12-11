@@ -1,4 +1,4 @@
-package com.datuzi.enums;
+package com.datuzi.supersoft.enums;
 
 public enum RespCode {
 

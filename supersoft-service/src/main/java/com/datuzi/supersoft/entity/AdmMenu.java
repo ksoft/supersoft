@@ -1,7 +1,7 @@
 package com.datuzi.supersoft.entity;
 
-import com.datuzi.enums.MenuType;
-import com.datuzi.enums.Status;
+import com.datuzi.supersoft.enums.MenuType;
+import com.datuzi.supersoft.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,6 @@
 package com.datuzi.supersoft.entity;
 
-import com.datuzi.enums.Status;
-import com.datuzi.enums.YesNo;
+import com.datuzi.supersoft.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
