@@ -215,8 +215,8 @@ layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
     function getHtml(data) {
         var ulHtml = '';
         for (var i = 0; i < data.length; i++) {
-            if (data[i].pid !== false && data[i].pid !== 'undefined') {
-                ulHtml += '<li class="layui-nav-item" data-pid="' + data[i].pid + '">';
+            if (data[i].id !== false && data[i].id !== 'undefined') {
+                ulHtml += '<li class="layui-nav-item" data-id="' + data[i].id + '">';
             } else if (data[i].spread) {
                 ulHtml += '<li class="layui-nav-item">';
             } else {

@@ -1,5 +1,6 @@
 package com.datuzi.supersoft.controller;
 
+import com.datuzi.dto.LeftMenuDto;
 import com.datuzi.dto.ResponseDto;
 import com.datuzi.dto.TopMenuDto;
 import com.datuzi.service.AdmMenuService;
@@ -20,5 +21,11 @@ public class RestMenuController {
     @ResponseBody
     public ResponseDto<List<TopMenuDto>> topMenu(@RequestBody Long roleCode) {
         return admMenuService.topMenu(roleCode);
+    }
+
+    @RequestMapping(value = "/leftMenu",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<List<LeftMenuDto>> leftMenu(@RequestBody Long pid) {
+        return admMenuService.leftMenu(pid);
     }
 }

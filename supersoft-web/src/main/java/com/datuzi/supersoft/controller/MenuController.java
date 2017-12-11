@@ -35,8 +35,11 @@ public class MenuController {
      */
     @PostMapping(value = "/leftMenuByTopMenu/{pid}")
     @ResponseBody
-    public ResponseDto<List<LeftMenuDto>> leftMenuByTopMenu(@PathVariable("pid") Integer pid){
-        List<LeftMenuDto> list=new ArrayList<>();
+    public ResponseDto<List<LeftMenuDto>> leftMenuByTopMenu(@PathVariable("pid") Long pid){
+        ResponseDto<List<LeftMenuDto>> responseDto=admMenuService.leftMenu(pid);
+        return ResponseDtoFactory.toSuccess(responseDto.getData());
+
+        /*List<LeftMenuDto> list=new ArrayList<>();
         list.add(new LeftMenuDto(100L,"后台首页","larry-houtaishouye",Boolean.FALSE,"html/main.php"));
 
         List<LeftSubMenuDto> subMenuDtotList=new ArrayList<>();
@@ -50,7 +53,6 @@ public class MenuController {
         subMenuDtotList2.add(new LeftSubMenuDto("角色列表","larry-jiaoseguanli1","html/temp.html"));
         subMenuDtotList2.add(new LeftSubMenuDto("菜单管理","larry-caidanguanli","html/temp.html"));
         list.add(new LeftMenuDto(102L,"用户管理","larry-10103",Boolean.TRUE,"",subMenuDtotList2));
-
-        return ResponseDtoFactory.toSuccess(list);
+        return ResponseDtoFactory.toSuccess(list);*/
     }
 }

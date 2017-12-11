@@ -49,7 +49,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
             var $that = $(this);
             //绑定一级导航的点击事件
             $that.on('click', function () {
-                var id = $that.data('pid');
+                var id = $that.data('id');
                 $.ajaxSettings.async = false;
 
                 $.post('/menu/leftMenuByTopMenu/' + id + '?t=' + new Date(), {

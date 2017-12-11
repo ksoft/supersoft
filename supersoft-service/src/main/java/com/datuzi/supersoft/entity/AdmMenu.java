@@ -23,6 +23,7 @@ public class AdmMenu implements Serializable {
     private Long id;
     private String title;
     private String icon;
+    private String href;
     private Boolean spread;
     private Long pid;
     private Status status;

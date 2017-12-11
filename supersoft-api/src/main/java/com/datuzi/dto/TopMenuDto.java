@@ -15,5 +15,5 @@ import java.io.Serializable;
 public class TopMenuDto implements Serializable{
     private String title;
     private String icon;
-    private Long pid;
+    private Long id;
 }

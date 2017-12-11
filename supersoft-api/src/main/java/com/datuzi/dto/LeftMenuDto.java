@@ -15,18 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LeftMenuDto implements Serializable{
+    private Long id;
     private Long pid;
     private String title;
     private String icon;
     private Boolean spread;
     private String href;
-    private List<LeftSubMenuDto> children=new ArrayList<>();
-
-    public LeftMenuDto(Long pid,String title,String icon,Boolean spread,String href){
-        this.pid=pid;
-        this.title=title;
-        this.icon=icon;
-        this.spread=spread;
-        this.href=href;
-    }
+    private List<LeftMenuDto> children=new ArrayList<>();
 }

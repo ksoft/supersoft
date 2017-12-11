@@ -1,6 +1,7 @@
 package com.datuzi.service;
 
 import com.datuzi.constant.Constants;
+import com.datuzi.dto.LeftMenuDto;
 import com.datuzi.dto.ResponseDto;
 import com.datuzi.dto.TopMenuDto;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -16,4 +17,8 @@ public interface AdmMenuService {
     @RequestMapping(value = "/topMenu",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<List<TopMenuDto>> topMenu(@RequestBody Long roleId);
+
+    @RequestMapping(value = "/leftMenu",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<List<LeftMenuDto>> leftMenu(@RequestBody Long pid);
 }
