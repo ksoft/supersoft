@@ -25,7 +25,7 @@ public class MenuController {
     @PostMapping(value = "/topMenu")
     @ResponseBody
     public ResponseDto<List<TopMenuDto>> topMenu(){
-        ResponseDto<List<TopMenuDto>> responseDto=admMenuService.topMenu(0L);
+        ResponseDto<List<TopMenuDto>> responseDto=admMenuService.topMenu(1L);
         return ResponseDtoFactory.toSuccess(responseDto.getData());
     }
 

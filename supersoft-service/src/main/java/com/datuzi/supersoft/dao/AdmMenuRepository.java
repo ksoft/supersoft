@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface AdmMenuRepository extends CrudRepository<AdmMenu,Long> {
 
-    @Query(value = "select t from AdmMenu t where t.roleCode=?1")
-    List<AdmMenu> findTopMenuByRoleCode(Long roleCode);
+    @Query(value = "select a.* from adm_menu a inner join adm_role_menu b on a.id=b.menu_id inner join adm_role c on b.role_id=c.id where c.id=?1",nativeQuery = true)
+    List<AdmMenu> findTopMenu(Long roleId);
 }

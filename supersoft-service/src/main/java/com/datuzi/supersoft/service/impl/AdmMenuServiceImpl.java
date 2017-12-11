@@ -23,9 +23,9 @@ public class AdmMenuServiceImpl implements AdmMenuService{
     AdmMenuRepository admMenuRepository;
 
     @Override
-    public ResponseDto<List<TopMenuDto>> topMenu(Long roleCode) {
+    public ResponseDto<List<TopMenuDto>> topMenu(Long roleId) {
         List<TopMenuDto> topMenuDtoList=new ArrayList<>();
-        List<AdmMenu> menuList=admMenuRepository.findTopMenuByRoleCode(roleCode);
+        List<AdmMenu> menuList=admMenuRepository.findTopMenu(roleId);
         for(AdmMenu admMenu:menuList){
             TopMenuDto topMenuDto=new TopMenuDto();
             BeanUtils.copyProperties(admMenu,topMenuDto);

@@ -15,5 +15,5 @@ import java.util.List;
 public interface AdmMenuService {
     @RequestMapping(value = "/topMenu",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<List<TopMenuDto>> topMenu(@RequestBody Long roleCode);
+    ResponseDto<List<TopMenuDto>> topMenu(@RequestBody Long roleId);
 }

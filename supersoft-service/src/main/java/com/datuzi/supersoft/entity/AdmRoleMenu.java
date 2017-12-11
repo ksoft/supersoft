@@ -1,7 +1,5 @@
 package com.datuzi.supersoft.entity;
 
-import com.datuzi.enums.MenuType;
-import com.datuzi.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,15 +15,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class AdmMenu implements Serializable {
+public class AdmRoleMenu implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String icon;
-    private Boolean spread;
-    private Long pid;
-    private Status status;
-    private MenuType type;
-
+    @ManyToOne
+    private AdmRole roleId;
+    @ManyToOne
+    private AdmMenu menuId;
 }
