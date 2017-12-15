@@ -1,7 +1,10 @@
 package com.datuzi.supersoft.controller;
 
 import com.datuzi.supersoft.dto.AdmUserDto;
+import com.datuzi.supersoft.dto.PageResultDto;
 import com.datuzi.supersoft.dto.ResponseDto;
+import com.datuzi.supersoft.dto.UserListDto;
+import com.datuzi.supersoft.dto.UserSearchDto;
 import com.datuzi.supersoft.service.AdmUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,5 +25,11 @@ public class RestUserController {
     @ResponseBody
     public ResponseDto<Boolean> save(@RequestBody AdmUserDto admUserDto) {
         return admUserService.saveAdmUser(admUserDto);
+    }
+
+    @RequestMapping(value = "/findUserPage",method = RequestMethod.POST)
+    @ResponseBody
+    public PageResultDto<List<UserListDto>> findUserPage(@RequestBody UserSearchDto searchDto) {
+        return admUserService.findUserPage(searchDto);
     }
 }

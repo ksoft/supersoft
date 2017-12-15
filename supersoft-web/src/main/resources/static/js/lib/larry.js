@@ -9,7 +9,7 @@
 layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
     var $ = layui.jquery,
         layer = layui.layer,
-        element = layui.element(),
+        element = layui.elements(),
         common = layui.common,
         cacheName = 'navbarCache';
 

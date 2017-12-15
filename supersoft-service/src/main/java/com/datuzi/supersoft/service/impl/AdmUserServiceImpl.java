@@ -7,7 +7,15 @@ import com.datuzi.supersoft.entity.AdmUser;
 import com.datuzi.supersoft.utils.EntityUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author zhangjianbo
@@ -34,5 +42,30 @@ public class AdmUserServiceImpl implements AdmUserService {
         AdmUser admUser=EntityUtil.translate(admUserDto,AdmUser.class);
         admUserRepository.save(admUser);
         return ResponseDtoFactory.toSuccess(Boolean.TRUE);
+    }
+
+    @Override
+    public PageResultDto<List<UserListDto>> findUserPage(UserSearchDto searchDto) {
+        Pageable pageable=new PageRequest(searchDto.getPage()-1,searchDto.getLimit());
+        Specification<AdmUser> spec = new Specification<AdmUser>() {        //查询条件构造
+        @Override
+        public Predicate toPredicate(Root<AdmUser> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+            Path<String> userName = root.get("userName");
+            Path<String> email = root.get("email");
+            cb.conjunction();
+            Predicate p1 = cb.like(userName, "%"+searchDto.getUserName()+"%");
+            Predicate p2 = cb.like(email, "%"+searchDto.getEmail()+"%");
+            Predicate p = cb.and(p1, p2);
+            return p;
+            }
+         };
+        Page<AdmUser> userPage=admUserRepository.findAll(pageable);
+        List<UserListDto> list=new ArrayList<>();
+        for(AdmUser user:userPage.getContent()){
+            UserListDto dto=new UserListDto();
+            BeanUtils.copyProperties(user,dto);
+            list.add(dto);
+        }
+        return PageResultDtoFactory.toSuccess("查询成功",list,userPage.getTotalElements());
     }
 }
