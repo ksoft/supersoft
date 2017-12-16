@@ -55,34 +55,24 @@ layui.use(['jquery','layer','form','table'],function(){
     table.on('tool(operateFilter)', function(obj){
         var data = obj.data;
         if(obj.event === 'detail'){
-            layer.msg('ID：'+ data.id + ' 的查看操作');
+            layer.open({
+                type: 2,
+                area: ['100%', '100%'],
+                content: '/user/view/'+data.id
+            });
         } else if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
                 obj.del();
                 layer.close(index);
             });
         } else if(obj.event === 'edit'){
-            layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            layer.open({
+                type: 2,
+                area: ['100%', '100%'],
+                content: '/user/edit/'+data.id
+            });
         }
     });
-
-    var $ = layui.$, active = {
-        getCheckData: function(){ //获取选中数据
-            var checkStatus = table.checkStatus('idTest')
-                ,data = checkStatus.data;
-            layer.alert(JSON.stringify(data));
-        }
-        ,getCheckLength: function(){ //获取选中数目
-            var checkStatus = table.checkStatus('idTest')
-                ,data = checkStatus.data;
-            layer.msg('选中了：'+ data.length + ' 个');
-        }
-        ,isAll: function(){ //验证是否全选
-            var checkStatus = table.checkStatus('idTest');
-            layer.msg(checkStatus.isAll ? '全选': '未全选')
-        }
-    };
-
 
     var $ = layui.$, active = {
         reload: function(){
@@ -96,10 +86,41 @@ layui.use(['jquery','layer','form','table'],function(){
                     queryParam: queryParam.val()
                 }
             });
+        },
+        add: function(){
+            layer.open({
+                type: 2,
+                area: ['100%', '100%'],
+                content: '/user/add'
+            });
+        },
+        edit: function(){
+            var checkStatus = table.checkStatus('userTable')
+                ,data = checkStatus.data;
+            if(data.length==0){
+                layer.alert("至少选中一条数据");
+                return;
+            }else if(data.length>1){
+                layer.alert("只能选中一条数据");
+                return;
+            }
+            var id=data[0].id;
+            layer.open({
+                type: 2,
+                area: ['100%', '100%'],
+                content: '/user/edit/'+id
+            });
+        },
+        delete: function(){
+            layer.open({
+                type: 2,
+                area: ['100%', '100%'],
+                content: '/user/add'
+            });
         }
     };
 
-    $('.queryTable .layui-btn').on('click', function(){
+    $('.headerTable .layui-btn').on('click', function(){
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });

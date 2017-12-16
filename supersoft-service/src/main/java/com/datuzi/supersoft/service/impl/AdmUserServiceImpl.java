@@ -39,6 +39,16 @@ public class AdmUserServiceImpl implements AdmUserService {
     }
 
     @Override
+    public ResponseDto<UserListDto> findAdmUserById(Long id) {
+        UserListDto userListDto=new UserListDto();
+        AdmUser user=admUserRepository.findOne(id);
+        if(user!=null){
+            BeanUtils.copyProperties(user,userListDto);
+        }
+        return ResponseDtoFactory.toSuccess(userListDto);
+    }
+
+    @Override
     public ResponseDto<Boolean> saveAdmUser(AdmUserDto admUserDto) {
         AdmUser admUser=EntityUtil.translate(admUserDto,AdmUser.class);
         admUserRepository.save(admUser);

@@ -3,10 +3,7 @@ package com.datuzi.supersoft.feign;
 import com.datuzi.supersoft.constant.Constants;
 import com.datuzi.supersoft.dto.*;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +21,15 @@ public interface AdmUserFeign {
     @RequestMapping(value = "/user/findAdmUser",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<AdmUserDto> findAdmUser(@RequestBody LoginUserDto loginUserDto);
+
+    /**
+     * 查找用户
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/user/findAdmUserById/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<UserListDto> findAdmUserById(@PathVariable("id") Long id);
 
 
     /**

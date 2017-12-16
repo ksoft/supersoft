@@ -17,6 +17,13 @@ public interface AdmUserService {
     ResponseDto<AdmUserDto> findAdmUser(LoginUserDto loginUserDto);
 
     /**
+     * 查找用户
+     * @param id
+     * @return
+     */
+    ResponseDto<UserListDto> findAdmUserById(Long id);
+
+    /**
      * 保存
      * @param admUserDto
      * @return

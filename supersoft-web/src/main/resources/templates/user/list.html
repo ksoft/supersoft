@@ -20,20 +20,22 @@
     <script type="text/javascript" th:src="@{/js/user/user.js}"></script>
 </head>
 <body>
-<div class="queryTable" style="margin-top: 20px;margin-left: 10px;margin-left: 1%">
+<div class="headerTable" style="margin-top: 20px;margin-left: 10px;margin-left: 1%">
     <div class="layui-btn-group" >
-        <button class="layui-btn">
+        <button class="layui-btn" data-type="add">
             <i class="layui-icon">&#xe608;</i> 添加
         </button>
-        <button class="layui-btn">
+        <button class="layui-btn" data-type="edit">
             <i class="layui-icon">&#xe642;</i> 编辑
         </button>
-        <button class="layui-btn">
+        <button class="layui-btn" data-type="delete">
             <i class="layui-icon">&#xe640;</i> 删除
         </button>
     </div>
     <div class="layui-btn-group" style="float: right;margin-right: 10px;">
-        <button class="layui-btn" data-type="reload" style="text-align: right">搜索</button>
+        <button class="layui-btn" data-type="reload" style="text-align: right">
+            <i class="layui-icon">&#xe615;</i> 搜索
+        </button>
     </div>
     <div class="layui-inline" style="float: right;margin-right: 10px;">
         <input class="layui-input" name="queryParam" id="queryParam" placeholder="用户名/姓名/邮箱/手机号" autocomplete="off" style="width: 300px;">

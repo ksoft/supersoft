@@ -32,4 +32,10 @@ public class RestUserController {
     public PageResultDto<List<UserListDto>> findUserPage(@RequestBody UserSearchDto searchDto) {
         return admUserService.findUserPage(searchDto);
     }
+
+    @RequestMapping(value = "/findAdmUserById/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<UserListDto> findAdmUserById(@PathVariable("id") Long id) {
+        return admUserService.findAdmUserById(id);
+    }
 }
