@@ -112,11 +112,7 @@ layui.use(['jquery','layer','form','table'],function(){
             });
         },
         delete: function(){
-            layer.open({
-                type: 2,
-                area: ['100%', '100%'],
-                content: '/user/add'
-            });
+            
         }
     };
 
