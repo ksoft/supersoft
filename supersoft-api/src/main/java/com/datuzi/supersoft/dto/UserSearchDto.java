@@ -9,7 +9,5 @@ import java.io.Serializable;
  */
 @Data
 public class UserSearchDto extends BasePageDto{
-    private String userName;
-    private String roleCode;
-    private String email;
+    private String queryParam;
 }

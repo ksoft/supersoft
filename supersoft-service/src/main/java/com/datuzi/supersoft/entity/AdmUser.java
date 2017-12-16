@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户
@@ -19,9 +20,15 @@ import java.io.Serializable;
 public class AdmUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String userCode;
     private String password;
     private String userName;
     private String email;
+    private String status;
+    private String mobilePhone;
+    private String sex;
     private String roleCode;
+    private Date createDt;
+    private String createBy;
 }

@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
@@ -47,19 +48,27 @@ public class AdmUserServiceImpl implements AdmUserService {
     @Override
     public PageResultDto<List<UserListDto>> findUserPage(UserSearchDto searchDto) {
         Pageable pageable=new PageRequest(searchDto.getPage()-1,searchDto.getLimit());
-        Specification<AdmUser> spec = new Specification<AdmUser>() {        //查询条件构造
+        //查询条件构造
+        Specification<AdmUser> spec = new Specification<AdmUser>() {
         @Override
         public Predicate toPredicate(Root<AdmUser> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+            Path<String> userCode = root.get("userCode");
             Path<String> userName = root.get("userName");
             Path<String> email = root.get("email");
+            Path<String> mobilePhone = root.get("mobilePhone");
             cb.conjunction();
-            Predicate p1 = cb.like(userName, "%"+searchDto.getUserName()+"%");
-            Predicate p2 = cb.like(email, "%"+searchDto.getEmail()+"%");
-            Predicate p = cb.and(p1, p2);
+            Predicate p=null;
+            if(!StringUtils.isEmpty(searchDto.getQueryParam())) {
+                Predicate p1 = cb.like(userCode, "%" + searchDto.getQueryParam() + "%");
+                Predicate p2 = cb.like(userName, "%" + searchDto.getQueryParam() + "%");
+                Predicate p3 = cb.like(email, "%" + searchDto.getQueryParam() + "%");
+                Predicate p4 = cb.like(mobilePhone, "%" + searchDto.getQueryParam() + "%");
+                p = cb.or(p1, p2, p3,p4);
+            }
             return p;
             }
          };
-        Page<AdmUser> userPage=admUserRepository.findAll(pageable);
+        Page<AdmUser> userPage=admUserRepository.findAll(spec,pageable);
         List<UserListDto> list=new ArrayList<>();
         for(AdmUser user:userPage.getContent()){
             UserListDto dto=new UserListDto();
