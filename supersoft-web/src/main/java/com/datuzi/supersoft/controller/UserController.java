@@ -2,12 +2,14 @@ package com.datuzi.supersoft.controller;
 
 import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.AdmUserFeign;
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,6 +63,16 @@ public class UserController {
     }
 
     /**
+     * 查看页
+     * @return
+     */
+    @GetMapping(value = "delete/{id}")
+    @ResponseBody
+    public ResponseDto<Boolean> delete(@PathVariable Long id) {
+        return admUserFeign.deleteAdmUserById(id);
+    }
+
+    /**
      * 列表
      * @return
      */
@@ -68,5 +80,14 @@ public class UserController {
     @ResponseBody
     public PageResultDto<List<UserListDto>> list(@RequestBody UserSearchDto searchDto){
         return admUserFeign.findUserPage(searchDto);
+    }
+
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> saveAdmUser(@RequestBody AdmUserDto admUserDto) {
+        admUserDto.setCreateBy("Sys");
+        admUserDto.setCreateDt(new Date());
+        ResponseDto<Boolean> user=admUserFeign.saveAdmUser(admUserDto);
+        return user;
     }
 }

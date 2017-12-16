@@ -52,7 +52,7 @@ public class AdmUserServiceImpl implements AdmUserService {
     public ResponseDto<Boolean> saveAdmUser(AdmUserDto admUserDto) {
         AdmUser admUser=EntityUtil.translate(admUserDto,AdmUser.class);
         admUserRepository.save(admUser);
-        return ResponseDtoFactory.toSuccess(Boolean.TRUE);
+        return ResponseDtoFactory.toSuccess("保存成功",Boolean.TRUE);
     }
 
     @Override
@@ -86,5 +86,11 @@ public class AdmUserServiceImpl implements AdmUserService {
             list.add(dto);
         }
         return PageResultDtoFactory.toSuccess("查询成功",list,userPage.getTotalElements());
+    }
+
+    @Override
+    public ResponseDto<Boolean> deleteAdmUserById(Long id) {
+        admUserRepository.delete(id);
+        return ResponseDtoFactory.toSuccess("删除成功",Boolean.TRUE);
     }
 }

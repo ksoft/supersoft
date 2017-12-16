@@ -23,6 +23,15 @@ public interface AdmUserFeign {
     ResponseDto<AdmUserDto> findAdmUser(@RequestBody LoginUserDto loginUserDto);
 
     /**
+     * 保存用户
+     * @param admUserDto
+     * @return
+     */
+    @RequestMapping(value = "/user/saveAdmUser",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<Boolean> saveAdmUser(@RequestBody AdmUserDto admUserDto);
+
+    /**
      * 查找用户
      * @param id
      * @return
@@ -30,6 +39,15 @@ public interface AdmUserFeign {
     @RequestMapping(value = "/user/findAdmUserById/{id}",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<UserListDto> findAdmUserById(@PathVariable("id") Long id);
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/user/deleteAdmUserById/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<Boolean> deleteAdmUserById(@PathVariable("id") Long id);
 
 
     /**

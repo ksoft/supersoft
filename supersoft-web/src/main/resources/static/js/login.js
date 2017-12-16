@@ -11,7 +11,7 @@ layui.use(['jquery','layer','form'],function(){
    'use strict';
 	var $ = layui.jquery
 	   ,layer=layui.layer
-	   ,form =layui.form();
+	   ,form =layui.form;
     
     $(window).on('resize',function(){
         var w = $(window).width();

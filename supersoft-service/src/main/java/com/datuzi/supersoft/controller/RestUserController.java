@@ -21,9 +21,9 @@ public class RestUserController {
     @Autowired
     private AdmUserService admUserService;
 
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @RequestMapping(value = "/saveAdmUser",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto<Boolean> save(@RequestBody AdmUserDto admUserDto) {
+    public ResponseDto<Boolean> saveAdmUser(@RequestBody AdmUserDto admUserDto) {
         return admUserService.saveAdmUser(admUserDto);
     }
 
@@ -37,5 +37,11 @@ public class RestUserController {
     @ResponseBody
     public ResponseDto<UserListDto> findAdmUserById(@PathVariable("id") Long id) {
         return admUserService.findAdmUserById(id);
+    }
+
+    @RequestMapping(value = "/deleteAdmUserById/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> deleteAdmUserById(@PathVariable("id") Long id) {
+        return admUserService.deleteAdmUserById(id);
     }
 }

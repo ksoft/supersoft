@@ -36,4 +36,11 @@ public interface AdmUserService {
      * @return
      */
     PageResultDto<List<UserListDto>> findUserPage(UserSearchDto searchDto);
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    ResponseDto<Boolean> deleteAdmUserById(Long id);
 }
