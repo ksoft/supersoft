@@ -58,6 +58,18 @@ public class AdmUserServiceImpl implements AdmUserService {
     }
 
     @Override
+    public ResponseDto<Boolean> updateAdmUser(AdmUserDto admUserDto) {
+        AdmUser admUser=admUserRepository.findOne(admUserDto.getId());
+        if(admUser!=null) {
+            BeanUtils.copyProperties(admUserDto, admUser);
+            admUserRepository.save(admUser);
+            return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
+        }else{
+            return ResponseDtoFactory.toError("找不到对应的数据");
+        }
+    }
+
+    @Override
     public PageResultDto<List<UserListDto>> findUserPage(final UserSearchDto searchDto) {
         Pageable pageable=new PageRequest(searchDto.getPage()-1,searchDto.getLimit());
 

@@ -31,6 +31,13 @@ public interface AdmUserService {
     ResponseDto<Boolean> saveAdmUser(AdmUserDto admUserDto);
 
     /**
+     * 更新
+     * @param admUserDto
+     * @return
+     */
+    ResponseDto<Boolean> updateAdmUser(AdmUserDto admUserDto);
+
+    /**
      * 列表分页
      * @param searchDto
      * @return

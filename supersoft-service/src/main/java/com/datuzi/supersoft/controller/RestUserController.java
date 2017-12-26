@@ -27,6 +27,12 @@ public class RestUserController {
         return admUserService.saveAdmUser(admUserDto);
     }
 
+    @RequestMapping(value = "/updateAdmUser",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> updateAdmUser(@RequestBody AdmUserDto admUserDto) {
+        return admUserService.updateAdmUser(admUserDto);
+    }
+
     @RequestMapping(value = "/findUserPage",method = RequestMethod.POST)
     @ResponseBody
     public PageResultDto<List<UserListDto>> findUserPage(@RequestBody UserSearchDto searchDto) {

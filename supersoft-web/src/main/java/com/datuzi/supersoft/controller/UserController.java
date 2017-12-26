@@ -87,12 +87,31 @@ public class UserController extends BaseController {
         return admUserFeign.findUserPage(searchDto);
     }
 
+    /**
+     * 新增
+     * @param admUserDto
+     * @return
+     */
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
     public ResponseDto<Boolean> saveAdmUser(@RequestBody AdmUserDto admUserDto) {
         AdmUserDto currentUser=getCurrent();
         admUserDto.setCreateBy(currentUser.getUserCode());
         ResponseDto<Boolean> user=admUserFeign.saveAdmUser(admUserDto);
+        return user;
+    }
+
+    /**
+     * 修改
+     * @param admUserDto
+     * @return
+     */
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> updateAdmUser(@RequestBody AdmUserDto admUserDto) {
+        AdmUserDto currentUser=getCurrent();
+        admUserDto.setCreateBy(currentUser.getUserCode());
+        ResponseDto<Boolean> user=admUserFeign.updateAdmUser(admUserDto);
         return user;
     }
 }

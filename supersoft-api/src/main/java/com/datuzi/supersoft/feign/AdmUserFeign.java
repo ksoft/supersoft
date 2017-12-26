@@ -32,6 +32,15 @@ public interface AdmUserFeign {
     ResponseDto<Boolean> saveAdmUser(@RequestBody AdmUserDto admUserDto);
 
     /**
+     * 更新用户
+     * @param admUserDto
+     * @return
+     */
+    @RequestMapping(value = "/user/updateAdmUser",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<Boolean> updateAdmUser(@RequestBody AdmUserDto admUserDto);
+
+    /**
      * 查找用户
      * @param id
      * @return

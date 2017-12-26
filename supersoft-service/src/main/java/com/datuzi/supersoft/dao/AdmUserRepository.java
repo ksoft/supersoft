@@ -3,6 +3,7 @@ package com.datuzi.supersoft.dao;
 import com.datuzi.supersoft.entity.AdmUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @date 2017/12/8
  */
 @Repository
-public interface AdmUserRepository extends JpaSpecificationExecutor<AdmUser>,JpaRepository<AdmUser, Long> {
+public interface AdmUserRepository extends JpaSpecificationExecutor<AdmUser>,CrudRepository<AdmUser, Long> {
     /**
      * 查找用户
      * @param userCode

@@ -42,7 +42,7 @@ layui.use(['jquery','layer','form','table'],function(){
     form.on('switch(statusFilter)', function(obj){
         layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
     });
-    //监听提交
+    //监听 新增
     form.on('submit(formAdd)', function(data){
         $.ajax({
             type:"POST",
@@ -58,6 +58,24 @@ layui.use(['jquery','layer','form','table'],function(){
         });
         return false;
     });
+
+    //监听 修改
+    form.on('submit(formEdit)', function(data){
+        $.ajax({
+            type:"POST",
+            url:"/user/update",
+            dataType:"json",
+            contentType:"application/json",
+            data:JSON.stringify(data.field),
+            success:function(res){
+                layer.msg(res.message)
+                var index=parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            }
+        });
+        return false;
+    });
+
     //监听工具条
     table.on('tool(operateFilter)', function(obj){
         var data = obj.data;
@@ -132,7 +150,10 @@ layui.use(['jquery','layer','form','table'],function(){
             layer.open({
                 type: 2,
                 area: ['100%', '100%'],
-                content: '/user/edit/'+id
+                content: '/user/edit/'+id,
+                end: function () {
+                    active.reload();
+                }
             });
         },
         delete: function(){
