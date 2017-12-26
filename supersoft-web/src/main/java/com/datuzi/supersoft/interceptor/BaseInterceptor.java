@@ -2,6 +2,7 @@ package com.datuzi.supersoft.interceptor;
 
 import com.alibaba.fastjson.JSON;
 import com.datuzi.supersoft.constant.Constants;
+import com.datuzi.supersoft.dto.AdmUserDto;
 import com.datuzi.supersoft.dto.ResponseDtoFactory;
 import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
@@ -46,17 +47,15 @@ public class BaseInterceptor implements HandlerInterceptor {
                 }
             }
         }
-        Object serverToken=redisTemplate.opsForValue().get(Constants.TOKEN);
-        if(!StringUtils.isEmpty(token) && !StringUtils.isEmpty(serverToken) && token.equals(serverToken.toString())){
-            return true;
+        if(!StringUtils.isEmpty(token)){
+            AdmUserDto user=(AdmUserDto)redisTemplate.opsForValue().get(token);
+            if(user!=null){
+                return true;
+            }else{
+                timeout(response);
+            }
         }else{
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType(ContentType.APPLICATION_JSON.toString());
-            PrintWriter out = response.getWriter();
-            response.setStatus(HttpServletResponse.SC_OK);
-            out.print(JSON.toJSON(ResponseDtoFactory.unAuthorized("登陆超时，请重新登陆")));
-            out.flush();
-            out.close();
+            timeout(response);
         }
         return false;
     }
@@ -69,5 +68,15 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 
+    }
+
+    private void timeout(HttpServletResponse response) throws Exception{
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType(ContentType.APPLICATION_JSON.toString());
+        PrintWriter out = response.getWriter();
+        response.setStatus(HttpServletResponse.SC_OK);
+        out.print(JSON.toJSON(ResponseDtoFactory.unAuthorized("登陆超时，请重新登陆")));
+        out.flush();
+        out.close();
     }
 }

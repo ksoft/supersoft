@@ -1,6 +1,7 @@
 package com.datuzi.supersoft.controller;
 
 import com.datuzi.supersoft.constant.Constants;
+import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.LoginFeign;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -29,7 +30,7 @@ import java.util.UUID;
  * @date 2017/5/11
  */
 @Controller
-public class LoginController {
+public class LoginController extends BaseController{
     @Autowired
     private DefaultKaptcha defaultKaptcha;
     @Autowired
@@ -67,8 +68,8 @@ public class LoginController {
         ResponseDto<AdmUserDto> result= loginFeign.login(loginUserDto);
         if(result.getCode()==0 && result.isSuccess()){
             String token=UUID.randomUUID().toString();
-            redisTemplate.opsForValue().set(Constants.TOKEN, token);
-            response.addHeader(Constants.TOKEN,token);
+            redisTemplate.opsForValue().set(token, result.getData());
+            response.setHeader(Constants.TOKEN,token);
             Cookie cookie=new Cookie(Constants.TOKEN,token);
             response.addCookie(cookie);
             return ResponseDtoFactory.toSuccess("登录成功",Boolean.TRUE);

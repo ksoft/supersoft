@@ -1,5 +1,6 @@
 package com.datuzi.supersoft.controller;
 
+import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.AdmUserFeign;
 import org.apache.commons.lang.time.DateUtils;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     private AdmUserFeign admUserFeign;
 
@@ -85,8 +86,8 @@ public class UserController {
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
     public ResponseDto<Boolean> saveAdmUser(@RequestBody AdmUserDto admUserDto) {
-        admUserDto.setCreateBy("Sys");
-        admUserDto.setCreateDt(new Date());
+        AdmUserDto currentUser=getCurrent();
+        admUserDto.setCreateBy(currentUser.getUserCode());
         ResponseDto<Boolean> user=admUserFeign.saveAdmUser(admUserDto);
         return user;
     }

@@ -1,5 +1,6 @@
 package com.datuzi.supersoft.controller;
 
+import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.AdmMenuFeign;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/menu")
-public class MenuController {
+public class MenuController extends BaseController {
     @Autowired
     private AdmMenuFeign admMenuFeign;
 

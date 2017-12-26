@@ -1,8 +1,10 @@
 package com.datuzi.supersoft.utils;
 
-import com.datuzi.supersoft.dto.AdmUserDto;
-import com.datuzi.supersoft.entity.AdmUser;
 import org.springframework.beans.BeanUtils;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * @author zhangjianbo
@@ -14,6 +16,12 @@ public class EntityUtil{
         try {
             entity = clazz.newInstance();
             BeanUtils.copyProperties(dto,entity);
+            Field field=clazz.getDeclaredField("createDt");
+            if(field!=null){
+                field.setAccessible(true);
+                Method fieldSetMet = clazz.getMethod("setCreateDt",field.getType());
+                fieldSetMet.invoke(entity,new Date());
+            }
         }catch (Exception ex){
             ex.printStackTrace();
         }
