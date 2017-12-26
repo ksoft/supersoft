@@ -56,8 +56,9 @@ public class AdmUserServiceImpl implements AdmUserService {
     }
 
     @Override
-    public PageResultDto<List<UserListDto>> findUserPage(UserSearchDto searchDto) {
+    public PageResultDto<List<UserListDto>> findUserPage(final UserSearchDto searchDto) {
         Pageable pageable=new PageRequest(searchDto.getPage()-1,searchDto.getLimit());
+
         //查询条件构造
         Specification<AdmUser> spec = new Specification<AdmUser>() {
         @Override
