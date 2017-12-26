@@ -67,10 +67,14 @@ public class UserController extends BaseController {
      * 查看页
      * @return
      */
-    @GetMapping(value = "delete/{id}")
+    @PostMapping(value = "delete")
     @ResponseBody
-    public ResponseDto<Boolean> delete(@PathVariable Long id) {
-        return admUserFeign.deleteAdmUserById(id);
+    public ResponseDto<Boolean> delete(@RequestBody List<Long> ids) {
+        AdmUserDto current=getCurrent();
+        if(ids.contains(current.getId())){
+            ids.remove(current.getId());
+        }
+        return admUserFeign.deleteAdmUserById(ids);
     }
 
     /**

@@ -39,8 +39,8 @@ public interface AdmUserService {
 
     /**
      * 删除用户
-     * @param id
+     * @param ids
      * @return
      */
-    ResponseDto<Boolean> deleteAdmUserById(Long id);
+    ResponseDto<Boolean> deleteAdmUserById(List<Long> ids);
 }

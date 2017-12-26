@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.*;
@@ -90,8 +92,11 @@ public class AdmUserServiceImpl implements AdmUserService {
     }
 
     @Override
-    public ResponseDto<Boolean> deleteAdmUserById(Long id) {
-        admUserRepository.delete(id);
+    @Transactional(propagation = Propagation.REQUIRED)
+    public ResponseDto<Boolean> deleteAdmUserById(List<Long> ids) {
+        for(Long id:ids) {
+            admUserRepository.delete(id);
+        }
         return ResponseDtoFactory.toSuccess("删除成功",Boolean.TRUE);
     }
 }

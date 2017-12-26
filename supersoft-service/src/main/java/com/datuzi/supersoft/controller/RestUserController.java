@@ -39,9 +39,9 @@ public class RestUserController {
         return admUserService.findAdmUserById(id);
     }
 
-    @RequestMapping(value = "/deleteAdmUserById/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteAdmUserById",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto<Boolean> deleteAdmUserById(@PathVariable("id") Long id) {
-        return admUserService.deleteAdmUserById(id);
+    public ResponseDto<Boolean> deleteAdmUserById(@RequestBody List<Long> ids) {
+        return admUserService.deleteAdmUserById(ids);
     }
 }

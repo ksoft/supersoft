@@ -69,10 +69,13 @@ layui.use(['jquery','layer','form','table'],function(){
             });
         } else if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
+                var ids=[];
+                ids[0]=data.id;
                 layer.close(index);
                 $.ajax({
-                    type:"GET",
-                    url:"/user/delete/"+data.id,
+                    type:"POST",
+                    url:"/user/delete",
+                    data: JSON.stringify(ids),
                     dataType:"json",
                     contentType:"application/json",
                     success:function(res){
@@ -138,16 +141,17 @@ layui.use(['jquery','layer','form','table'],function(){
             if(data.length==0){
                 layer.alert("至少选中一条数据");
                 return;
-            }else if(data.length>1){
-                layer.alert("只能选中一条数据");
-                return;
             }
-            layer.confirm('真的删除行么', function(index) {
+            var ids=[];
+            for(var i=0;i<data.length;i++){
+               ids[i]=data[i].id;
+            }
+            layer.confirm('真的删除选中的所有行么', function(index) {
                 layer.close(index);
-                var id = data[0].id;
                 $.ajax({
-                    type: "GET",
-                    url: "/user/delete/" + id,
+                    type: "POST",
+                    url: "/user/delete",
+                    data: JSON.stringify(ids),
                     dataType: "json",
                     contentType: "application/json",
                     success: function (res) {

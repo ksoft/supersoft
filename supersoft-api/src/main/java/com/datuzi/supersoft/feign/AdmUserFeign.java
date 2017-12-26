@@ -45,9 +45,9 @@ public interface AdmUserFeign {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/user/deleteAdmUserById/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/user/deleteAdmUserById",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<Boolean> deleteAdmUserById(@PathVariable("id") Long id);
+    ResponseDto<Boolean> deleteAdmUserById(List<Long> id);
 
 
     /**
