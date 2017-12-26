@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-12-11 17:33:20
+Date: 2017-12-26 16:28:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,7 +47,7 @@ INSERT INTO `ADM_MENU` VALUES ('7', '用户管理', 'larry-10103', null, '1', '1
 INSERT INTO `ADM_MENU` VALUES ('8', '个人信息', 'larry-gerenxinxi1', '/toLogin', '0', '6', '1', '0', null, null, null);
 INSERT INTO `ADM_MENU` VALUES ('9', '修改密码', 'larry-xiugaimima2', 'html/changepwd.html', '0', '6', '1', '0', null, null, null);
 INSERT INTO `ADM_MENU` VALUES ('10', '日志信息', 'larry-rizhi2', 'html/myloginfo.html', '0', '6', '1', '0', null, null, null);
-INSERT INTO `ADM_MENU` VALUES ('11', '用户列表', 'larry-yonghuliebiao1', null, '0', '7', '1', '0', null, null, null);
+INSERT INTO `ADM_MENU` VALUES ('11', '用户列表', 'larry-yonghuliebiao1', '/user/index', '0', '7', '1', '0', null, null, null);
 
 -- ----------------------------
 -- Table structure for ADM_ROLE
@@ -106,18 +106,17 @@ CREATE TABLE `ADM_USER` (
   `STATUS` char(1) DEFAULT NULL,
   `CREATE_DT` datetime DEFAULT NULL,
   `CREATE_BY` varchar(25) DEFAULT NULL,
+  `SEX` varchar(255) DEFAULT NULL,
+  `MOBILE_PHONE` varchar(255) DEFAULT NULL,
   `EMAIL` varchar(25) DEFAULT NULL,
   `ROLE_CODE` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ADM_USER
 -- ----------------------------
-INSERT INTO `ADM_USER` VALUES ('1', '1111', '张三', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', '2016-12-02 13:40:39', 'SYS', 'k963@vip.qq.com', null);
-INSERT INTO `ADM_USER` VALUES ('2', '2222', '李四', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', '2016-12-05 16:27:35', 'SYS', 'k963@vip.qq.com', null);
-INSERT INTO `ADM_USER` VALUES ('3', 'xiaoqiu', '小邱', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', '2016-12-13 14:53:51', 'SYS', 'xiaoqiu@qq.com', null);
-INSERT INTO `ADM_USER` VALUES ('4', 'admin', '管理员', 'admin', null, null, null, null, 'ROLE_admin');
+INSERT INTO `ADM_USER` VALUES ('4', 'admin12', '管理员t', 'admin12', '1', '2017-12-26 14:38:32', 'admin', '1', null, 'admin44@datuzi.com', '1');
 
 -- ----------------------------
 -- Function structure for getChild
