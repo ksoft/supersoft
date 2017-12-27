@@ -117,7 +117,7 @@ CREATE TABLE `adm_user` (
 -- ----------------------------
 -- Records of adm_user
 -- ----------------------------
-INSERT INTO `adm_user` VALUES ('4', 'admin', '超级管理员', 'admin', '1', '2017-12-26 14:38:32', 'admin', '1', '17688888888', 'admin44@datuzi.com', '/images/logo.png', '1');
+INSERT INTO `adm_user` VALUES ('4', 'admin', '超级管理员', 'admin', '1', '2017-12-26 14:38:32', 'admin', '1', '17688888888', 'admin44@datuzi.com', '/images/user.jpg', '1');
 
 -- ----------------------------
 -- Function structure for getChild
