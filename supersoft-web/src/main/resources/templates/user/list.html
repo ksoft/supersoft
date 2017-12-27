@@ -50,6 +50,15 @@
 <script type="text/html" id="sexTpl">
     <input type="checkbox" name="sex" value="{{d.sex}}" disabled lay-skin="switch" lay-text="男|女" lay-filter="sexFilter" {{ d.sex == 0 ? 'checked' : '' }}>
 </script>
+<script type="text/html" id="roleTpl">
+    {{#  if(d.roleCode == '0'){  }}
+        超级管理员
+    {{#  } else if(d.roleCode == '1'){  }}
+        管理员
+    {{#  } else{  }}
+        普通帐号
+    {{#  }  }}
+</script>
 <script type="text/html" id="statusTpl">
     <input type="checkbox" name="status" value="{{d.status}}" disabled lay-skin="switch" lay-text="启用|禁用" lay-filter="statusFilter" {{ d.status == 0 ? 'checked' : '' }}>
 </script>

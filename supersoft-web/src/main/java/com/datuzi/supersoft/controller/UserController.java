@@ -114,4 +114,14 @@ public class UserController extends BaseController {
         ResponseDto<Boolean> user=admUserFeign.updateAdmUser(admUserDto);
         return user;
     }
+
+    /**
+     * 个人信息
+     * @return
+     */
+    @GetMapping(value = "myInfo")
+    public String myInfo(Model model) {
+        model.addAttribute("user",super.getCurrent());
+        return "user/myInfo";
+    }
 }

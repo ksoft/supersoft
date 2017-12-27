@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,15 +67,16 @@ public class LoginController extends BaseController{
         BeanUtils.copyProperties(loginDto,loginUserDto);
 
         ResponseDto<AdmUserDto> result= loginFeign.login(loginUserDto);
-        if(result.getCode()==0 && result.isSuccess()){
+        if(result.isSuccess()){
             String token=UUID.randomUUID().toString();
             redisTemplate.opsForValue().set(token, result.getData());
             response.setHeader(Constants.TOKEN,token);
             Cookie cookie=new Cookie(Constants.TOKEN,token);
             response.addCookie(cookie);
             return ResponseDtoFactory.toSuccess("登录成功",Boolean.TRUE);
+        }else{
+            return ResponseDtoFactory.toError(result.getMessage(),Boolean.FALSE);
         }
-        return ResponseDtoFactory.toError("登录失败");
     }
 
     /**
@@ -82,7 +84,9 @@ public class LoginController extends BaseController{
      * @return
      */
     @GetMapping(value = "index")
-    public String index() {
+    public String index(Model model) {
+        AdmUserDto user=super.getCurrent();
+        model.addAttribute("headIcon",user.getHeadIcon());
         return "index/index";
     }
 

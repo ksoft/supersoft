@@ -32,12 +32,14 @@ public class AdmUserServiceImpl implements AdmUserService {
 
     @Override
     public  ResponseDto<AdmUserDto> findAdmUser(LoginUserDto loginUserDto) {
-        AdmUserDto admUserDto=new AdmUserDto();
         AdmUser user=admUserRepository.findAdmUserByUserCodeAndPassword(loginUserDto.getUserCode(),loginUserDto.getPassword());
         if(user!=null){
+            AdmUserDto admUserDto=new AdmUserDto();
             BeanUtils.copyProperties(user,admUserDto);
+            return ResponseDtoFactory.toSuccess(admUserDto);
+        }else{
+            return ResponseDtoFactory.toError("未找到对应的用户信息");
         }
-        return ResponseDtoFactory.toSuccess(admUserDto);
     }
 
     @Override
@@ -46,8 +48,10 @@ public class AdmUserServiceImpl implements AdmUserService {
         AdmUser user=admUserRepository.findOne(id);
         if(user!=null){
             BeanUtils.copyProperties(user,userListDto);
+            return ResponseDtoFactory.toSuccess(userListDto);
+        }else{
+            return ResponseDtoFactory.toError("未找到对应的用户信息");
         }
-        return ResponseDtoFactory.toSuccess(userListDto);
     }
 
     @Override
