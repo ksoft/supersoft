@@ -197,7 +197,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
         ,before: function(obj){
             //预读本地文件示例，不支持ie8
             obj.preview(function(index, file, result){
-                $('#headIcon').attr('src', result); //图片链接（base64）
+                $('#headIconImg').attr('src', result); //图片链接（base64）
             });
         }
         ,done: function(res){
@@ -206,7 +206,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
                 return layer.msg('上传失败');
             }else{
                 //上传成功
-                $('#headIcon').attr('src', res.data);
+                $('#headIcon').val('src', res.data);
             }
         }
         ,error: function(){

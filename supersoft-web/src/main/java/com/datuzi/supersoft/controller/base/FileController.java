@@ -33,7 +33,7 @@ public class FileController {
         try {
             String path = "D:\\photos\\";
             String fileName = UploadUtil.upload(file, path);
-            return ResponseDtoFactory.toSuccess("上传成功",config.getStaticPath()+fileName);
+            return ResponseDtoFactory.toSuccess("上传成功",fileName);
         }catch (Exception e){
             return ResponseDtoFactory.toError("上传失败");
         }
