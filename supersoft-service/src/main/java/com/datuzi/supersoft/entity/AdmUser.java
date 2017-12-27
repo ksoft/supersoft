@@ -1,5 +1,6 @@
 package com.datuzi.supersoft.entity;
 
+import com.datuzi.supersoft.enums.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public class AdmUser implements Serializable {
     private String status;
     private String mobilePhone;
     private String sex;
-    private String roleCode;
+    private RoleType roleCode;
     private Date createDt;
     private String createBy;
 }
