@@ -26,7 +26,7 @@ spring.jackson:
   date-format: yyyy-MM-dd HH:mm:ss
 
 supersoft:
-  static-path: http://10.1.80.239/
+  static-path: http://localhost/
   context-path: http://localhost:${server.port}${server.context-path}
 ---
 #development profile
