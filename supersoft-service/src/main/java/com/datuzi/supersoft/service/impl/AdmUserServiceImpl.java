@@ -65,7 +65,7 @@ public class AdmUserServiceImpl implements AdmUserService {
     public ResponseDto<Boolean> updateAdmUser(AdmUserDto admUserDto) {
         AdmUser admUser=admUserRepository.findOne(admUserDto.getId());
         if(admUser!=null) {
-            BeanUtils.copyProperties(admUserDto, admUser);
+            EntityUtil.copyPropertiesIgnoreNull(admUserDto, admUser);
             admUserRepository.save(admUser);
             return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
         }else{
