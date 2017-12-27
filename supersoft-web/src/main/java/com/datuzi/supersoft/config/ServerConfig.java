@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class ServerConfig {
+    private String staticPath;
     private String contextPath;
     private String ftpFileBase;
 }

@@ -43,6 +43,7 @@ public class ThymeleafConfig implements ApplicationContextAware {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         Map<String, Object> variables = new HashMap<String, Object>();
         variables.put("contextPath", config.getContextPath());
+        variables.put("staticPath", config.getStaticPath());
         resolver.setStaticVariables(variables);
         resolver.setTemplateEngine(templateEngine());
         resolver.setCharacterEncoding("UTF-8");
