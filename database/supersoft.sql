@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-12-27 11:03:14
+Date: 2017-12-28 10:22:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,7 @@ CREATE TABLE `adm_menu` (
   `create_by` varchar(25) DEFAULT NULL,
   `order_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adm_menu
@@ -44,10 +44,12 @@ INSERT INTO `adm_menu` VALUES ('4', '扩展模块', 'larry-ht_expand', null, '0'
 INSERT INTO `adm_menu` VALUES ('5', '后台首页', 'larry-houtaishouye', 'html/main.php', '0', '1', '1', '0', null, null, null);
 INSERT INTO `adm_menu` VALUES ('6', '我的面板', 'larry-gerenxinxi5', null, '1', '1', '1', '0', null, null, null);
 INSERT INTO `adm_menu` VALUES ('7', '用户管理', 'larry-10103', null, '1', '1', '1', '0', null, null, null);
-INSERT INTO `adm_menu` VALUES ('8', '个人信息', 'larry-gerenxinxi1', '/toLogin', '0', '6', '1', '0', null, null, null);
+INSERT INTO `adm_menu` VALUES ('8', '个人信息', 'larry-gerenxinxi1', '/user/myInfo', '0', '6', '1', '0', null, null, null);
 INSERT INTO `adm_menu` VALUES ('9', '修改密码', 'larry-xiugaimima2', 'html/changepwd.html', '0', '6', '1', '0', null, null, null);
 INSERT INTO `adm_menu` VALUES ('10', '日志信息', 'larry-rizhi2', 'html/myloginfo.html', '0', '6', '1', '0', null, null, null);
 INSERT INTO `adm_menu` VALUES ('11', '用户列表', 'larry-yonghuliebiao1', '/user/index', '0', '7', '1', '0', null, null, null);
+INSERT INTO `adm_menu` VALUES ('12', '角色列表', 'larry-jiaoseguanli1', '/role/index', '0', '7', '1', '0', null, null, null);
+INSERT INTO `adm_menu` VALUES ('13', '菜单管理', 'larry-caidanguanli', '/menu/index', '0', '7', '1', '0', null, null, null);
 
 -- ----------------------------
 -- Table structure for adm_role
@@ -117,14 +119,14 @@ CREATE TABLE `adm_user` (
 -- ----------------------------
 -- Records of adm_user
 -- ----------------------------
-INSERT INTO `adm_user` VALUES ('4', 'admin', '超级管理员', 'admin', '1', '2017-12-26 14:38:32', 'admin', '1', '17688888888', 'admin44@datuzi.com', '/images/user.jpg', '1');
+INSERT INTO `adm_user` VALUES ('4', 'admin', '管理员2', 'admin', '1', '2017-12-26 14:38:32', 'admin', '0', '17688888888', 'admin44@datuzi.com', '910bba9b-ce80-477f-8428-f80bf30b29f2.png', '0');
 
 -- ----------------------------
 -- Function structure for getChild
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getChild`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `getChild`(`rootId` bigint) RETURNS varchar(1000) CHARSET utf8
+CREATE DEFINER=`root`@`localhost` FUNCTION `getChild`(`rootId` bigint) RETURNS varchar(1000) CHARSET utf8 COLLATE utf8_unicode_ci
     NO SQL
 BEGIN
 	DECLARE ptemp varchar(1000);
@@ -133,8 +135,8 @@ BEGIN
        SET ctemp =cast(rootId as CHAR);
        WHILE ctemp is not null DO
              SET ptemp = concat(ptemp,',',ctemp);
-            SELECT group_concat(id) INTO ctemp FROM ADM_MENU
-            WHERE FIND_IN_SET(pid,ctemp)>0;
+            SELECT group_concat(id) INTO ctemp FROM adm_menu
+            WHERE status=0 and FIND_IN_SET(pid,ctemp)>0;
        END WHILE;
        RETURN ptemp;
 END
