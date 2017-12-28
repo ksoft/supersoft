@@ -9,36 +9,27 @@ import java.util.List;
 
 /**
  * @author zhangjianbo
- * @date 2017/12/8
+ * @date 2017/12/28
  */
 @FeignClient(name= Constants.SERVICE_PROVIDER)
-public interface AdmUserFeign {
-    /**
-     * 查找
-     * @param loginUserDto
-     * @return
-     */
-    @RequestMapping(value = "/user/findAdmUser",method = RequestMethod.POST)
-    @ResponseBody
-    ResponseDto<AdmUserDto> findOne(@RequestBody LoginUserDto loginUserDto);
-
+public interface AdmRoleFeign {
     /**
      * 保存
-     * @param admUserDto
+     * @param dto
      * @return
      */
     @RequestMapping(value = "/user/save",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<Boolean> save(@RequestBody AdmUserDto admUserDto);
+    ResponseDto<Boolean> save(@RequestBody AdmRoleDto dto);
 
     /**
      * 更新
-     * @param admUserDto
+     * @param dto
      * @return
      */
     @RequestMapping(value = "/user/update",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<AdmUserDto> update(@RequestBody AdmUserDto admUserDto);
+    ResponseDto<Boolean> update(@RequestBody AdmRoleDto dto);
 
     /**
      * 查找
@@ -47,7 +38,7 @@ public interface AdmUserFeign {
      */
     @RequestMapping(value = "/user/findById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<UserListDto> findById(@PathVariable("id") Long id);
+    ResponseDto<RoleListDto> findById(@PathVariable("id") Long id);
 
     /**
      * 删除
@@ -60,11 +51,11 @@ public interface AdmUserFeign {
 
 
     /**
-     * 查找
+     * 分页查找
      * @param searchDto
      * @return
      */
     @RequestMapping(value = "/user/findByPage",method = RequestMethod.POST)
     @ResponseBody
-    PageResultDto<List<UserListDto>> findByPage(@RequestBody BasePageDto searchDto);
+    PageResultDto<List<RoleListDto>> findUserPage(@RequestBody BasePageDto searchDto);
 }

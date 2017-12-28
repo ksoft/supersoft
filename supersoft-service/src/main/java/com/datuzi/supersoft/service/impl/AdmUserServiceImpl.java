@@ -31,7 +31,7 @@ public class AdmUserServiceImpl implements AdmUserService {
 
 
     @Override
-    public  ResponseDto<AdmUserDto> findAdmUser(LoginUserDto loginUserDto) {
+    public  ResponseDto<AdmUserDto> findOne(LoginUserDto loginUserDto) {
         AdmUser user=admUserRepository.findAdmUserByUserCodeAndPassword(loginUserDto.getUserCode(),loginUserDto.getPassword());
         if(user!=null){
             AdmUserDto admUserDto=new AdmUserDto();
@@ -43,7 +43,7 @@ public class AdmUserServiceImpl implements AdmUserService {
     }
 
     @Override
-    public ResponseDto<UserListDto> findAdmUserById(Long id) {
+    public ResponseDto<UserListDto> findById(Long id) {
         UserListDto userListDto=new UserListDto();
         AdmUser user=admUserRepository.findOne(id);
         if(user!=null){
@@ -55,26 +55,27 @@ public class AdmUserServiceImpl implements AdmUserService {
     }
 
     @Override
-    public ResponseDto<Boolean> saveAdmUser(AdmUserDto admUserDto) {
+    public ResponseDto<Boolean> save(AdmUserDto admUserDto) {
         AdmUser admUser=EntityUtil.translate(admUserDto,AdmUser.class);
         admUserRepository.save(admUser);
         return ResponseDtoFactory.toSuccess("保存成功",Boolean.TRUE);
     }
 
     @Override
-    public ResponseDto<Boolean> updateAdmUser(AdmUserDto admUserDto) {
+    public ResponseDto<AdmUserDto> update(AdmUserDto admUserDto) {
         AdmUser admUser=admUserRepository.findOne(admUserDto.getId());
         if(admUser!=null) {
             EntityUtil.copyPropertiesIgnoreNull(admUserDto, admUser);
             admUserRepository.save(admUser);
-            return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
+            BeanUtils.copyProperties(admUser,admUserDto);
+            return ResponseDtoFactory.toSuccess("更新成功",admUserDto);
         }else{
             return ResponseDtoFactory.toError("找不到对应的数据");
         }
     }
 
     @Override
-    public PageResultDto<List<UserListDto>> findUserPage(final UserSearchDto searchDto) {
+    public PageResultDto<List<UserListDto>> findByPage(final BasePageDto searchDto) {
         Pageable pageable=new PageRequest(searchDto.getPage()-1,searchDto.getLimit());
 
         //查询条件构造
@@ -109,7 +110,7 @@ public class AdmUserServiceImpl implements AdmUserService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public ResponseDto<Boolean> deleteAdmUserById(List<Long> ids) {
+    public ResponseDto<Boolean> deleteById(List<Long> ids) {
         for(Long id:ids) {
             admUserRepository.delete(id);
         }

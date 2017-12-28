@@ -24,6 +24,10 @@ public class BaseController {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    /**
+     * 获取当前用户
+     * @return
+     */
     public AdmUserDto getCurrent(){
         RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
         if (requestAttributes != null) {
@@ -45,5 +49,25 @@ public class BaseController {
             }
         }
         return null;
+    }
+
+    /**
+     * 刷新当前用户缓存
+     * @param request
+     */
+    public void refreshCurrent(HttpServletRequest request,AdmUserDto userDto){
+        String token=request.getHeader(Constants.TOKEN);
+        if(org.springframework.util.StringUtils.isEmpty(token)){
+            Cookie[] cookies=request.getCookies();
+            if(cookies!=null && cookies.length>0){
+                for(Cookie cookie:cookies){
+                    if(Constants.TOKEN.equals(cookie.getName())){
+                        token=cookie.getValue();
+                        break;
+                    }
+                }
+            }
+        }
+        redisTemplate.opsForValue().set(token,userDto);
     }
 }

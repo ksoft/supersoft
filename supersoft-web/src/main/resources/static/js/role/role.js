@@ -8,10 +8,10 @@ layui.use(['jquery','layer','form','table','upload'],function(){
 
     //第一个实例
     table.render({
-        elem: '#userTable'
-        ,id: 'userTable'
+        elem: '#listTable'
+        ,id: 'listTable'
         ,height: 'full-100' //高度最大化减去差值
-        ,url: '/user/list' //数据接口
+        ,url: '/role/list' //数据接口
         ,method:'post'
         ,limit:20
         //,where: {tokensdf: 'sasasas', id: 123} //如果无需传递额外参数，可不加该参数
@@ -19,12 +19,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
         ,cols: [[ //表头
             {type:'checkbox'}
             ,{field: 'id', title: 'ID', width:80, sort: true}
-            ,{field: 'userCode', title: '用户名', width:180, sort: true}
-            ,{field: 'userName', title: '姓名', width:180, sort: true}
-            ,{field: 'sex', title: '性别', width:80, templet: '#sexTpl', unresize: true, sort: true}
-            ,{field: 'email', title: '邮箱', width:180, sort: true}
-            ,{field: 'mobilePhone', title: '手机号', width: 177, sort: true}
-            ,{field: 'roleCode', title: '角色', templet: '#roleTpl', unresize: true, width: 160, sort: true}
+            ,{field: 'name', title: '名称', width:180, sort: true}
             ,{field: 'createDt', title: '创建时间', width:180, sort: true}
             ,{field: 'createBy', title: '创建人', width: 177, sort: true}
             ,{field: 'status', title: '状态', templet: '#statusTpl', unresize: true, width: 160, sort: true}
@@ -36,10 +31,6 @@ layui.use(['jquery','layer','form','table','upload'],function(){
     table.on('checkbox(operate)', function(obj){
         console.log(obj)
     });
-    //监听性别操作
-    form.on('switch(sexFilter)', function(obj){
-        layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
-    });
     //监听状态操作
     form.on('switch(statusFilter)', function(obj){
         layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
@@ -48,7 +39,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
     form.on('submit(formAdd)', function(data){
         $.ajax({
             type:"POST",
-            url:"/user/save",
+            url:"/role/save",
             dataType:"json",
             contentType:"application/json",
             data:JSON.stringify(data.field),
@@ -65,7 +56,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
     form.on('submit(formEdit)', function(data){
         $.ajax({
             type:"POST",
-            url:"/user/update",
+            url:"/role/update",
             dataType:"json",
             contentType:"application/json",
             data:JSON.stringify(data.field),
@@ -87,7 +78,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             layer.open({
                 type: 2,
                 area: ['100%', '100%'],
-                content: '/user/view/'+data.id
+                content: '/role/view/'+data.id
             });
         } else if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
@@ -96,7 +87,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
                 layer.close(index);
                 $.ajax({
                     type:"POST",
-                    url:"/user/delete",
+                    url:"/role/delete",
                     data: JSON.stringify(ids),
                     dataType:"json",
                     contentType:"application/json",
@@ -111,7 +102,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             layer.open({
                 type: 2,
                 area: ['100%', '100%'],
-                content: '/user/edit/'+data.id
+                content: '/role/edit/'+data.id
             });
         }
     });
@@ -120,7 +111,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
         reload: function(){
             var queryParam = $('#queryParam');
             //执行重载
-            table.reload('userTable', {
+            table.reload('table', {
                 page: {
                     curr: 1 //重新从第 1 页开始
                 }
@@ -132,16 +123,16 @@ layui.use(['jquery','layer','form','table','upload'],function(){
         add: function(){
             layer.open({
                 type: 2,
-                title:"新增用户",
+                title:"新增",
                 area: ['100%', '100%'],
-                content: '/user/add',
+                content: '/role/add',
                 end: function () {
                     active.reload();
                 }
             });
         },
         edit: function(){
-            var checkStatus = table.checkStatus('userTable')
+            var checkStatus = table.checkStatus('listTable')
                 ,data = checkStatus.data;
             if(data.length==0){
                 layer.alert("至少选中一条数据");
@@ -154,14 +145,14 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             layer.open({
                 type: 2,
                 area: ['100%', '100%'],
-                content: '/user/edit/'+id,
+                content: '/role/edit/'+id,
                 end: function () {
                     active.reload();
                 }
             });
         },
         delete: function(){
-            var checkStatus = table.checkStatus('userTable')
+            var checkStatus = table.checkStatus('listTable')
                 ,data = checkStatus.data;
             if(data.length==0){
                 layer.alert("至少选中一条数据");
@@ -175,7 +166,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
                 layer.close(index);
                 $.ajax({
                     type: "POST",
-                    url: "/user/delete",
+                    url: "/role/delete",
                     data: JSON.stringify(ids),
                     dataType: "json",
                     contentType: "application/json",
@@ -191,54 +182,5 @@ layui.use(['jquery','layer','form','table','upload'],function(){
     $('.headerTable .layui-btn').on('click', function(){
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
-    });
-
-    var uploadInst =upload.render({
-        elem: '#upload'
-        ,url: '/file/upload'
-        ,before: function(obj){
-            //预读本地文件示例，不支持ie8
-            obj.preview(function(index, file, result){
-                $('#headIconImg').attr('src', result); //图片链接（base64）
-            });
-        }
-        ,done: function(res){
-            //如果上传失败
-            if(res.code > 0){
-                return layer.msg('上传失败');
-            }else{
-                //上传成功
-                $('#headIcon').val(res.data);
-            }
-        }
-        ,error: function(){
-            //演示失败状态，并实现重传
-            var demoText = $('#uploadMsg');
-            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-            demoText.find('.demo-reload').on('click', function(){
-                uploadInst.upload();
-            });
-        }
-    });
-
-    form.verify({
-        userName: function(value, item){ //value：表单的值、item：表单的DOM对象
-            if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
-                return '用户名不能有特殊字符';
-            }
-            if(/(^\_)|(\__)|(\_+$)/.test(value)){
-                return '用户名首尾不能出现下划线\'_\'';
-            }
-            if(/^\d+\d+\d$/.test(value)){
-                return '用户名不能全为数字';
-            }
-        }
-
-        //我们既支持上述函数式的方式，也支持下述数组的形式
-        //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
-        ,password: [
-            /^[\S]{6,12}$/
-            ,'密码必须6到12位，且不能出现空格'
-        ]
     });
 });

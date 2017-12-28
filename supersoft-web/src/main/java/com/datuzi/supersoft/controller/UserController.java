@@ -3,14 +3,12 @@ package com.datuzi.supersoft.controller;
 import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.AdmUserFeign;
-import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -22,6 +20,7 @@ import java.util.List;
 public class UserController extends BaseController {
     @Autowired
     private AdmUserFeign admUserFeign;
+
 
     /**
      * 列表页
@@ -47,7 +46,7 @@ public class UserController extends BaseController {
      */
     @GetMapping(value = "view/{id}")
     public String view(@PathVariable Long id, Model model) {
-        ResponseDto<UserListDto> dto=admUserFeign.findAdmUserById(id);
+        ResponseDto<UserListDto> dto=admUserFeign.findById(id);
         model.addAttribute("user",dto.getData());
         return "user/view";
     }
@@ -58,13 +57,13 @@ public class UserController extends BaseController {
      */
     @GetMapping(value = "edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        ResponseDto<UserListDto> dto=admUserFeign.findAdmUserById(id);
+        ResponseDto<UserListDto> dto=admUserFeign.findById(id);
         model.addAttribute("user",dto.getData());
         return "user/edit";
     }
 
     /**
-     * 查看页
+     * 删除
      * @return
      */
     @PostMapping(value = "delete")
@@ -74,7 +73,7 @@ public class UserController extends BaseController {
         if(ids.contains(current.getId())){
             ids.remove(current.getId());
         }
-        return admUserFeign.deleteAdmUserById(ids);
+        return admUserFeign.deleteById(ids);
     }
 
     /**
@@ -83,8 +82,8 @@ public class UserController extends BaseController {
      */
     @PostMapping(value = "/list")
     @ResponseBody
-    public PageResultDto<List<UserListDto>> list(@RequestBody UserSearchDto searchDto){
-        return admUserFeign.findUserPage(searchDto);
+    public PageResultDto<List<UserListDto>> list(@RequestBody BasePageDto searchDto){
+        return admUserFeign.findByPage(searchDto);
     }
 
     /**
@@ -97,8 +96,7 @@ public class UserController extends BaseController {
     public ResponseDto<Boolean> saveAdmUser(@RequestBody AdmUserDto admUserDto) {
         AdmUserDto currentUser=getCurrent();
         admUserDto.setCreateBy(currentUser.getUserCode());
-        ResponseDto<Boolean> user=admUserFeign.saveAdmUser(admUserDto);
-        return user;
+        return admUserFeign.save(admUserDto);
     }
 
     /**
@@ -108,11 +106,19 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto<Boolean> updateAdmUser(@RequestBody AdmUserDto admUserDto) {
+    public ResponseDto<Boolean> updateAdmUser(@RequestBody AdmUserDto admUserDto, HttpServletRequest request) {
         AdmUserDto currentUser=getCurrent();
         admUserDto.setCreateBy(currentUser.getUserCode());
-        ResponseDto<Boolean> user=admUserFeign.updateAdmUser(admUserDto);
-        return user;
+        ResponseDto<AdmUserDto> responseDto=admUserFeign.update(admUserDto);
+        if(responseDto.isSuccess()){
+            //如果更新的是当前用户，刷新用户缓存
+            if(admUserDto.getId().equals(currentUser.getId())){
+                super.refreshCurrent(request,responseDto.getData());
+            }
+            return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
+        }else{
+            return ResponseDtoFactory.toError("更新失败",Boolean.FALSE);
+        }
     }
 
     /**

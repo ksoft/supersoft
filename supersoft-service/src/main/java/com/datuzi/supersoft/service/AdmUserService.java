@@ -14,40 +14,40 @@ public interface AdmUserService {
      * @param loginUserDto
      * @return
      */
-    ResponseDto<AdmUserDto> findAdmUser(LoginUserDto loginUserDto);
+    ResponseDto<AdmUserDto> findOne(LoginUserDto loginUserDto);
 
     /**
      * 查找用户
      * @param id
      * @return
      */
-    ResponseDto<UserListDto> findAdmUserById(Long id);
+    ResponseDto<UserListDto> findById(Long id);
 
     /**
      * 保存
      * @param admUserDto
      * @return
      */
-    ResponseDto<Boolean> saveAdmUser(AdmUserDto admUserDto);
+    ResponseDto<Boolean> save(AdmUserDto admUserDto);
 
     /**
      * 更新
      * @param admUserDto
      * @return
      */
-    ResponseDto<Boolean> updateAdmUser(AdmUserDto admUserDto);
+    ResponseDto<AdmUserDto> update(AdmUserDto admUserDto);
 
     /**
      * 列表分页
      * @param searchDto
      * @return
      */
-    PageResultDto<List<UserListDto>> findUserPage(UserSearchDto searchDto);
+    PageResultDto<List<UserListDto>> findByPage(BasePageDto searchDto);
 
     /**
      * 删除用户
      * @param ids
      * @return
      */
-    ResponseDto<Boolean> deleteAdmUserById(List<Long> ids);
+    ResponseDto<Boolean> deleteById(List<Long> ids);
 }

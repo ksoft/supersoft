@@ -19,6 +19,6 @@ public class RestLoginController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public ResponseDto<AdmUserDto> login(@RequestBody LoginUserDto loginUserDto) {
-        return admUserService.findAdmUser(loginUserDto);
+        return admUserService.findOne(loginUserDto);
     }
 }

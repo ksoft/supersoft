@@ -35,24 +35,8 @@ public class MenuController extends BaseController {
      */
     @PostMapping(value = "/leftMenuByTopMenu/{pid}")
     @ResponseBody
-    public ResponseDto<List<LeftMenuDto>> leftMenuByTopMenu(@PathVariable("pid") Long pid){
-        ResponseDto<List<LeftMenuDto>> responseDto= admMenuFeign.leftMenu(pid);
+    public ResponseDto<List<LeftMenuDto>> leftMenuByTopMenu(@PathVariable("pid") Long pid) {
+        ResponseDto<List<LeftMenuDto>> responseDto = admMenuFeign.leftMenu(pid);
         return ResponseDtoFactory.toSuccess(responseDto.getData());
-
-        /*List<LeftMenuDto> list=new ArrayList<>();
-        list.add(new LeftMenuDto(100L,"后台首页","larry-houtaishouye",Boolean.FALSE,"html/main.php"));
-
-        List<LeftSubMenuDto> subMenuDtotList=new ArrayList<>();
-        subMenuDtotList.add(new LeftSubMenuDto("个人信息","larry-gerenxinxi1","html/personInfo.html"));
-        subMenuDtotList.add(new LeftSubMenuDto("修改密码","larry-xiugaimima2","html/changepwd.html"));
-        subMenuDtotList.add(new LeftSubMenuDto("日志信息","larry-rizhi2","html/myloginfo.html"));
-        list.add(new LeftMenuDto(101L,"我的面板","larry-gerenxinxi5",Boolean.TRUE,"",subMenuDtotList));
-
-        List<LeftSubMenuDto> subMenuDtotList2=new ArrayList<>();
-        subMenuDtotList2.add(new LeftSubMenuDto("用户列表","larry-yonghuliebiao1","html/main.html"));
-        subMenuDtotList2.add(new LeftSubMenuDto("角色列表","larry-jiaoseguanli1","html/temp.html"));
-        subMenuDtotList2.add(new LeftSubMenuDto("菜单管理","larry-caidanguanli","html/temp.html"));
-        list.add(new LeftMenuDto(102L,"用户管理","larry-10103",Boolean.TRUE,"",subMenuDtotList2));
-        return ResponseDtoFactory.toSuccess(list);*/
     }
 }
