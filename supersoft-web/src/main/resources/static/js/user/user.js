@@ -194,7 +194,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
     });
 
     var uploadInst =upload.render({
-        elem: '#upload'
+        elem: '#headIconImg'
         ,url: '/file/upload'
         ,before: function(obj){
             //预读本地文件示例，不支持ie8

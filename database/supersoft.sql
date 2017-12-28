@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-12-28 10:22:46
+Date: 2017-12-28 11:08:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -112,6 +112,7 @@ CREATE TABLE `adm_user` (
   `mobile_phone` varchar(255) DEFAULT NULL,
   `email` varchar(25) DEFAULT NULL,
   `head_icon` varchar(255) DEFAULT NULL,
+  `motto` varchar(2000) DEFAULT NULL,
   `role_code` bigint(25) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
@@ -119,7 +120,7 @@ CREATE TABLE `adm_user` (
 -- ----------------------------
 -- Records of adm_user
 -- ----------------------------
-INSERT INTO `adm_user` VALUES ('4', 'admin', '管理员2', 'admin', '1', '2017-12-26 14:38:32', 'admin', '0', '17688888888', 'admin44@datuzi.com', '910bba9b-ce80-477f-8428-f80bf30b29f2.png', '0');
+INSERT INTO `adm_user` VALUES ('4', 'admin', '管理员2', 'admin', '1', '2017-12-26 14:38:32', 'admin', '0', '17688888888', 'admin44@datuzi.com', '4fae5755-f294-4739-b0d2-2ec3c1606925.png', null, '0');
 
 -- ----------------------------
 -- Function structure for getChild

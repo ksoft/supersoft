@@ -171,3 +171,19 @@ header.larry-personal-tit span{
 	padding: 0px;
 	margin: 0px;
 }
+
+.user-info .photo{
+    display: block;
+    width: 76px;
+    height: 76px;
+    margin-left: 150px;
+    padding: 0px;
+}
+.user-info .photo img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    -webkit-border-radius:50%;
+    border: 4px solid #44576B;
+}

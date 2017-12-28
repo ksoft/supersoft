@@ -14,8 +14,6 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" th:href="@{/plugins/layui/css/layui.css}" media="all">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/global.css}" media="all">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" media="all">
     <link rel="stylesheet" type="text/css" th:href="@{/css/user/myInfo.css}" media="all">
     <script type="text/javascript" th:src="@{/plugins/layui/layui.js}"></script>
     <script type="text/javascript" th:src="@{/js/user/user.js}"></script>
@@ -72,12 +70,21 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">修改头像</label>
                     <div class="layui-upload-list">
-                        <img class="layui-upload-img" id="headIconImg" th:src="${staticPath}+${user.headIcon}">
-                        <button type="button" class="layui-btn" id="upload">图片上传</button>
+                        <div class="user-info">
+                            <div class="photo">
+                                <img class="layui-upload-img" id="headIconImg" th:src="${staticPath}+${user.headIcon}">
+                            </div>
+                        </div>
                         <p id="uploadMsg"></p>
                     </div>
                 </div>
-				<div class="layui-form-item">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">座右铭</label>
+                    <div class="layui-input-block">
+                        <textarea name="motto" th:value="${user.motto}" placeholder="既然选择了远方，便只顾风雨兼程；路漫漫其修远兮，吾将上下而求索" value="" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
 					<div class="layui-input-block">
 						<button class="layui-btn" lay-submit="" lay-filter="formEdit">立即提交</button>
 						<button type="reset" class="layui-btn layui-btn-primary">重置</button>

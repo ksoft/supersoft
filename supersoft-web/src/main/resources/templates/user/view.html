@@ -62,5 +62,11 @@
             <input disabled type="checkbox" th:checked="${user.status == '0'}" lay-skin="switch" lay-text="启用|禁用" lay-filter="statusFilter">
         </div>
     </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">座右铭</label>
+        <div class="layui-input-block">
+            <textarea th:value="${user.motto}" placeholder="既然选择了远方，便只顾风雨兼程；路漫漫其修远兮，吾将上下而求索" class="layui-textarea"></textarea>
+        </div>
+    </div>
 </form>
 </body>
