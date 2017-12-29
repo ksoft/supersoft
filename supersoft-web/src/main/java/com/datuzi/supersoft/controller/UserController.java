@@ -3,6 +3,8 @@ package com.datuzi.supersoft.controller;
 import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.AdmUserFeign;
+import org.apache.http.util.EntityUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -126,8 +128,13 @@ public class UserController extends BaseController {
      * @return
      */
     @GetMapping(value = "myInfo")
-    public String myInfo(Model model) {
-        model.addAttribute("user",super.getCurrent());
+    public String myInfo(HttpServletRequest request,Model model) {
+        ResponseDto<UserListDto> responseDto=admUserFeign.findById(super.getCurrent().getId());
+        UserListDto userListDto=responseDto.getData();
+        AdmUserDto admUserDto=new AdmUserDto();
+        BeanUtils.copyProperties(userListDto,admUserDto);
+        super.refreshCurrent(request,admUserDto);
+        model.addAttribute("user",admUserDto);
         return "user/myInfo";
     }
 }

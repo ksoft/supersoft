@@ -19,8 +19,9 @@ public class UserListDto implements Serializable {
     private Integer status;
     private String mobilePhone;
     private String sex;
-    private String motto;
+    private String headIcon;
     private Long roleCode;
+    private String motto;
     private Date createDt;
     private String createBy;
 }

@@ -18,7 +18,7 @@ public interface AdmUserFeign {
      * @param loginUserDto
      * @return
      */
-    @RequestMapping(value = "/user/findAdmUser",method = RequestMethod.POST)
+    @RequestMapping(value = "/user/findOne",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<AdmUserDto> findOne(@RequestBody LoginUserDto loginUserDto);
 
