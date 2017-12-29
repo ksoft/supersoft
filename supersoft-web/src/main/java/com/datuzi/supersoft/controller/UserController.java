@@ -27,7 +27,7 @@ public class UserController extends BaseController {
      * @return
      */
     @GetMapping(value = "index")
-    public String main() {
+    public String index() {
         return "user/list";
     }
 

@@ -1,7 +1,6 @@
 package com.datuzi.supersoft.entity;
 
 import com.datuzi.supersoft.enums.MenuType;
-import com.datuzi.supersoft.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +25,7 @@ public class AdmMenu implements Serializable {
     private String href;
     private Boolean spread;
     private Long pid;
-    private Status status;
+    private Integer status;
     private MenuType type;
 
 }

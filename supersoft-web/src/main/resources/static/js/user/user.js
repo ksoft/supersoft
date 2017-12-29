@@ -8,8 +8,8 @@ layui.use(['jquery','layer','form','table','upload'],function(){
 
     //第一个实例
     table.render({
-        elem: '#userTable'
-        ,id: 'userTable'
+        elem: '#listTable'
+        ,id: 'listTable'
         ,height: 'full-100' //高度最大化减去差值
         ,url: '/user/list' //数据接口
         ,method:'post'
@@ -120,7 +120,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
         reload: function(){
             var queryParam = $('#queryParam');
             //执行重载
-            table.reload('userTable', {
+            table.reload('listTable', {
                 page: {
                     curr: 1 //重新从第 1 页开始
                 }
@@ -141,7 +141,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             });
         },
         edit: function(){
-            var checkStatus = table.checkStatus('userTable')
+            var checkStatus = table.checkStatus('listTable')
                 ,data = checkStatus.data;
             if(data.length==0){
                 layer.alert("至少选中一条数据");
@@ -161,7 +161,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             });
         },
         delete: function(){
-            var checkStatus = table.checkStatus('userTable')
+            var checkStatus = table.checkStatus('listTable')
                 ,data = checkStatus.data;
             if(data.length==0){
                 layer.alert("至少选中一条数据");

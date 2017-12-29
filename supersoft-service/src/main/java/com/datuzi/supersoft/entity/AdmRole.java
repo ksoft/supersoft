@@ -1,6 +1,5 @@
 package com.datuzi.supersoft.entity;
 
-import com.datuzi.supersoft.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,7 @@ public class AdmRole implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Status status;
-    private Date createDate;
+    private Integer status;
+    private Date createDt;
     private String createBy;
 }

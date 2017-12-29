@@ -18,7 +18,7 @@ public interface AdmRoleFeign {
      * @param dto
      * @return
      */
-    @RequestMapping(value = "/user/save",method = RequestMethod.POST)
+    @RequestMapping(value = "/role/save",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<Boolean> save(@RequestBody AdmRoleDto dto);
 
@@ -27,7 +27,7 @@ public interface AdmRoleFeign {
      * @param dto
      * @return
      */
-    @RequestMapping(value = "/user/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/role/update",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<Boolean> update(@RequestBody AdmRoleDto dto);
 
@@ -36,7 +36,7 @@ public interface AdmRoleFeign {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/user/findById/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/role/findById/{id}",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<RoleListDto> findById(@PathVariable("id") Long id);
 
@@ -45,7 +45,7 @@ public interface AdmRoleFeign {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/user/deleteById",method = RequestMethod.POST)
+    @RequestMapping(value = "/role/deleteById",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<Boolean> deleteById(List<Long> id);
 
@@ -55,7 +55,7 @@ public interface AdmRoleFeign {
      * @param searchDto
      * @return
      */
-    @RequestMapping(value = "/user/findByPage",method = RequestMethod.POST)
+    @RequestMapping(value = "/role/findByPage",method = RequestMethod.POST)
     @ResponseBody
-    PageResultDto<List<RoleListDto>> findUserPage(@RequestBody BasePageDto searchDto);
+    PageResultDto<List<RoleListDto>> findByPage(@RequestBody BasePageDto searchDto);
 }

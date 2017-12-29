@@ -1,6 +1,5 @@
 package com.datuzi.supersoft.dto;
 
-import com.datuzi.supersoft.enums.Status;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,7 +13,7 @@ import java.util.Date;
 public class RoleListDto implements Serializable {
     private Long id;
     private String name;
-    private Status status;
-    private Date createDate;
+    private Integer status;
+    private Date createDt;
     private String createBy;
 }

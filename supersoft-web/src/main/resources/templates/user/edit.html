@@ -69,8 +69,8 @@
     <div class="layui-form-item">
         <label class="layui-form-label">状态</label>
         <div class="layui-input-block">
-            <input type="radio" name="status" th:checked="${user.status == '0'}" value="0" title="启用">
-            <input type="radio" name="status" th:checked="${user.status == '1'}" value="1" title="禁用">
+            <input type="radio" name="status" th:checked="${user.status == 0}" value="0" title="启用">
+            <input type="radio" name="status" th:checked="${user.status == 1}" value="1" title="禁用">
         </div>
     </div>
     <div class="layui-form-item layui-form-text">

@@ -25,7 +25,7 @@ public class AdmUser implements Serializable {
     private String password;
     private String userName;
     private String email;
-    private String status;
+    private Integer status;
     private String mobilePhone;
     private String sex;
     private String headIcon;

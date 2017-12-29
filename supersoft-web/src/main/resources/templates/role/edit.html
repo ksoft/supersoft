@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{app.name}">后台登录</title>
+    <meta name="keywords" th:content="#{app.name}" content="LarryCMS后台登录界面" />
+    <meta name="description" th:content="#{app.name}" content="LarryCMS Version:1.09" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/global.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" media="all">
+    <script type="text/javascript" th:src="@{/plugins/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/role/role.js}"></script>
+</head>
+<body>
+<form class="layui-form" action="" style="margin-top: 20px;">
+    <input type="hidden" name="id" th:value="${role.id}">
+    <div class="layui-form-item">
+        <label class="layui-form-label">角色名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" th:value="${role.name}"  lay-verify="required" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-block">
+            <input type="radio" name="status" th:checked="${role.status == 0}" value="0" title="启用">
+            <input type="radio" name="status" th:checked="${role.status == 1}" value="1" title="禁用">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formEdit">提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>

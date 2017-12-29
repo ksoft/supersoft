@@ -4,6 +4,7 @@ import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.AdmRoleFeign;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @author zhangjianbo
  * @date 2017/12/28
  */
-@RestController
+@Controller
 @RequestMapping("/role")
 public class RoleController extends BaseController{
     @Autowired
@@ -24,7 +25,7 @@ public class RoleController extends BaseController{
      * @return
      */
     @GetMapping(value = "index")
-    public String main() {
+    public String index() {
         return "role/list";
     }
 
@@ -67,8 +68,9 @@ public class RoleController extends BaseController{
     @ResponseBody
     public ResponseDto<Boolean> delete(@RequestBody List<Long> ids) {
         AdmUserDto current=getCurrent();
-        if(ids.contains(current.getId())){
-            ids.remove(current.getId());
+        if(ids.contains(current.getRoleCode())){
+            ids.remove(current.getRoleCode());
+            ids.remove(0L);
         }
         return admRoleFeign.deleteById(ids);
     }
@@ -80,7 +82,7 @@ public class RoleController extends BaseController{
     @PostMapping(value = "/list")
     @ResponseBody
     public PageResultDto<List<RoleListDto>> list(@RequestBody BasePageDto searchDto){
-        return admRoleFeign.findUserPage(searchDto);
+        return admRoleFeign.findByPage(searchDto);
     }
 
     /**
@@ -90,7 +92,7 @@ public class RoleController extends BaseController{
      */
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto<Boolean> saveAdmUser(@RequestBody AdmRoleDto dto) {
+    public ResponseDto<Boolean> save(@RequestBody AdmRoleDto dto) {
         AdmUserDto currentUser=getCurrent();
         dto.setCreateBy(currentUser.getUserCode());
         return admRoleFeign.save(dto);
