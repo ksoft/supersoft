@@ -39,4 +39,22 @@ public class RestMenuController {
     public ResponseDto<Boolean> deleteById(@RequestBody List<Long> ids) {
         return admMenuService.deleteById(ids);
     }
+
+    @RequestMapping(value = "/findAll",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<List<MenuListDto>> findAll(){
+        return admMenuService.findAll();
+    }
+
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> save(@RequestBody AdmMenuDto dto) {
+        return admMenuService.save(dto);
+    }
+
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> update(@RequestBody AdmMenuDto dto) {
+        return admMenuService.update(dto);
+    }
 }

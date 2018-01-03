@@ -4,6 +4,8 @@ import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.service.AdmMenuService;
 import com.datuzi.supersoft.dao.AdmMenuRepository;
 import com.datuzi.supersoft.entity.AdmMenu;
+import com.datuzi.supersoft.utils.EntityUtil;
+import com.google.common.collect.Lists;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -87,6 +89,37 @@ public class AdmMenuServiceImpl implements AdmMenuService{
             admMenuRepository.delete(id);
         }
         return ResponseDtoFactory.toSuccess("删除成功",Boolean.TRUE);
+    }
+
+    @Override
+    public ResponseDto<List<MenuListDto>> findAll() {
+        List<MenuListDto> list=new ArrayList<>();
+        Iterable<AdmMenu> ite=admMenuRepository.findAll();
+        for(AdmMenu menu:ite){
+            MenuListDto dto=new MenuListDto();
+            BeanUtils.copyProperties(menu,dto);
+            list.add(dto);
+        }
+        return ResponseDtoFactory.toSuccess(list);
+    }
+
+    @Override
+    public ResponseDto<Boolean> save(AdmMenuDto dto) {
+        AdmMenu admMenu=EntityUtil.translate(dto,AdmMenu.class);
+        admMenuRepository.save(admMenu);
+        return ResponseDtoFactory.toSuccess("保存成功",Boolean.TRUE);
+    }
+
+    @Override
+    public ResponseDto<Boolean> update(AdmMenuDto dto) {
+        AdmMenu admMenu=admMenuRepository.findOne(dto.getId());
+        if(admMenu!=null) {
+            EntityUtil.copyPropertiesIgnoreNull(dto, admMenu);
+            admMenuRepository.save(admMenu);
+            return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
+        }else{
+            return ResponseDtoFactory.toError("找不到对应的数据");
+        }
     }
 
     private LeftMenuDto getChildMenu(LeftMenuDto current,List<AdmMenu> menuList){

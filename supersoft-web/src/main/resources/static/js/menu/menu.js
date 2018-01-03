@@ -3,8 +3,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
     var $ = layui.jquery
         ,layer=layui.layer
         ,form =layui.form
-        ,table = layui.table
-        ,upload = layui.upload;
+        ,table = layui.table;
 
     //第一个实例
     table.render({
@@ -36,6 +35,16 @@ layui.use(['jquery','layer','form','table','upload'],function(){
     //监听状态操作
     form.on('switch(statusFilter)', function(obj){
         layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+    });
+    //监听菜单类别操作
+    form.on('radio(typeFilter)', function(obj){
+        form.render("select");
+        $("select").find("option:selected").attr('selected',false);
+        if(this.value == 'LEFT'){
+           $("#parent").show();
+        }else{
+            $("#parent").hide();
+        }
     });
     //监听 新增
     form.on('submit(formAdd)', function(data){

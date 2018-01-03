@@ -37,4 +37,30 @@ public interface AdmMenuFeign {
     @RequestMapping(value = "/menu/deleteById",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<Boolean> deleteById(List<Long> id);
+
+    /**
+     * 查找全部
+     * @return
+     */
+    @RequestMapping(value = "/menu/findAll",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<List<MenuListDto>> findAll();
+
+    /**
+     * 保存
+     * @param dto
+     * @return
+     */
+    @RequestMapping(value = "/menu/save",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<Boolean> save(@RequestBody AdmMenuDto dto);
+
+    /**
+     * 更新
+     * @param dto
+     * @return
+     */
+    @RequestMapping(value = "/menu/update",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<Boolean> update(@RequestBody AdmMenuDto dto);
 }

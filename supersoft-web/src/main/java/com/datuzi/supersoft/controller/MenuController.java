@@ -5,6 +5,7 @@ import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.AdmMenuFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,6 +48,48 @@ public class MenuController extends BaseController {
     @GetMapping(value = "/index")
     public String index() {
         return "menu/list";
+    }
+
+    /**
+     * 新增
+     * @return
+     */
+    @GetMapping(value = "/add")
+    public String add(Model model) {
+        ResponseDto<List<MenuListDto>> responseDto=admMenuFeign.findAll();
+        model.addAttribute("menus",responseDto.getData());
+        return "menu/add";
+    }
+
+    /**
+     * 新增
+     * @param dto
+     * @return
+     */
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> save(@RequestBody AdmMenuDto dto) {
+        AdmUserDto currentUser=getCurrent();
+        dto.setCreateBy(currentUser.getUserCode());
+        return admMenuFeign.save(dto);
+    }
+
+    /**
+     * 修改
+     * @param dto
+     * @return
+     */
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> updateAdmUser(@RequestBody AdmMenuDto dto) {
+        AdmUserDto currentUser=getCurrent();
+        dto.setCreateBy(currentUser.getUserCode());
+        ResponseDto<Boolean> responseDto=admMenuFeign.update(dto);
+        if(responseDto.isSuccess()){
+            return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
+        }else{
+            return responseDto;
+        }
     }
 
     /**

@@ -36,4 +36,24 @@ public interface AdmMenuService {
      * @return
      */
     ResponseDto<Boolean> deleteById(List<Long> ids);
+
+    /**
+     * 获取全部菜单
+     * @return
+     */
+    ResponseDto<List<MenuListDto>> findAll();
+
+    /**
+     * 保存
+     * @param dto
+     * @return
+     */
+    ResponseDto<Boolean> save(AdmMenuDto dto);
+
+    /**
+     * 更新
+     * @param dto
+     * @return
+     */
+    ResponseDto<Boolean> update(AdmMenuDto dto);
 }
