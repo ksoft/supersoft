@@ -65,6 +65,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
                 if(res.success){
                     var index=parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index);
+
                 }
             }
         });

@@ -27,6 +27,8 @@
         <div class="layui-input-inline">
             <input type="text" name="userCode" th:value="${user.userCode}"  lay-verify="required|userName" placeholder="请输入用户名" autocomplete="off" class="layui-input">
         </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">密码</label>
         <div class="layui-input-inline">
             <input type="password" name="password" th:value="${user.userCode}" lay-verify="required|password" placeholder="请输入密码" autocomplete="off" class="layui-input">
@@ -37,6 +39,8 @@
         <div class="layui-input-inline">
             <input type="text" name="userName" th:value="${user.userName}"  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
         </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">性别</label>
         <div class="layui-input-block">
             <input type="radio" name="sex" value="0" th:checked="${user.sex == '0'}" title="男" >
@@ -76,7 +80,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">座右铭</label>
         <div class="layui-input-block">
-            <textarea name="motto" th:value="${user.motto}" placeholder="既然选择了远方，便只顾风雨兼程；路漫漫其修远兮，吾将上下而求索" class="layui-textarea"></textarea>
+            <textarea name="motto" th:text="${user.motto}" placeholder="既然选择了远方，便只顾风雨兼程；路漫漫其修远兮，吾将上下而求索" class="layui-textarea">${user.motto}</textarea>
         </div>
     </div>
     <div class="layui-form-item">

@@ -27,6 +27,8 @@
         <div class="layui-input-inline">
             <input disabled type="text" th:value="${user.userCode}" autocomplete="off" class="layui-input">
         </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">姓名</label>
         <div class="layui-input-inline">
             <input disabled type="text" th:value="${user.userName}" autocomplete="off" class="layui-input">
@@ -43,6 +45,8 @@
         <div class="layui-input-inline">
             <input disabled type="text" th:value="${user.mobilePhone}" autocomplete="off" class="layui-input">
         </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">邮箱</label>
         <div class="layui-input-inline">
             <input disabled type="text" th:value="${user.email}" autocomplete="off" class="layui-input">
@@ -65,7 +69,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">座右铭</label>
         <div class="layui-input-block">
-            <textarea th:value="${user.motto}" placeholder="既然选择了远方，便只顾风雨兼程；路漫漫其修远兮，吾将上下而求索" class="layui-textarea"></textarea>
+            <textarea th:text="${user.motto}" placeholder="既然选择了远方，便只顾风雨兼程；路漫漫其修远兮，吾将上下而求索" class="layui-textarea"></textarea>
         </div>
     </div>
 </form>
