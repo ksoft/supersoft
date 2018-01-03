@@ -1,25 +1,17 @@
-package com.datuzi.supersoft.entity;
+package com.datuzi.supersoft.dto;
 
 import com.datuzi.supersoft.enums.MenuType;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author zhangjianbo
- * @date 2017/12/8
+ * @date 2018/1/3
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-public class AdmMenu implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MenuListDto implements Serializable {
     private Long id;
     private String title;
     private String icon;

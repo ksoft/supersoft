@@ -17,7 +17,7 @@ public interface AdmUserService {
     ResponseDto<AdmUserDto> findOne(LoginUserDto loginUserDto);
 
     /**
-     * 查找用户
+     * 查找
      * @param id
      * @return
      */
@@ -45,7 +45,7 @@ public interface AdmUserService {
     PageResultDto<List<UserListDto>> findByPage(BasePageDto searchDto);
 
     /**
-     * 删除用户
+     * 删除
      * @param ids
      * @return
      */

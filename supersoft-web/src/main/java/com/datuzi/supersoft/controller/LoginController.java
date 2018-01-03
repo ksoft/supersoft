@@ -53,7 +53,7 @@ public class LoginController extends BaseController{
      * 本系统登录
      * @return
      */
-    @PostMapping(value = "login")
+    @PostMapping(value = "/login")
     @ResponseBody
     public ResponseDto<Boolean> login(LoginDto loginDto, HttpSession session,HttpServletResponse response){
         String code=session.getAttribute(Constants.SESSION_KEY_KAPTCHA).toString();
@@ -83,7 +83,7 @@ public class LoginController extends BaseController{
      * 首页
      * @return
      */
-    @GetMapping(value = "index")
+    @GetMapping(value = "/index")
     public String index(Model model) {
         AdmUserDto user=super.getCurrent();
         model.addAttribute("headIcon",user.getHeadIcon());
@@ -94,7 +94,7 @@ public class LoginController extends BaseController{
      * 首页中间
      * @return
      */
-    @GetMapping(value = "main")
+    @GetMapping(value = "/main")
     public String main() {
         return "main/main";
     }

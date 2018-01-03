@@ -39,4 +39,33 @@ public class MenuController extends BaseController {
         ResponseDto<List<LeftMenuDto>> responseDto = admMenuFeign.leftMenu(pid);
         return ResponseDtoFactory.toSuccess(responseDto.getData());
     }
+
+    /**
+     * 列表页
+     * @return
+     */
+    @GetMapping(value = "/index")
+    public String index() {
+        return "menu/list";
+    }
+
+    /**
+     * 列表
+     * @return
+     */
+    @PostMapping(value = "/list")
+    @ResponseBody
+    public PageResultDto<List<MenuListDto>> list(@RequestBody BasePageDto searchDto){
+        return admMenuFeign.findByPage(searchDto);
+    }
+
+    /**
+     * 删除
+     * @return
+     */
+    @PostMapping(value = "/delete")
+    @ResponseBody
+    public ResponseDto<Boolean> delete(@RequestBody List<Long> ids) {
+        return admMenuFeign.deleteById(ids);
+    }
 }

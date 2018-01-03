@@ -28,7 +28,7 @@ public class UserController extends BaseController {
      * 列表页
      * @return
      */
-    @GetMapping(value = "index")
+    @GetMapping(value = "/index")
     public String index() {
         return "user/list";
     }
@@ -37,7 +37,7 @@ public class UserController extends BaseController {
      * 新增
      * @return
      */
-    @GetMapping(value = "add")
+    @GetMapping(value = "/add")
     public String add() {
         return "user/add";
     }
@@ -46,7 +46,7 @@ public class UserController extends BaseController {
      * 查看页
      * @return
      */
-    @GetMapping(value = "view/{id}")
+    @GetMapping(value = "/view/{id}")
     public String view(@PathVariable Long id, Model model) {
         ResponseDto<UserListDto> dto=admUserFeign.findById(id);
         model.addAttribute("user",dto.getData());
@@ -57,7 +57,7 @@ public class UserController extends BaseController {
      * 编辑页
      * @return
      */
-    @GetMapping(value = "edit/{id}")
+    @GetMapping(value = "/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
         ResponseDto<UserListDto> dto=admUserFeign.findById(id);
         model.addAttribute("user",dto.getData());
@@ -68,7 +68,7 @@ public class UserController extends BaseController {
      * 删除
      * @return
      */
-    @PostMapping(value = "delete")
+    @PostMapping(value = "/delete")
     @ResponseBody
     public ResponseDto<Boolean> delete(@RequestBody List<Long> ids) {
         AdmUserDto current=getCurrent();
@@ -127,7 +127,7 @@ public class UserController extends BaseController {
      * 个人信息
      * @return
      */
-    @GetMapping(value = "myInfo")
+    @GetMapping(value = "/myInfo")
     public String myInfo(HttpServletRequest request,Model model) {
         ResponseDto<UserListDto> responseDto=admUserFeign.findById(super.getCurrent().getId());
         UserListDto userListDto=responseDto.getData();

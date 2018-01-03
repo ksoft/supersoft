@@ -24,7 +24,7 @@ public class RoleController extends BaseController{
      * 列表页
      * @return
      */
-    @GetMapping(value = "index")
+    @GetMapping(value = "/index")
     public String index() {
         return "role/list";
     }
@@ -33,7 +33,7 @@ public class RoleController extends BaseController{
      * 新增
      * @return
      */
-    @GetMapping(value = "add")
+    @GetMapping(value = "/add")
     public String add() {
         return "role/add";
     }
@@ -42,7 +42,7 @@ public class RoleController extends BaseController{
      * 查看页
      * @return
      */
-    @GetMapping(value = "view/{id}")
+    @GetMapping(value = "/view/{id}")
     public String view(@PathVariable Long id, Model model) {
         ResponseDto<RoleListDto> dto=admRoleFeign.findById(id);
         model.addAttribute("role",dto.getData());
@@ -53,7 +53,7 @@ public class RoleController extends BaseController{
      * 编辑页
      * @return
      */
-    @GetMapping(value = "edit/{id}")
+    @GetMapping(value = "/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
         ResponseDto<RoleListDto> dto=admRoleFeign.findById(id);
         model.addAttribute("role",dto.getData());
@@ -64,7 +64,7 @@ public class RoleController extends BaseController{
      * 删除
      * @return
      */
-    @PostMapping(value = "delete")
+    @PostMapping(value = "/delete")
     @ResponseBody
     public ResponseDto<Boolean> delete(@RequestBody List<Long> ids) {
         AdmUserDto current=getCurrent();

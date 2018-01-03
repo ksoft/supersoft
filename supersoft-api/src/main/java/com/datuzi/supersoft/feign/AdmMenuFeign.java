@@ -1,9 +1,7 @@
 package com.datuzi.supersoft.feign;
 
 import com.datuzi.supersoft.constant.Constants;
-import com.datuzi.supersoft.dto.LeftMenuDto;
-import com.datuzi.supersoft.dto.ResponseDto;
-import com.datuzi.supersoft.dto.TopMenuDto;
+import com.datuzi.supersoft.dto.*;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,4 +19,22 @@ public interface AdmMenuFeign {
     @RequestMapping(value = "/menu/leftMenu",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<List<LeftMenuDto>> leftMenu(@RequestBody Long pid);
+
+    /**
+     * 查找
+     * @param searchDto
+     * @return
+     */
+    @RequestMapping(value = "/menu/findByPage",method = RequestMethod.POST)
+    @ResponseBody
+    PageResultDto<List<MenuListDto>> findByPage(@RequestBody BasePageDto searchDto);
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/menu/deleteById",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<Boolean> deleteById(List<Long> id);
 }
