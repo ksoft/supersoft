@@ -62,7 +62,20 @@ public class MenuController extends BaseController {
     }
 
     /**
-     * 新增
+     * 编辑页
+     * @return
+     */
+    @GetMapping(value = "/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        ResponseDto<List<MenuListDto>> responseDto=admMenuFeign.findAll();
+        model.addAttribute("menus",responseDto.getData());
+        ResponseDto<MenuListDto> dto=admMenuFeign.findById(id);
+        model.addAttribute("menu",dto.getData());
+        return "menu/edit";
+    }
+
+    /**
+     * 保存
      * @param dto
      * @return
      */

@@ -47,6 +47,15 @@ public interface AdmMenuFeign {
     ResponseDto<List<MenuListDto>> findAll();
 
     /**
+     * 查找
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/menu/findById/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<MenuListDto> findById(@PathVariable("id") Long id);
+
+    /**
      * 保存
      * @param dto
      * @return

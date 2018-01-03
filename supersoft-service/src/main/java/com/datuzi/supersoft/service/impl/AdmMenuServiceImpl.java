@@ -83,6 +83,18 @@ public class AdmMenuServiceImpl implements AdmMenuService{
     }
 
     @Override
+    public ResponseDto<MenuListDto> findById(Long id) {
+        MenuListDto listDto=new MenuListDto();
+        AdmMenu role=admMenuRepository.findOne(id);
+        if(role!=null){
+            BeanUtils.copyProperties(role,listDto);
+            return ResponseDtoFactory.toSuccess(listDto);
+        }else{
+            return ResponseDtoFactory.toError("未找到对应的信息");
+        }
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public ResponseDto<Boolean> deleteById(List<Long> ids) {
         for(Long id:ids) {

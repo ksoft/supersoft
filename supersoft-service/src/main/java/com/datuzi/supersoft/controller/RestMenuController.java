@@ -46,6 +46,12 @@ public class RestMenuController {
         return admMenuService.findAll();
     }
 
+    @RequestMapping(value = "/findById/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<MenuListDto> findById(@PathVariable("id") Long id) {
+        return admMenuService.findById(id);
+    }
+
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
     public ResponseDto<Boolean> save(@RequestBody AdmMenuDto dto) {

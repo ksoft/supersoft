@@ -31,6 +31,13 @@ public interface AdmMenuService {
     PageResultDto<List<MenuListDto>> findByPage(BasePageDto searchDto);
 
     /**
+     * 查找
+     * @param id
+     * @return
+     */
+    ResponseDto<MenuListDto> findById(Long id);
+
+    /**
      * 删除
      * @param ids
      * @return

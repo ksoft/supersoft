@@ -87,7 +87,10 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             layer.open({
                 type: 2,
                 area: ['100%', '100%'],
-                content: '/user/view/'+data.id
+                content: '/user/view/'+data.id,
+                end: function () {
+                    active.reload();
+                }
             });
         } else if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
@@ -111,7 +114,10 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             layer.open({
                 type: 2,
                 area: ['100%', '100%'],
-                content: '/user/edit/'+data.id
+                content: '/user/edit/'+data.id,
+                end: function () {
+                    active.reload();
+                }
             });
         }
     });
