@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-12-28 11:08:52
+Date: 2018-01-03 17:11:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,7 @@ CREATE TABLE `adm_menu` (
   `create_by` varchar(25) DEFAULT NULL,
   `order_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adm_menu
@@ -50,6 +50,9 @@ INSERT INTO `adm_menu` VALUES ('10', '日志信息', 'larry-rizhi2', 'html/mylog
 INSERT INTO `adm_menu` VALUES ('11', '用户列表', 'larry-yonghuliebiao1', '/user/index', '0', '7', '1', '0', null, null, null);
 INSERT INTO `adm_menu` VALUES ('12', '角色列表', 'larry-jiaoseguanli1', '/role/index', '0', '7', '1', '0', null, null, null);
 INSERT INTO `adm_menu` VALUES ('13', '菜单管理', 'larry-caidanguanli', '/menu/index', '0', '7', '1', '0', null, null, null);
+INSERT INTO `adm_menu` VALUES ('14', '顶替', 'larry-neirongguanli', '/TEST', null, null, '0', '0', '2018-01-03 16:43:10', 'admin', null);
+INSERT INTO `adm_menu` VALUES ('15', '顶替2', 'larry-neirongguanli', '/TEST2', null, '14', '1', '1', '2018-01-03 16:44:27', 'admin', null);
+INSERT INTO `adm_menu` VALUES ('16', '顶替3', 'larry-neirongguanli', '/SDF', null, '15', '1', '0', '2018-01-03 16:45:37', 'admin', null);
 
 -- ----------------------------
 -- Table structure for adm_role
@@ -62,15 +65,18 @@ CREATE TABLE `adm_role` (
   `create_dt` datetime NOT NULL,
   `create_by` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adm_role
 -- ----------------------------
-INSERT INTO `adm_role` VALUES ('1', '超级管理员', '1', '0000-00-00 00:00:00', '');
-INSERT INTO `adm_role` VALUES ('2', '系统管理员', '1', '0000-00-00 00:00:00', '');
-INSERT INTO `adm_role` VALUES ('3', '普通', '1', '0000-00-00 00:00:00', '');
-INSERT INTO `adm_role` VALUES ('4', '新注册', '1', '2016-12-13 14:55:18', '');
+INSERT INTO `adm_role` VALUES ('1', '超级管理员', '1', '2017-12-29 10:00:24', 'SYS');
+INSERT INTO `adm_role` VALUES ('2', '系统管理员', '0', '2017-12-29 10:00:27', 'admin');
+INSERT INTO `adm_role` VALUES ('3', '普通', '0', '2017-12-29 10:00:30', 'admin');
+INSERT INTO `adm_role` VALUES ('4', '新注册', '0', '2016-12-13 14:55:18', 'admin');
+INSERT INTO `adm_role` VALUES ('5', '大', '1', '2017-12-29 10:44:12', 'admin');
+INSERT INTO `adm_role` VALUES ('6', '止', '1', '2017-12-29 10:44:31', 'admin');
+INSERT INTO `adm_role` VALUES ('7', '222', '0', '2018-01-03 14:16:03', 'admin');
 
 -- ----------------------------
 -- Table structure for adm_role_menu
@@ -81,7 +87,7 @@ CREATE TABLE `adm_role_menu` (
   `role_id` bigint(20) DEFAULT NULL,
   `menu_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adm_role_menu
@@ -95,6 +101,9 @@ INSERT INTO `adm_role_menu` VALUES ('6', '1', '6');
 INSERT INTO `adm_role_menu` VALUES ('7', '1', '11');
 INSERT INTO `adm_role_menu` VALUES ('8', '1', '12');
 INSERT INTO `adm_role_menu` VALUES ('9', '1', '13');
+INSERT INTO `adm_role_menu` VALUES ('10', '1', '14');
+INSERT INTO `adm_role_menu` VALUES ('11', '1', '15');
+INSERT INTO `adm_role_menu` VALUES ('12', '1', '16');
 
 -- ----------------------------
 -- Table structure for adm_user
@@ -115,12 +124,14 @@ CREATE TABLE `adm_user` (
   `motto` varchar(2000) DEFAULT NULL,
   `role_code` bigint(25) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adm_user
 -- ----------------------------
-INSERT INTO `adm_user` VALUES ('4', 'admin', '管理员2', 'admin', '1', '2017-12-26 14:38:32', 'admin', '0', '17688888888', 'admin44@datuzi.com', '4fae5755-f294-4739-b0d2-2ec3c1606925.png', null, '0');
+INSERT INTO `adm_user` VALUES ('4', 'admin', '管理员2', 'admin', '0', '2017-12-26 14:38:32', 'admin', '1', '17688888888', 'admin44@datuzi.com', '4fae5755-f294-4739-b0d2-2ec3c1606925.png', '', '0');
+INSERT INTO `adm_user` VALUES ('6', 'asdfa', 'asdfasdf', 'asdfaasdf', '0', '2018-01-03 14:26:19', 'admin', '0', '17688882636', 'asdf@adsf.com', null, 'asdf', '1');
+INSERT INTO `adm_user` VALUES ('7', 'asdf', 'asdf', 'asdfasdf', '0', '2018-01-03 14:29:50', 'admin', '1', '17699632658', 'asdf@asdf.com', null, 'aaaa', '0');
 
 -- ----------------------------
 -- Function structure for getChild
