@@ -22,7 +22,7 @@
 </head>
 <body>
 <form class="layui-form" action="" style="margin-top: 20px;">
-    <input type="hidden" name="id" th:value="${role.id}">
+    <input type="hidden" id="roleId" name="roleId" th:value="${role.id}">
     <div class="layui-form-item">
         <label class="layui-form-label">角色</label>
         <div class="layui-input-inline">
@@ -44,7 +44,7 @@
     layui.use('form', function () {
         var form = layui.form;
 
-        var roleId=$("#roleId").val();
+        var roleId = document.getElementById('roleId').value;
         //创建tree
         var xtree = new layuiXtree({
             elem: 'menuTree'                        //放xtree的容器，id，不要带#号（必填）
