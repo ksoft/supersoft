@@ -18,14 +18,20 @@ public class RestMenuController {
 
     @RequestMapping(value = "/topMenu",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto<List<TopMenuDto>> topMenu(@RequestBody Long roleCode) {
-        return admMenuService.topMenu(roleCode);
+    public ResponseDto<List<TopMenuDto>> topMenu(@RequestBody Long roleId) {
+        return admMenuService.topMenu(roleId);
     }
 
     @RequestMapping(value = "/leftMenu",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto<List<LeftMenuDto>> leftMenu(@RequestBody Long pid) {
-        return admMenuService.leftMenu(pid);
+    public ResponseDto<List<LeftMenuDto>> leftMenu(@RequestBody LeftMenuSearchDto searchDto) {
+        return admMenuService.leftMenu(searchDto);
+    }
+
+    @RequestMapping(value = "/findMenuTree",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<List<MenuTreeDto>> findMenuTree(@RequestBody Long roleId) {
+        return admMenuService.findMenuTree(roleId);
     }
 
     @RequestMapping(value = "/findByPage",method = RequestMethod.POST)

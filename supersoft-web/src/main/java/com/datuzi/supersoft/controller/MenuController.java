@@ -20,13 +20,14 @@ public class MenuController extends BaseController {
     private AdmMenuFeign admMenuFeign;
 
     /**
-     * 本顶部菜单
+     * 顶部菜单
      * @return
      */
     @PostMapping(value = "/topMenu")
     @ResponseBody
     public ResponseDto<List<TopMenuDto>> topMenu(){
-        ResponseDto<List<TopMenuDto>> responseDto= admMenuFeign.topMenu(1L);
+        AdmUserDto admUserDto=getCurrent();
+        ResponseDto<List<TopMenuDto>> responseDto= admMenuFeign.topMenu(admUserDto.getRoleId());
         return ResponseDtoFactory.toSuccess(responseDto.getData());
     }
 
@@ -37,7 +38,9 @@ public class MenuController extends BaseController {
     @PostMapping(value = "/leftMenuByTopMenu/{pid}")
     @ResponseBody
     public ResponseDto<List<LeftMenuDto>> leftMenuByTopMenu(@PathVariable("pid") Long pid) {
-        ResponseDto<List<LeftMenuDto>> responseDto = admMenuFeign.leftMenu(pid);
+        AdmUserDto admUserDto=getCurrent();
+        LeftMenuSearchDto searchDto=new LeftMenuSearchDto(admUserDto.getRoleId(),pid);
+        ResponseDto<List<LeftMenuDto>> responseDto = admMenuFeign.leftMenu(searchDto);
         return ResponseDtoFactory.toSuccess(responseDto.getData());
     }
 

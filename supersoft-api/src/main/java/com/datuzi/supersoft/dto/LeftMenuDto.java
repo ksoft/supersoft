@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class LeftMenuDto implements Serializable{
     private Long id;
-    private Long pid;
     private String title;
     private String icon;
     private Boolean spread;

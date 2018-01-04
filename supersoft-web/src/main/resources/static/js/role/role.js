@@ -111,6 +111,15 @@ layui.use(['jquery','layer','form','table','upload'],function(){
                     active.reload();
                 }
             });
+        }else if(obj.event === 'auth'){
+            layer.open({
+                type: 2,
+                area: ['100%', '100%'],
+                content: '/role/auth/'+data.id,
+                end: function () {
+                    active.reload();
+                }
+            });
         }
     });
 

@@ -18,10 +18,16 @@ public interface AdmMenuService {
 
     /**
      * 获取左侧菜单
-     * @param pid
+     * @param searchDto
      * @return
      */
-    ResponseDto<List<LeftMenuDto>> leftMenu(Long pid);
+    ResponseDto<List<LeftMenuDto>> leftMenu(LeftMenuSearchDto searchDto);
+
+    /**
+     * 查找
+     * @return
+     */
+    ResponseDto<List<MenuTreeDto>> findMenuTree(Long roleId);
 
     /**
      * 列表分页

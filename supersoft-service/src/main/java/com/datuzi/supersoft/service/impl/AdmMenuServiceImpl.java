@@ -1,6 +1,9 @@
 package com.datuzi.supersoft.service.impl;
 
+import com.datuzi.supersoft.dao.AdmRoleMenuRepository;
 import com.datuzi.supersoft.dto.*;
+import com.datuzi.supersoft.entity.AdmRoleMenu;
+import com.datuzi.supersoft.enums.MenuType;
 import com.datuzi.supersoft.service.AdmMenuService;
 import com.datuzi.supersoft.dao.AdmMenuRepository;
 import com.datuzi.supersoft.entity.AdmMenu;
@@ -27,7 +30,10 @@ import java.util.List;
 @Service
 public class AdmMenuServiceImpl implements AdmMenuService{
     @Autowired
-    AdmMenuRepository admMenuRepository;
+    private AdmMenuRepository admMenuRepository;
+    @Autowired
+    private AdmRoleMenuRepository admRoleMenuRepository;
+
 
     @Override
     public ResponseDto<List<TopMenuDto>> topMenu(Long roleId) {
@@ -42,17 +48,71 @@ public class AdmMenuServiceImpl implements AdmMenuService{
     }
 
     @Override
-    public ResponseDto<List<LeftMenuDto>> leftMenu(Long pid) {
+    public ResponseDto<List<LeftMenuDto>> leftMenu(LeftMenuSearchDto searchDto) {
         List<LeftMenuDto> leftMenuDtoList=new ArrayList<>();
-        List<AdmMenu> menuList=admMenuRepository.findLeftMenu(pid);
+        List<AdmMenu> menuList=admMenuRepository.findLeftMenu(searchDto.getRoleId(),searchDto.getPid());
         for(AdmMenu admMenu:menuList){
-            if(admMenu.getPid().equals(pid)) {
+            if(admMenu.getPid().equals(searchDto.getPid())) {
                 LeftMenuDto current = new LeftMenuDto();
                 BeanUtils.copyProperties(admMenu,current);
                 leftMenuDtoList.add(getChildMenu(current,menuList));
             }
         }
         return ResponseDtoFactory.toSuccess(leftMenuDtoList);
+    }
+
+    @Override
+    public ResponseDto<List<MenuTreeDto>> findMenuTree(Long roleId) {
+        List<MenuTreeDto> list=new ArrayList<>();
+        List<MenuTreeDto> list2=new ArrayList<>();
+        List<AdmMenu> menuList= Lists.newArrayList(admMenuRepository.findAll());
+        List<AdmRoleMenu> roleMenuList=admRoleMenuRepository.findMenuByRole(roleId);
+        List<Long> menuIdList=new ArrayList<>();
+        for(AdmRoleMenu roleMenu:roleMenuList){
+            menuIdList.add(roleMenu.getMenuId());
+        }
+        List<AdmMenu> topMenuList=new ArrayList<>();
+        List<AdmMenu> leftMenuList=new ArrayList<>();
+        for(AdmMenu menu:menuList){
+            if(MenuType.TOP.equals(menu.getType())){
+                topMenuList.add(menu);
+            }else{
+                leftMenuList.add(menu);
+            }
+        }
+
+        for(AdmMenu topMenu:topMenuList){
+            MenuTreeDto current = new MenuTreeDto();
+            current.setId(topMenu.getId());
+            current.setPid(topMenu.getPid());
+            current.setTitle(topMenu.getTitle());
+            current.setValue(topMenu.getId());
+            if(menuIdList.contains(topMenu.getId())) {
+                current.setChecked(true);
+            }
+            list.add(current);
+        }
+        for(AdmMenu leftMenu:leftMenuList){
+            MenuTreeDto current = new MenuTreeDto();
+            current.setId(leftMenu.getId());
+            current.setPid(leftMenu.getPid());
+            current.setTitle(leftMenu.getTitle());
+            current.setValue(leftMenu.getId());
+            if(menuIdList.contains(leftMenu.getId())) {
+                current.setChecked(true);
+            }
+            list2.add(getChildMenu(current,leftMenuList,menuIdList));
+        }
+        for(MenuTreeDto top:list){
+            for(MenuTreeDto left:list2){
+                if(left.getPid().equals(top.getId())){
+                    top.setChecked(true);
+                    top.getData().add(left);
+                }
+            }
+        }
+
+        return ResponseDtoFactory.toSuccess(list);
     }
 
     @Override
@@ -136,11 +196,29 @@ public class AdmMenuServiceImpl implements AdmMenuService{
 
     private LeftMenuDto getChildMenu(LeftMenuDto current,List<AdmMenu> menuList){
         for(AdmMenu subMenu:menuList){
-            if(subMenu.getPid().equals(current.getId())){
+            if(MenuType.LEFT.equals(subMenu.getType()) && subMenu.getPid().equals(current.getId())){
                 LeftMenuDto subMenuDto=new LeftMenuDto();
                 BeanUtils.copyProperties(subMenu,subMenuDto);
                 current.getChildren().add(subMenuDto);
                 getChildMenu(subMenuDto,menuList);
+            }
+        }
+        return current;
+    }
+
+    private MenuTreeDto getChildMenu(MenuTreeDto current, List<AdmMenu> leftMenuList,List<Long> menuIdList){
+        for(AdmMenu subMenu:leftMenuList){
+            if(subMenu.getPid().equals(current.getId())){
+                MenuTreeDto subMenuDto=new MenuTreeDto();
+                subMenuDto.setId(subMenu.getId());
+                subMenuDto.setPid(subMenu.getPid());
+                subMenuDto.setTitle(subMenu.getTitle());
+                subMenuDto.setValue(subMenu.getId());
+                if(menuIdList.contains(subMenuDto.getId())) {
+                    subMenuDto.setChecked(true);
+                }
+                current.getData().add(subMenuDto);
+                getChildMenu(subMenuDto,leftMenuList,menuIdList);
             }
         }
         return current;

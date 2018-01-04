@@ -18,7 +18,7 @@ public interface AdmMenuFeign {
 
     @RequestMapping(value = "/menu/leftMenu",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<List<LeftMenuDto>> leftMenu(@RequestBody Long pid);
+    ResponseDto<List<LeftMenuDto>> leftMenu(@RequestBody LeftMenuSearchDto searchDto);
 
     /**
      * 查找
@@ -45,6 +45,14 @@ public interface AdmMenuFeign {
     @RequestMapping(value = "/menu/findAll",method = RequestMethod.POST)
     @ResponseBody
     ResponseDto<List<MenuListDto>> findAll();
+
+    /**
+     * 查找
+     * @return
+     */
+    @RequestMapping(value = "/menu/findMenuTree",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<List<MenuTreeDto>> findMenuTree(@RequestBody Long roleId);
 
     /**
      * 查找

@@ -2,6 +2,7 @@ package com.datuzi.supersoft.controller;
 
 import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
+import com.datuzi.supersoft.feign.AdmMenuFeign;
 import com.datuzi.supersoft.feign.AdmRoleFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import java.util.List;
 public class RoleController extends BaseController{
     @Autowired
     private AdmRoleFeign admRoleFeign;
+    @Autowired
+    private AdmMenuFeign admMenuFeign;
 
     /**
      * 列表页
@@ -61,6 +64,27 @@ public class RoleController extends BaseController{
     }
 
     /**
+     * 授权
+     * @return
+     */
+    @GetMapping(value = "/auth/{id}")
+    public String auth(@PathVariable Long id, Model model) {
+        ResponseDto<RoleListDto> role=admRoleFeign.findById(id);
+        model.addAttribute("role",role.getData());
+        return "role/auth";
+    }
+
+    /**
+     *获取整个菜单树
+     * @return
+     */
+    @GetMapping(value = "/findMenuTree/{roleId}")
+    @ResponseBody
+    public List<MenuTreeDto> findMenuTree(@PathVariable Long roleId) {
+        return admMenuFeign.findMenuTree(roleId).getData();
+    }
+
+    /**
      * 删除
      * @return
      */
@@ -68,8 +92,8 @@ public class RoleController extends BaseController{
     @ResponseBody
     public ResponseDto<Boolean> delete(@RequestBody List<Long> ids) {
         AdmUserDto current=getCurrent();
-        if(ids.contains(current.getRoleCode())){
-            ids.remove(current.getRoleCode());
+        if(ids.contains(current.getRoleId())){
+            ids.remove(current.getRoleId());
             ids.remove(0L);
         }
         return admRoleFeign.deleteById(ids);

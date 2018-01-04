@@ -20,6 +20,9 @@ public interface AdmMenuRepository extends JpaSpecificationExecutor<AdmMenu>,Cru
             "where c.id=?1 and a.type= 0 and a.status=0",nativeQuery = true)
     List<AdmMenu> findTopMenu(Long roleId);
 
-    @Query(value = "select * from adm_menu where find_in_set (pid,getChild(?1))",nativeQuery = true)
-    List<AdmMenu> findLeftMenu(Long pId);
+    @Query(value = "select * from adm_menu a " +
+            "inner join adm_role_menu b on a.id=b.menu_id " +
+            "inner join adm_role c on b.role_id=c.id " +
+            "where c.id=?1 and find_in_set (a.pid,getChild(?2))",nativeQuery = true)
+    List<AdmMenu> findLeftMenu(Long roleId,Long pId);
 }
