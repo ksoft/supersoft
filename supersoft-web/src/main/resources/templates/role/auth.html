@@ -32,6 +32,14 @@
     <div class="layui-form-item">
         <div id="menuTree" style="width:400px;height:400px; border:1px solid black; margin:20px;overflow:auto;float:left;"></div>
     </div>
+    <input type="button" class="layui-btn" value="选中的末级check原dom对象" id="btn_getCk" />
+    <input type="button" class="layui-btn" value="选中的所有对象" id="btn_getAllCk2" />
+    <input type="button" class="layui-btn" value="获取全部的check原dom对象" id="btn_getAllCk" />
+    <br /><br /><br />
+    <input id="txt_value" type="text" class="layui-input" style="width:150px;float:left;" placeholder="如：jd1.1" />
+    <input type="button" class="layui-btn" value="通过值来获取其父级节点" id="btn_getParent" />
+
+    <div id="result" style="width:100%;min-height:140px;padding:10px;line-height:22px; margin-top:20px; background-color:#eee;"></div>
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit lay-filter="formEdit">提交</button>
@@ -73,6 +81,17 @@
         document.getElementById('btn_getAllCk').onclick = function () {
 
             var oCks = xtree.GetAllCheckBox(); //获取全部的checkbox原dom对象，返回的类型:Array
+
+            var res = '';
+            for (var i = 0; i < oCks.length; i++) {
+                res += oCks[i].value + '<br>';
+            }
+            document.getElementById('result').innerHTML = res;
+        }
+
+        document.getElementById('btn_getAllCk2').onclick = function () {
+
+            var oCks = xtree.GetAllChecked(); //获取全部的checkbox原dom对象，返回的类型:Array
 
             var res = '';
             for (var i = 0; i < oCks.length; i++) {
