@@ -24,48 +24,40 @@
     <div class="layui-form-item">
         <label class="layui-form-label">菜单类别</label>
         <div class="layui-input-block">
-            <input type="radio" name="type" lay-filter="typeFilter" value="TOP" title="顶部" checked="">
-            <input type="radio" name="type" lay-filter="typeFilter" value="LEFT" title="左侧">
+            <input disabled type="checkbox" th:checked="${'TOP' == menu.type.name()}" lay-skin="switch" lay-text="顶部|左侧">
         </div>
     </div>
-    <div class="layui-form-item" th:hidden="true" id="parent">
+    <div class="layui-form-item" th:hidden="${'TOP' == menu.type.name()}">
         <label class="layui-form-label">父菜单</label>
         <div class="layui-input-inline">
-            <select name="pid" id="pid" lay-search>
+            <select disabled name="pid" id="pid" lay-search>
                 <option value="">--请选择--</option>
-                <option th:each="menu,menuStat:${menus}" th:value="${menu.id}" th:text="${menu.title}"></option>
+                <option th:each="curmenu,menuStat:${menus}" th:value="${curmenu.id}" th:text="${curmenu.title}" th:selected="${curmenu.id == menu.pid}"></option>
             </select>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">菜单名称</label>
         <div class="layui-input-inline">
-            <input type="text" name="title"  lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
+            <input disabled type="text" name="title" th:value="${menu.title}"  autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">图标样式</label>
         <div class="layui-input-inline">
-            <input type="text" name="icon"  lay-verify="required" placeholder="请输入图标样式" autocomplete="off" class="layui-input">
+            <input disabled type="text" name="title" th:value="${menu.icon}"  autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">菜单URL</label>
         <div class="layui-input-inline">
-            <input type="text" name="href"  lay-verify="required" placeholder="请输入菜单URL" autocomplete="off" class="layui-input">
+            <input disabled type="text" name="href" th:value="${menu.href}"  autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">状态</label>
         <div class="layui-input-block">
-            <input type="radio" name="status" value="0" title="启用" checked="">
-            <input type="radio" name="status" value="1" title="禁用">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formAdd">提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <input disabled type="checkbox" th:checked="${menu.status == 0}" lay-skin="switch" lay-text="启用|禁用" lay-filter="statusFilter">
         </div>
     </div>
 </form>

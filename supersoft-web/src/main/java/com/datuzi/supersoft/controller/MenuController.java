@@ -75,6 +75,19 @@ public class MenuController extends BaseController {
     }
 
     /**
+     * 查看页
+     * @return
+     */
+    @GetMapping(value = "/view/{id}")
+    public String view(@PathVariable Long id, Model model) {
+        ResponseDto<List<MenuListDto>> responseDto=admMenuFeign.findAll();
+        model.addAttribute("menus",responseDto.getData());
+        ResponseDto<MenuListDto> dto=admMenuFeign.findById(id);
+        model.addAttribute("menu",dto.getData());
+        return "menu/view";
+    }
+
+    /**
      * 保存
      * @param dto
      * @return

@@ -25,12 +25,12 @@
     <div class="layui-form-item">
         <label class="layui-form-label">菜单类别</label>
         <div class="layui-input-block">
-            <input type="radio" name="type" th:checked="${'TOP' == menu.type.name()}" lay-filter="typeFilter" value="TOP" title="顶部菜单" >
-            <input type="radio" name="type" th:checked="${'LEFT' == menu.type.name()}" lay-filter="typeFilter" value="LEFT" title="左侧菜单">
+            <input type="radio" name="type" th:checked="${'TOP' == menu.type.name()}" lay-filter="typeFilter" value="TOP" title="顶部" >
+            <input type="radio" name="type" th:checked="${'LEFT' == menu.type.name()}" lay-filter="typeFilter" value="LEFT" title="左侧">
         </div>
     </div>
-    <div class="layui-form-item" th:hidden="${menu.type == 'LEFT'}" id="parent">
-        <label class="layui-form-label">请选择父菜单</label>
+    <div class="layui-form-item" th:hidden="${'TOP' == menu.type.name()}" id="parent">
+        <label class="layui-form-label">父菜单</label>
         <div class="layui-input-inline">
             <select name="pid" id="pid" lay-search>
                 <option value="">--请选择--</option>
