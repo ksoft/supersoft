@@ -19,7 +19,15 @@ function layuiXtree(options) {
 
     _this._container.appendChild(_this.xloading); //加载显示
 
-    var obj = new XMLHttpRequest();
+    var obj;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        obj=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        obj=new ActiveXObject("Microsoft.XMLHTTP");
+    }
 
     obj.open('get', options.data, true);
     obj.onreadystatechange = function () {
