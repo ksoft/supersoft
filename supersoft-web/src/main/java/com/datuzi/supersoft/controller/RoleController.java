@@ -160,7 +160,7 @@ public class RoleController extends BaseController{
         if(responseDto.isSuccess()){
             return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
         }else{
-            return responseDto;
+            return ResponseDtoFactory.toError("更新失败");
         }
     }
 }
