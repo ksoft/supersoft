@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
@@ -47,6 +48,16 @@ public class LoginController extends BaseController{
     @GetMapping(value = "toLogin")
     public String toLogin() {
         return "login/login";
+    }
+
+    /**
+     * 退出登录
+     * @return
+     */
+    @GetMapping(value = "/logout")
+    public String logout(HttpServletRequest request) {
+        super.clearCurrent(request);
+        return "redirect:/toLogin";
     }
 
     /**

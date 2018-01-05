@@ -412,7 +412,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
 
     // 登出系统
     $('#logout').on('click', function () {
-        var url = 'login.html';
+        var url = '/logout';
         common.logOut('退出登陆提示！', '你真的确定要退出系统吗？', url);
     })
     // 左侧导航菜单控制

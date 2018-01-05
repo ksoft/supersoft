@@ -70,4 +70,24 @@ public class BaseController {
         }
         redisTemplate.opsForValue().set(token,userDto);
     }
+
+    /**
+     * 清空当前用户缓存
+     * @param request
+     */
+    public void clearCurrent(HttpServletRequest request){
+        String token=request.getHeader(Constants.TOKEN);
+        if(org.springframework.util.StringUtils.isEmpty(token)){
+            Cookie[] cookies=request.getCookies();
+            if(cookies!=null && cookies.length>0){
+                for(Cookie cookie:cookies){
+                    if(Constants.TOKEN.equals(cookie.getName())){
+                        token=cookie.getValue();
+                        break;
+                    }
+                }
+            }
+        }
+        redisTemplate.delete(token);
+    }
 }
