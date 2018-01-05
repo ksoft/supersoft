@@ -4,11 +4,13 @@ import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.AdmMenuFeign;
 import com.datuzi.supersoft.feign.AdmRoleFeign;
+import com.datuzi.supersoft.feign.AdmRoleMenuFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +24,8 @@ public class RoleController extends BaseController{
     private AdmRoleFeign admRoleFeign;
     @Autowired
     private AdmMenuFeign admMenuFeign;
+    @Autowired
+    private AdmRoleMenuFeign admRoleMenuFeign;
 
     /**
      * 列表页
@@ -82,6 +86,26 @@ public class RoleController extends BaseController{
     @ResponseBody
     public List<MenuTreeDto> findMenuTree(@PathVariable Long roleId) {
         return admMenuFeign.findMenuTree(roleId).getData();
+    }
+
+    /**
+     * 保存授权
+     * @param dto
+     * @return
+     */
+    @RequestMapping(value = "/saveAuth",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> saveAuth(@RequestBody AdmRoleMenuSaveDto dto) {
+        AdmUserDto admUserDto=getCurrent();
+        List<AdmRoleMenuDto> list=new ArrayList<>();
+        for(Long menuId:dto.getMenuIdList()){
+            AdmRoleMenuDto admRoleMenuDto=new AdmRoleMenuDto();
+            admRoleMenuDto.setRoleId(dto.getRoleId());
+            admRoleMenuDto.setMenuId(menuId);
+            admRoleMenuDto.setCreateBy(admUserDto.getUserName());
+            list.add(admRoleMenuDto);
+        }
+        return admRoleMenuFeign.save(list);
     }
 
     /**

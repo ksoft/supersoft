@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author zhangjianbo
@@ -21,4 +22,6 @@ public class AdmRoleMenu implements Serializable {
     private Long id;
     private Long roleId;
     private Long menuId;
+    private Date createDt;
+    private String createBy;
 }

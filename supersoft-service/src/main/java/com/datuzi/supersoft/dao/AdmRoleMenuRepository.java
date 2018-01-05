@@ -17,4 +17,6 @@ public interface AdmRoleMenuRepository extends JpaSpecificationExecutor<AdmRoleM
     @Query(value = "select a.* from adm_role_menu a " +
             "where a.role_id=?1 ",nativeQuery = true)
     List<AdmRoleMenu> findMenuByRole(Long roleId);
+
+    void deleteByRoleId(Long roleId);
 }
