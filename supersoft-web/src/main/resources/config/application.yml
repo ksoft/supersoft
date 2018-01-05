@@ -9,6 +9,8 @@ spring:
     type: redis
   thymeleaf:
     cache: false
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
 
 swaggerVersion: 1.0
 logging:
@@ -19,11 +21,6 @@ server:
     access_log_enabled: true
     basedir: target/tomcat
   context-path:
-
-#Jackson配置
-spring.jackson:
-  #default-property-inclusion: non_default
-  date-format: yyyy-MM-dd HH:mm:ss
 
 supersoft:
   static-path: http://localhost/

@@ -80,6 +80,21 @@ layui.use(['jquery','layer','form','table','upload'],function(){
         return false;
     });
 
+    //监听 修改密码
+    form.on('submit(updatePwd)', function(data){
+        $.ajax({
+            type:"POST",
+            url:"/user/updatePwd",
+            dataType:"json",
+            contentType:"application/json",
+            data:JSON.stringify(data.field),
+            success:function(res){
+                layer.msg(res.message);
+            }
+        });
+        return false;
+    });
+
     //监听工具条
     table.on('tool(operateFilter)', function(obj){
         var data = obj.data;
@@ -243,8 +258,8 @@ layui.use(['jquery','layer','form','table','upload'],function(){
         //我们既支持上述函数式的方式，也支持下述数组的形式
         //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
         ,password: [
-            /^[\S]{6,12}$/
-            ,'密码必须6到12位，且不能出现空格'
+            /^[\S]{5,12}$/
+            ,'密码必须5到12位，且不能出现空格'
         ]
     });
 });

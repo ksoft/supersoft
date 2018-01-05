@@ -62,11 +62,11 @@
     <div class="layui-form-item">
         <label class="layui-form-label">角色</label>
         <div class="layui-input-inline">
-            <select name="roleCode" lay-verify="required">
+            <select name="roleId" lay-verify="required">
                 <option value="">--请选择--</option>
-                <option value="0" th:selected="${user.roleCode == 0}">超级管理员</option>
-                <option value="1" th:selected="${user.roleCode == 1}">管理员</option>
-                <option value="2" th:selected="${user.roleCode == 2}">普通帐号</option>
+                <option value="0" th:selected="${user.roleId == 0}">超级管理员</option>
+                <option value="1" th:selected="${user.roleId == 1}">管理员</option>
+                <option value="2" th:selected="${user.roleId == 2}">普通帐号</option>
             </select>
         </div>
     </div>

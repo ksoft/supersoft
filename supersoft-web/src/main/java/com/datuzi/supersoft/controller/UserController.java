@@ -65,6 +65,16 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 修改密码页
+     * @return
+     */
+    @GetMapping(value = "/changePwd")
+    public String changePwd(Model model) {
+        model.addAttribute("user",getCurrent());
+        return "user/changePwd";
+    }
+
+    /**
      * 删除
      * @return
      */
@@ -117,6 +127,32 @@ public class UserController extends BaseController {
             if(admUserDto.getId().equals(currentUser.getId())){
                 super.refreshCurrent(request,responseDto.getData());
             }
+            return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
+        }else{
+            return ResponseDtoFactory.toError("更新失败",Boolean.FALSE);
+        }
+    }
+
+    /**
+     * 修改密码
+     * @param changePwdDto
+     * @return
+     */
+    @RequestMapping(value = "/updatePwd",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> updatePwd(@RequestBody ChangePwdDto changePwdDto, HttpServletRequest request) {
+        AdmUserDto currentUser=getCurrent();
+        if(!changePwdDto.getOldPwd().equals(currentUser.getPassword())){
+            return ResponseDtoFactory.toError("旧密码不正确",Boolean.FALSE);
+        }
+        if(!changePwdDto.getNewPwd().equals(changePwdDto.getNewConfirmPwd())){
+            return ResponseDtoFactory.toError("两次新密码不一样",Boolean.FALSE);
+        }
+        currentUser.setPassword(changePwdDto.getNewPwd());
+        ResponseDto<AdmUserDto> responseDto=admUserFeign.update(currentUser);
+        if(responseDto.isSuccess()){
+            //刷新用户缓存
+            super.refreshCurrent(request,responseDto.getData());
             return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
         }else{
             return ResponseDtoFactory.toError("更新失败",Boolean.FALSE);

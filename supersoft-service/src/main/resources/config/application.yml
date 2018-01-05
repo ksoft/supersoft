@@ -5,6 +5,8 @@ spring:
     store-type: none
   application:
       name: supersoft-provider
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
 logging:
   config: classpath:config/logback-spring.xml
 server:
