@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2018-01-04 16:44:29
+Date: 2018-01-05 10:26:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -85,27 +85,57 @@ CREATE TABLE `adm_role_menu` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_id` bigint(20) DEFAULT NULL,
   `menu_id` bigint(20) DEFAULT NULL,
+  `create_by` varchar(255) DEFAULT NULL,
+  `create_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adm_role_menu
 -- ----------------------------
-INSERT INTO `adm_role_menu` VALUES ('1', '1', '1');
-INSERT INTO `adm_role_menu` VALUES ('2', '1', '2');
-INSERT INTO `adm_role_menu` VALUES ('3', '1', '3');
-INSERT INTO `adm_role_menu` VALUES ('4', '1', '4');
-INSERT INTO `adm_role_menu` VALUES ('5', '1', '5');
-INSERT INTO `adm_role_menu` VALUES ('6', '1', '6');
-INSERT INTO `adm_role_menu` VALUES ('7', '1', '11');
-INSERT INTO `adm_role_menu` VALUES ('8', '1', '12');
-INSERT INTO `adm_role_menu` VALUES ('9', '1', '13');
-INSERT INTO `adm_role_menu` VALUES ('10', '1', '14');
-INSERT INTO `adm_role_menu` VALUES ('11', '1', '15');
-INSERT INTO `adm_role_menu` VALUES ('12', '1', '16');
-INSERT INTO `adm_role_menu` VALUES ('13', '1', '7');
-INSERT INTO `adm_role_menu` VALUES ('15', '1', '9');
-INSERT INTO `adm_role_menu` VALUES ('16', '1', '10');
+INSERT INTO `adm_role_menu` VALUES ('1', '1', '1', null, null);
+INSERT INTO `adm_role_menu` VALUES ('2', '1', '2', null, null);
+INSERT INTO `adm_role_menu` VALUES ('3', '1', '3', null, null);
+INSERT INTO `adm_role_menu` VALUES ('4', '1', '4', null, null);
+INSERT INTO `adm_role_menu` VALUES ('5', '1', '5', null, null);
+INSERT INTO `adm_role_menu` VALUES ('6', '1', '6', null, null);
+INSERT INTO `adm_role_menu` VALUES ('7', '1', '11', null, null);
+INSERT INTO `adm_role_menu` VALUES ('8', '1', '12', null, null);
+INSERT INTO `adm_role_menu` VALUES ('9', '1', '13', null, null);
+INSERT INTO `adm_role_menu` VALUES ('10', '1', '14', null, null);
+INSERT INTO `adm_role_menu` VALUES ('11', '1', '15', null, null);
+INSERT INTO `adm_role_menu` VALUES ('12', '1', '16', null, null);
+INSERT INTO `adm_role_menu` VALUES ('13', '1', '7', null, null);
+INSERT INTO `adm_role_menu` VALUES ('15', '1', '9', null, null);
+INSERT INTO `adm_role_menu` VALUES ('16', '1', '10', null, null);
+INSERT INTO `adm_role_menu` VALUES ('211', '3', '14', '管理员2', '2018-01-05 10:16:51');
+INSERT INTO `adm_role_menu` VALUES ('212', '3', '15', '管理员2', '2018-01-05 10:16:51');
+INSERT INTO `adm_role_menu` VALUES ('213', '4', '4', '管理员2', '2018-01-05 10:18:36');
+INSERT INTO `adm_role_menu` VALUES ('214', '4', '14', '管理员2', '2018-01-05 10:18:36');
+INSERT INTO `adm_role_menu` VALUES ('215', '4', '15', '管理员2', '2018-01-05 10:18:36');
+INSERT INTO `adm_role_menu` VALUES ('260', '6', '1', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('261', '6', '6', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('262', '6', '8', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('263', '6', '9', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('264', '6', '10', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('265', '6', '7', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('266', '6', '11', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('267', '6', '12', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('268', '6', '13', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('269', '6', '3', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('270', '6', '14', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('271', '6', '15', '管理员2', '2018-01-05 10:22:19');
+INSERT INTO `adm_role_menu` VALUES ('312', '7', '1', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('313', '7', '5', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('314', '7', '6', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('315', '7', '8', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('316', '7', '9', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('317', '7', '7', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('318', '7', '12', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('319', '7', '13', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('320', '7', '2', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('321', '7', '14', '管理员2', '2018-01-05 10:25:23');
+INSERT INTO `adm_role_menu` VALUES ('322', '7', '15', '管理员2', '2018-01-05 10:25:23');
 
 -- ----------------------------
 -- Table structure for adm_user
