@@ -31,7 +31,7 @@ public class FileController {
     @ResponseBody
     public ResponseDto<String> upload(MultipartFile file) {
         try {
-            String path = "D:\\photos\\";
+            String path = config.getFtpFileBase();
             String fileName = UploadUtil.upload(file, path);
             return ResponseDtoFactory.toSuccess("上传成功",fileName);
         }catch (Exception e){

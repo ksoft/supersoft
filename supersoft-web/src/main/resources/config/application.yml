@@ -25,6 +25,7 @@ server:
 supersoft:
   static-path: http://localhost/
   context-path: http://localhost:${server.port}${server.context-path}
+  ftp-file-base: F:\\photos\\
 ---
 #development profile
 spring:
