@@ -18,17 +18,17 @@ layui.use(['jquery','layer','form','table','upload'],function(){
         ,page: true //开启分页
         ,cols: [[ //表头
             {type:'checkbox'}
-            ,{field: 'id', title: 'ID', width:80, sort: true}
-            ,{field: 'userCode', title: '用户名', width:180, sort: true}
-            ,{field: 'userName', title: '姓名', width:180, sort: true}
-            ,{field: 'sex', title: '性别', width:80, templet: '#sexTpl', unresize: true, sort: true}
-            ,{field: 'email', title: '邮箱', width:180, sort: true}
-            ,{field: 'mobilePhone', title: '手机号', width: 177, sort: true}
-            ,{field: 'roleName', title: '角色', width: 160, sort: true}
-            ,{field: 'createDt', title: '创建时间', width:180, sort: true}
-            ,{field: 'createBy', title: '创建人', width: 177, sort: true}
-            ,{field: 'status', title: '状态', templet: '#statusTpl', unresize: true, width: 160, sort: true}
-            ,{field: 'opt', title: '操作', width: 250, sort: true, toolbar: '#operateBar'}
+            ,{field: 'id', title: 'ID', width:'2%', sort: true}
+            ,{field: 'userCode', title: '用户名', width:'5%', sort: true}
+            ,{field: 'userName', title: '姓名', width:'5%', sort: true}
+            ,{field: 'sex', title: '性别', width:'5%', templet: '#sexTpl', unresize: true, sort: true}
+            ,{field: 'email', title: '邮箱', width:'15%', sort: true}
+            ,{field: 'mobilePhone', title: '手机号', width: '10%', sort: true}
+            ,{field: 'roleName', title: '角色', width: '10%', sort: true}
+            ,{field: 'createDt', title: '创建时间', width:'10%', sort: true}
+            ,{field: 'createBy', title: '创建人', width: '10%', sort: true}
+            ,{field: 'status', title: '状态', templet: '#statusTpl', unresize: true, width: '5%', sort: true}
+            ,{field: 'opt', title: '操作', width: '20%', sort: true, toolbar: '#operateBar'}
         ]]
     });
 
