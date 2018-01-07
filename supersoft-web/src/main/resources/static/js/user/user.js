@@ -24,7 +24,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             ,{field: 'sex', title: '性别', width:80, templet: '#sexTpl', unresize: true, sort: true}
             ,{field: 'email', title: '邮箱', width:180, sort: true}
             ,{field: 'mobilePhone', title: '手机号', width: 177, sort: true}
-            ,{field: 'roleId', title: '角色', templet: '#roleTpl', unresize: true, width: 160, sort: true}
+            ,{field: 'roleName', title: '角色', width: 160, sort: true}
             ,{field: 'createDt', title: '创建时间', width:180, sort: true}
             ,{field: 'createBy', title: '创建人', width: 177, sort: true}
             ,{field: 'status', title: '状态', templet: '#statusTpl', unresize: true, width: 160, sort: true}

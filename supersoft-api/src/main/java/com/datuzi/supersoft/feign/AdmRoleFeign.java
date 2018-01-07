@@ -41,6 +41,14 @@ public interface AdmRoleFeign {
     ResponseDto<RoleListDto> findById(@PathVariable("id") Long id);
 
     /**
+     * 查找全部
+     * @return
+     */
+    @RequestMapping(value = "/role/findAll",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<List<RoleListDto>> findAll();
+
+    /**
      * 删除
      * @param id
      * @return

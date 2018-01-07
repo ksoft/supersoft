@@ -1,6 +1,8 @@
 package com.datuzi.supersoft.service.impl;
 
+import com.datuzi.supersoft.dao.AdmRoleRepository;
 import com.datuzi.supersoft.dto.*;
+import com.datuzi.supersoft.entity.AdmRole;
 import com.datuzi.supersoft.service.AdmUserService;
 import com.datuzi.supersoft.dao.AdmUserRepository;
 import com.datuzi.supersoft.entity.AdmUser;
@@ -28,6 +30,8 @@ import java.util.List;
 public class AdmUserServiceImpl implements AdmUserService {
     @Autowired
     private AdmUserRepository admUserRepository;
+    @Autowired
+    private AdmRoleRepository admRoleRepository;
 
 
     @Override
@@ -99,10 +103,18 @@ public class AdmUserServiceImpl implements AdmUserService {
             }
          };
         Page<AdmUser> userPage=admUserRepository.findAll(spec,pageable);
+        Iterable<AdmRole> roleIterable=admRoleRepository.findAll();
+
         List<UserListDto> list=new ArrayList<>();
         for(AdmUser user:userPage.getContent()){
             UserListDto dto=new UserListDto();
             BeanUtils.copyProperties(user,dto);
+            for(AdmRole role:roleIterable){
+                if(user.getRoleId().equals(role.getId())){
+                    dto.setRoleName(role.getName());
+                    break;
+                }
+            }
             list.add(dto);
         }
         return PageResultDtoFactory.toSuccess("查询成功",list,userPage.getTotalElements());

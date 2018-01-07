@@ -2,6 +2,7 @@ package com.datuzi.supersoft.controller;
 
 import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
+import com.datuzi.supersoft.feign.AdmRoleFeign;
 import com.datuzi.supersoft.feign.AdmUserFeign;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.BeanUtils;
@@ -22,6 +23,8 @@ import java.util.List;
 public class UserController extends BaseController {
     @Autowired
     private AdmUserFeign admUserFeign;
+    @Autowired
+    private AdmRoleFeign admRoleFeign;
 
 
     /**
@@ -38,7 +41,9 @@ public class UserController extends BaseController {
      * @return
      */
     @GetMapping(value = "/add")
-    public String add() {
+    public String add(Model model) {
+        ResponseDto<List<RoleListDto>> responseDto=admRoleFeign.findAll();
+        model.addAttribute("roles",responseDto.getData());
         return "user/add";
     }
 
@@ -50,6 +55,8 @@ public class UserController extends BaseController {
     public String view(@PathVariable Long id, Model model) {
         ResponseDto<UserListDto> dto=admUserFeign.findById(id);
         model.addAttribute("user",dto.getData());
+        ResponseDto<List<RoleListDto>> responseDto=admRoleFeign.findAll();
+        model.addAttribute("roles",responseDto.getData());
         return "user/view";
     }
 
@@ -61,6 +68,8 @@ public class UserController extends BaseController {
     public String edit(@PathVariable Long id, Model model) {
         ResponseDto<UserListDto> dto=admUserFeign.findById(id);
         model.addAttribute("user",dto.getData());
+        ResponseDto<List<RoleListDto>> responseDto=admRoleFeign.findAll();
+        model.addAttribute("roles",responseDto.getData());
         return "user/edit";
     }
 

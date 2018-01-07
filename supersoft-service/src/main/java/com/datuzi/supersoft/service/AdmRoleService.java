@@ -18,6 +18,12 @@ public interface AdmRoleService {
     ResponseDto<RoleListDto> findById(Long id);
 
     /**
+     * 获取全部菜单
+     * @return
+     */
+    ResponseDto<List<RoleListDto>> findAll();
+
+    /**
      * 保存
      * @param dto
      * @return

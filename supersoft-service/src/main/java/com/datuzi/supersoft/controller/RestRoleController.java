@@ -41,6 +41,12 @@ public class RestRoleController {
         return admRoleService.findById(id);
     }
 
+    @RequestMapping(value = "/findAll",method = RequestMethod.POST)
+    @ResponseBody
+    ResponseDto<List<RoleListDto>> findAll(){
+        return admRoleService.findAll();
+    }
+
     @RequestMapping(value = "/deleteById",method = RequestMethod.POST)
     @ResponseBody
     public ResponseDto<Boolean> deleteById(@RequestBody List<Long> ids) {

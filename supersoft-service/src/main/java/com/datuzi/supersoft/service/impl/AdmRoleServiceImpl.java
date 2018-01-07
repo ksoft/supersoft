@@ -43,6 +43,18 @@ public class AdmRoleServiceImpl implements AdmRoleService {
     }
 
     @Override
+    public ResponseDto<List<RoleListDto>> findAll() {
+        List<RoleListDto> list=new ArrayList<>();
+        Iterable<AdmRole> ite=admRoleRepository.findAll();
+        for(AdmRole role:ite){
+            RoleListDto dto=new RoleListDto();
+            BeanUtils.copyProperties(role,dto);
+            list.add(dto);
+        }
+        return ResponseDtoFactory.toSuccess(list);
+    }
+
+    @Override
     public ResponseDto<Boolean> save(AdmRoleDto dto) {
         AdmRole admRole=EntityUtil.translate(dto,AdmRole.class);
         admRoleRepository.save(admRole);

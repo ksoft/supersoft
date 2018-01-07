@@ -21,6 +21,7 @@ public class UserListDto implements Serializable {
     private String sex;
     private String headIcon;
     private Long roleId;
+    private String roleName;
     private String motto;
     private Date createDt;
     private String createBy;

@@ -55,9 +55,10 @@
     <div class="layui-form-item">
         <label class="layui-form-label">角色</label>
         <div class="layui-input-inline">
-            <input disabled type="text" th:if="${user.roleId == 0}" th:value="超级管理员" class="layui-input">
-            <input disabled type="text" th:if="${user.roleId == 1}" th:value="管理员" class="layui-input">
-            <input disabled type="text" th:if="${user.roleId == 2}" th:value="普通帐号" class="layui-input">
+            <select name="roleId" id="roleId" lay-search>
+                <option value="">--请选择--</option>
+                <option th:each="role,stat:${roles}" th:value="${role.id}" th:text="${role.name}" th:selected="${role.id == user.roleId}"></option>
+            </select>
         </div>
     </div>
     <div class="layui-form-item">
