@@ -20,7 +20,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             {type:'checkbox'}
             ,{field: 'id', title: 'ID', width: '10%', sort: true}
             ,{field: 'userName', title: '姓名', width:'20%', sort: true}
-            ,{field: 'ip', title: '手机号', width: '20%', sort: true}
+            ,{field: 'ip', title: 'IP地址', width: '20%', sort: true}
             ,{field: 'createDt', title: '创建时间', width:'20%', sort: true}
             ,{field: 'createBy', title: '创建人', width: '10%', sort: true}
             ,{field: 'opt', title: '操作', width: '20%', sort: true, toolbar: '#operateBar'}
