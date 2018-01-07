@@ -3,6 +3,7 @@ package com.datuzi.supersoft.controller;
 import com.datuzi.supersoft.constant.Constants;
 import com.datuzi.supersoft.controller.base.BaseController;
 import com.datuzi.supersoft.dto.*;
+import com.datuzi.supersoft.feign.AdmLogFeign;
 import com.datuzi.supersoft.feign.LoginFeign;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang.StringUtils;
@@ -37,7 +38,8 @@ public class LoginController extends BaseController{
     private DefaultKaptcha defaultKaptcha;
     @Autowired
     private LoginFeign loginFeign;
-
+    @Autowired
+    private AdmLogFeign admLogFeign;
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -66,7 +68,7 @@ public class LoginController extends BaseController{
      */
     @PostMapping(value = "/login")
     @ResponseBody
-    public ResponseDto<Boolean> login(LoginDto loginDto, HttpSession session,HttpServletResponse response){
+    public ResponseDto<Boolean> login(LoginDto loginDto, HttpSession session,HttpServletRequest request,HttpServletResponse response){
         String code=session.getAttribute(Constants.SESSION_KEY_KAPTCHA).toString();
         if(StringUtils.isEmpty(code)){
             return ResponseDtoFactory.toError("验证码不能为空");
@@ -84,6 +86,12 @@ public class LoginController extends BaseController{
             response.setHeader(Constants.TOKEN,token);
             Cookie cookie=new Cookie(Constants.TOKEN,token);
             response.addCookie(cookie);
+
+            AdmLogDto logDto=new AdmLogDto();
+            logDto.setUserId(result.getData().getId());
+            logDto.setIp(super.getIP(request));
+            logDto.setCreateBy(result.getData().getUserName());
+            admLogFeign.save(logDto);
             return ResponseDtoFactory.toSuccess("登录成功",Boolean.TRUE);
         }else{
             return ResponseDtoFactory.toError(result.getMessage(),Boolean.FALSE);
