@@ -1,5 +1,6 @@
 package com.datuzi.supersoft.service.impl;
 
+import com.datuzi.supersoft.dao.AdmRoleMenuRepository;
 import com.datuzi.supersoft.dao.AdmRoleRepository;
 import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.entity.AdmRole;
@@ -28,6 +29,8 @@ import java.util.List;
 public class AdmRoleServiceImpl implements AdmRoleService {
     @Autowired
     private AdmRoleRepository admRoleRepository;
+    @Autowired
+    private AdmRoleMenuRepository admRoleMenuRepository;
 
 
     @Override
@@ -105,6 +108,7 @@ public class AdmRoleServiceImpl implements AdmRoleService {
     public ResponseDto<Boolean> deleteById(List<Long> ids) {
         for(Long id:ids) {
             admRoleRepository.delete(id);
+            admRoleMenuRepository.deleteByRoleId(id);
         }
         return ResponseDtoFactory.toSuccess("删除成功",Boolean.TRUE);
     }
