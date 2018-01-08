@@ -55,7 +55,7 @@
                             var data=res.data;
                             console.log(data)
                             for(var i=0; i<data.length; i++){
-                                imgList.push('<li><img  src="[[${staticPath}]]'+ data[i].imgSrc +'"><div class="operate"><div class="check"><input type="checkbox" name="belle" lay-filter="choose" lay-skin="primary" title="'+data[i].imgTitle+'"></div><i class="layui-icon img_del">&#xe640;</i></div></li>')
+                                imgList.push('<li><img src="[[${staticPath}]]'+ data[i].imgSrc +'"><div class="operate"><div class="check"><input type="checkbox" name="belle" lay-filter="choose" lay-skin="primary" title="'+data[i].imgTitle+'" photoId="'+data[i].id+'"></div><i class="layui-icon img_del">&#xe640;</i></div></li>')
                             }
                             next(imgList.join(''), page < res.totalPages);
                             form.render();
@@ -69,9 +69,21 @@
         $("body").on("click",".img_del",function(){
             var _this = $(this);
             layer.confirm('确定删除图片"'+_this.siblings().find("input").attr("title")+'"吗？',{icon:3, title:'提示信息'},function(index){
-                _this.parents("li").hide(1000);
-                setTimeout(function(){_this.parents("li").remove();},950);
+                var ids=[];
+                ids[0]=_this.siblings().find("input").attr("photoId");
                 layer.close(index);
+                $.ajax({
+                    type: "POST",
+                    url: "/photo/delete",
+                    data: JSON.stringify(ids),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (res) {
+                        _this.parents("li").hide(1000);
+                        setTimeout(function(){_this.parents("li").remove();},950);
+                        layer.msg(res.message);
+                    }
+                });
             });
         })
 
@@ -100,26 +112,36 @@
         $(".batchDel").click(function(){
             var $checkbox = $('#Images li input[type="checkbox"]');
             var $checked = $('#Images li input[type="checkbox"]:checked');
+            var ids=[];
+            $checked.each(function(i){
+                ids[i]=$(this).attr("photoId")
+            })
+
             if($checkbox.is(":checked")){
                 layer.confirm('确定删除选中的图片？',{icon:3, title:'提示信息'},function(index){
-                    var index = layer.msg('删除中，请稍候',{icon: 16,time:false,shade:0.8});
-                    setTimeout(function(){
-                        //删除数据
-                        $checked.each(function(){
-                            $(this).parents("li").hide(1000);
-                            setTimeout(function(){$(this).parents("li").remove();},950);
-                        })
-                        $('#Images li input[type="checkbox"]').prop("checked",false);
-                        form.render();
-                        layer.close(index);
-                        layer.msg("删除成功");
-                    },2000);
+                    layer.close(index);
+                    var loading = layer.msg('删除中，请稍候',{icon: 16,time:false,shade:0.8});
+                    $.ajax({
+                        type: "POST",
+                        url: "/photo/delete",
+                        data: JSON.stringify(ids),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (res) {
+                            $checked.each(function(){
+                                $(this).parents("li").remove();
+                            })
+                            $('#Images li input[type="checkbox"]').prop("checked",false);
+                            form.render();
+                            layer.close(loading);
+                            layer.msg("删除成功");
+                        }
+                    });
                 })
             }else{
                 layer.msg("请选择需要删除的图片");
             }
         })
-
     })
 </script>
 </body>
