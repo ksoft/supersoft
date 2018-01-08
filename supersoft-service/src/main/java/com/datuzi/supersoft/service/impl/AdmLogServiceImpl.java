@@ -33,7 +33,7 @@ public class AdmLogServiceImpl implements AdmLogService{
     private AdmUserRepository admUserRepository;
 
     @Override
-    public PageResultDto<List<AdmLogDto>> findByPage(BasePageDto searchDto) {
+    public PageResultDto<List<AdmLogDto>> findByPage(final BasePageDto searchDto) {
         Pageable pageable=new PageRequest(searchDto.getPage()-1,searchDto.getLimit());
 
         //查询条件构造
@@ -64,13 +64,13 @@ public class AdmLogServiceImpl implements AdmLogService{
             }
             list.add(dto);
         }
-        return PageResultDtoFactory.toSuccess("查询成功",list,page.getTotalElements());
+        return PageResultDtoFactory.toSuccess("查询成功",list,page.getTotalElements(),page.getTotalPages());
     }
 
     @Override
     public ResponseDto<Boolean> save(AdmLogDto dto) {
-        AdmLog admRole= EntityUtil.translate(dto,AdmLog.class);
-        admLogRepository.save(admRole);
+        AdmLog entity= EntityUtil.translate(dto,AdmLog.class);
+        admLogRepository.save(entity);
         return ResponseDtoFactory.toSuccess("保存成功",Boolean.TRUE);
     }
 

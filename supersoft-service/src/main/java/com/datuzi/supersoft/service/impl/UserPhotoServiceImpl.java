@@ -1,10 +1,9 @@
 package com.datuzi.supersoft.service.impl;
 
-import com.datuzi.supersoft.dao.AdmRoleMenuRepository;
-import com.datuzi.supersoft.dao.AdmRoleRepository;
+import com.datuzi.supersoft.dao.UserPhotoRepository;
 import com.datuzi.supersoft.dto.*;
-import com.datuzi.supersoft.entity.AdmRole;
-import com.datuzi.supersoft.service.AdmRoleService;
+import com.datuzi.supersoft.entity.UserPhoto;
+import com.datuzi.supersoft.service.UserPhotoService;
 import com.datuzi.supersoft.utils.EntityUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +22,17 @@ import java.util.List;
 
 /**
  * @author zhangjianbo
- * @date 2017/12/8
+ * @date 2018/1/8
  */
 @Service
-public class AdmRoleServiceImpl implements AdmRoleService {
+public class UserPhotoServiceImpl implements UserPhotoService{
     @Autowired
-    private AdmRoleRepository admRoleRepository;
-    @Autowired
-    private AdmRoleMenuRepository admRoleMenuRepository;
-
+    private UserPhotoRepository userPhotoRepository;
 
     @Override
-    public ResponseDto<AdmRoleDto> findById(Long id) {
-        AdmRoleDto dto=new AdmRoleDto();
-        AdmRole entity=admRoleRepository.findOne(id);
+    public ResponseDto<UserPhotoDto> findById(Long id) {
+        UserPhotoDto dto=new UserPhotoDto();
+        UserPhoto entity=userPhotoRepository.findOne(id);
         if(entity!=null){
             BeanUtils.copyProperties(entity,dto);
             return ResponseDtoFactory.toSuccess(dto);
@@ -46,11 +42,11 @@ public class AdmRoleServiceImpl implements AdmRoleService {
     }
 
     @Override
-    public ResponseDto<List<AdmRoleDto>> findAll() {
-        List<AdmRoleDto> list=new ArrayList<>();
-        Iterable<AdmRole> ite=admRoleRepository.findAll();
-        for(AdmRole entity:ite){
-            AdmRoleDto dto=new AdmRoleDto();
+    public ResponseDto<List<UserPhotoDto>> findAll() {
+        List<UserPhotoDto> list=new ArrayList<>();
+        Iterable<UserPhoto> ite=userPhotoRepository.findAll();
+        for(UserPhoto entity:ite){
+            UserPhotoDto dto=new UserPhotoDto();
             BeanUtils.copyProperties(entity,dto);
             list.add(dto);
         }
@@ -58,18 +54,18 @@ public class AdmRoleServiceImpl implements AdmRoleService {
     }
 
     @Override
-    public ResponseDto<Boolean> save(AdmRoleDto dto) {
-        AdmRole entity=EntityUtil.translate(dto,AdmRole.class);
-        admRoleRepository.save(entity);
+    public ResponseDto<Boolean> save(UserPhotoDto dto) {
+        UserPhoto entity= EntityUtil.translate(dto,UserPhoto.class);
+        userPhotoRepository.save(entity);
         return ResponseDtoFactory.toSuccess("保存成功",Boolean.TRUE);
     }
 
     @Override
-    public ResponseDto<Boolean> update(AdmRoleDto dto) {
-        AdmRole entity=admRoleRepository.findOne(dto.getId());
+    public ResponseDto<Boolean> update(UserPhotoDto dto) {
+        UserPhoto entity=userPhotoRepository.findOne(dto.getId());
         if(entity!=null) {
             EntityUtil.copyPropertiesIgnoreNull(dto, entity);
-            admRoleRepository.save(entity);
+            userPhotoRepository.save(entity);
             return ResponseDtoFactory.toSuccess("更新成功",Boolean.TRUE);
         }else{
             return ResponseDtoFactory.toError("找不到对应的数据");
@@ -77,27 +73,27 @@ public class AdmRoleServiceImpl implements AdmRoleService {
     }
 
     @Override
-    public PageResultDto<List<AdmRoleDto>> findByPage(final BasePageDto searchDto) {
+    public PageResultDto<List<UserPhotoDto>> findByPage(final BasePageDto searchDto) {
         Pageable pageable=new PageRequest(searchDto.getPage()-1,searchDto.getLimit());
 
         //查询条件构造
-        Specification<AdmRole> spec = new Specification<AdmRole>() {
-        @Override
-        public Predicate toPredicate(Root<AdmRole> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-            Path<String> name = root.get("name");
-            cb.conjunction();
-            Predicate p=null;
-            if(!StringUtils.isEmpty(searchDto.getQueryParam())) {
-                p= cb.like(name, "%" + searchDto.getQueryParam() + "%");
+        Specification<UserPhoto> spec = new Specification<UserPhoto>() {
+            @Override
+            public Predicate toPredicate(Root<UserPhoto> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Path<String> name = root.get("imgSrc");
+                cb.conjunction();
+                Predicate p=null;
+                if(!StringUtils.isEmpty(searchDto.getQueryParam())) {
+                    p= cb.like(name, "%" + searchDto.getQueryParam() + "%");
+                }
+                return p;
             }
-            return p;
-            }
-         };
-        Page<AdmRole> page=admRoleRepository.findAll(spec,pageable);
-        List<AdmRoleDto> list=new ArrayList<>();
-        for(AdmRole entity:page.getContent()){
-            AdmRoleDto dto=new AdmRoleDto();
-            BeanUtils.copyProperties(entity,dto);
+        };
+        Page<UserPhoto> page=userPhotoRepository.findAll(spec,pageable);
+        List<UserPhotoDto> list=new ArrayList<>();
+        for(UserPhoto role:page.getContent()){
+            UserPhotoDto dto=new UserPhotoDto();
+            BeanUtils.copyProperties(role,dto);
             list.add(dto);
         }
         return PageResultDtoFactory.toSuccess("查询成功",list,page.getTotalElements(),page.getTotalPages());
@@ -107,8 +103,7 @@ public class AdmRoleServiceImpl implements AdmRoleService {
     @Transactional(propagation = Propagation.REQUIRED)
     public ResponseDto<Boolean> deleteById(List<Long> ids) {
         for(Long id:ids) {
-            admRoleRepository.delete(id);
-            admRoleMenuRepository.deleteByRoleId(id);
+            userPhotoRepository.delete(id);
         }
         return ResponseDtoFactory.toSuccess("删除成功",Boolean.TRUE);
     }

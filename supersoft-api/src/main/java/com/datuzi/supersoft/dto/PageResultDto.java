@@ -13,5 +13,6 @@ public class PageResultDto<T> implements Serializable{
     private int code=0;
     private String msg="";
     private long count=0;
+    private int totalPages=0;
     private T data;
 }

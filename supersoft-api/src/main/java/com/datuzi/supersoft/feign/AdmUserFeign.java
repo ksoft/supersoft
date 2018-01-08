@@ -47,7 +47,7 @@ public interface AdmUserFeign {
      */
     @RequestMapping(value = "/user/findById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<UserListDto> findById(@PathVariable("id") Long id);
+    ResponseDto<AdmUserDto> findById(@PathVariable("id") Long id);
 
     /**
      * 删除
@@ -66,5 +66,5 @@ public interface AdmUserFeign {
      */
     @RequestMapping(value = "/user/findByPage",method = RequestMethod.POST)
     @ResponseBody
-    PageResultDto<List<UserListDto>> findByPage(@RequestBody BasePageDto searchDto);
+    PageResultDto<List<AdmUserDto>> findByPage(@RequestBody BasePageDto searchDto);
 }

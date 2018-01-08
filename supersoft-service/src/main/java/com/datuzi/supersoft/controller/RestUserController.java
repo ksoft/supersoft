@@ -31,13 +31,13 @@ public class RestUserController {
 
     @RequestMapping(value = "/findByPage",method = RequestMethod.POST)
     @ResponseBody
-    public PageResultDto<List<UserListDto>> findByPage(@RequestBody BasePageDto searchDto) {
+    public PageResultDto<List<AdmUserDto>> findByPage(@RequestBody BasePageDto searchDto) {
         return admUserService.findByPage(searchDto);
     }
 
     @RequestMapping(value = "/findById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto<UserListDto> findById(@PathVariable("id") Long id) {
+    public ResponseDto<AdmUserDto> findById(@PathVariable("id") Long id) {
         return admUserService.findById(id);
     }
 

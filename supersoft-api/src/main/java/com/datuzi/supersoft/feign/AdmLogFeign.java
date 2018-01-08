@@ -29,7 +29,7 @@ public interface AdmLogFeign {
      */
     @RequestMapping(value = "/log/findById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<UserListDto> findById(@PathVariable("id") Long id);
+    ResponseDto<AdmUserDto> findById(@PathVariable("id") Long id);
 
     /**
      * 删除

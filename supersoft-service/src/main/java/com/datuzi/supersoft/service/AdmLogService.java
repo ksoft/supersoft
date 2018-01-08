@@ -16,7 +16,7 @@ public interface AdmLogService {
      * @param searchDto
      * @return
      */
-    PageResultDto<List<AdmLogDto>> findByPage(BasePageDto searchDto);
+    PageResultDto<List<AdmLogDto>> findByPage(final BasePageDto searchDto);
 
     /**
      * 保存

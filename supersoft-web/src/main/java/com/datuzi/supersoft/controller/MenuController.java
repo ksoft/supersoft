@@ -59,7 +59,7 @@ public class MenuController extends BaseController {
      */
     @GetMapping(value = "/add")
     public String add(Model model) {
-        ResponseDto<List<MenuListDto>> responseDto=admMenuFeign.findAll();
+        ResponseDto<List<AdmMenuDto>> responseDto=admMenuFeign.findAll();
         model.addAttribute("menus",responseDto.getData());
         return "menu/add";
     }
@@ -70,9 +70,9 @@ public class MenuController extends BaseController {
      */
     @GetMapping(value = "/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        ResponseDto<List<MenuListDto>> responseDto=admMenuFeign.findAll();
+        ResponseDto<List<AdmMenuDto>> responseDto=admMenuFeign.findAll();
         model.addAttribute("menus",responseDto.getData());
-        ResponseDto<MenuListDto> dto=admMenuFeign.findById(id);
+        ResponseDto<AdmMenuDto> dto=admMenuFeign.findById(id);
         model.addAttribute("menu",dto.getData());
         return "menu/edit";
     }
@@ -83,9 +83,9 @@ public class MenuController extends BaseController {
      */
     @GetMapping(value = "/view/{id}")
     public String view(@PathVariable Long id, Model model) {
-        ResponseDto<List<MenuListDto>> responseDto=admMenuFeign.findAll();
+        ResponseDto<List<AdmMenuDto>> responseDto=admMenuFeign.findAll();
         model.addAttribute("menus",responseDto.getData());
-        ResponseDto<MenuListDto> dto=admMenuFeign.findById(id);
+        ResponseDto<AdmMenuDto> dto=admMenuFeign.findById(id);
         model.addAttribute("menu",dto.getData());
         return "menu/view";
     }
@@ -127,7 +127,7 @@ public class MenuController extends BaseController {
      */
     @PostMapping(value = "/list")
     @ResponseBody
-    public PageResultDto<List<MenuListDto>> list(@RequestBody BasePageDto searchDto){
+    public PageResultDto<List<AdmMenuDto>> list(@RequestBody BasePageDto searchDto){
         return admMenuFeign.findByPage(searchDto);
     }
 

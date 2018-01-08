@@ -36,50 +36,50 @@ public class AdmUserServiceImpl implements AdmUserService {
 
     @Override
     public  ResponseDto<AdmUserDto> findOne(LoginUserDto loginUserDto) {
-        AdmUser user=admUserRepository.findAdmUserByUserCodeAndPassword(loginUserDto.getUserCode(),loginUserDto.getPassword());
-        if(user!=null){
-            AdmUserDto admUserDto=new AdmUserDto();
-            BeanUtils.copyProperties(user,admUserDto);
-            return ResponseDtoFactory.toSuccess(admUserDto);
+        AdmUser entity=admUserRepository.findAdmUserByUserCodeAndPassword(loginUserDto.getUserCode(),loginUserDto.getPassword());
+        if(entity!=null){
+            AdmUserDto dto=new AdmUserDto();
+            BeanUtils.copyProperties(entity,dto);
+            return ResponseDtoFactory.toSuccess(dto);
         }else{
             return ResponseDtoFactory.toError("未找到对应的用户信息");
         }
     }
 
     @Override
-    public ResponseDto<UserListDto> findById(Long id) {
-        UserListDto userListDto=new UserListDto();
-        AdmUser user=admUserRepository.findOne(id);
-        if(user!=null){
-            BeanUtils.copyProperties(user,userListDto);
-            return ResponseDtoFactory.toSuccess(userListDto);
+    public ResponseDto<AdmUserDto> findById(Long id) {
+        AdmUserDto dto=new AdmUserDto();
+        AdmUser entity=admUserRepository.findOne(id);
+        if(entity!=null){
+            BeanUtils.copyProperties(entity,dto);
+            return ResponseDtoFactory.toSuccess(dto);
         }else{
             return ResponseDtoFactory.toError("未找到对应的用户信息");
         }
     }
 
     @Override
-    public ResponseDto<Boolean> save(AdmUserDto admUserDto) {
-        AdmUser admUser=EntityUtil.translate(admUserDto,AdmUser.class);
-        admUserRepository.save(admUser);
+    public ResponseDto<Boolean> save(AdmUserDto dto) {
+        AdmUser entity=EntityUtil.translate(dto,AdmUser.class);
+        admUserRepository.save(entity);
         return ResponseDtoFactory.toSuccess("保存成功",Boolean.TRUE);
     }
 
     @Override
-    public ResponseDto<AdmUserDto> update(AdmUserDto admUserDto) {
-        AdmUser admUser=admUserRepository.findOne(admUserDto.getId());
+    public ResponseDto<AdmUserDto> update(AdmUserDto dto) {
+        AdmUser admUser=admUserRepository.findOne(dto.getId());
         if(admUser!=null) {
-            EntityUtil.copyPropertiesIgnoreNull(admUserDto, admUser);
+            EntityUtil.copyPropertiesIgnoreNull(dto, admUser);
             admUserRepository.save(admUser);
-            BeanUtils.copyProperties(admUser,admUserDto);
-            return ResponseDtoFactory.toSuccess("更新成功",admUserDto);
+            BeanUtils.copyProperties(admUser,dto);
+            return ResponseDtoFactory.toSuccess("更新成功",dto);
         }else{
             return ResponseDtoFactory.toError("找不到对应的数据");
         }
     }
 
     @Override
-    public PageResultDto<List<UserListDto>> findByPage(final BasePageDto searchDto) {
+    public PageResultDto<List<AdmUserDto>> findByPage(final BasePageDto searchDto) {
         Pageable pageable=new PageRequest(searchDto.getPage()-1,searchDto.getLimit());
 
         //查询条件构造
@@ -102,22 +102,22 @@ public class AdmUserServiceImpl implements AdmUserService {
             return p;
             }
          };
-        Page<AdmUser> userPage=admUserRepository.findAll(spec,pageable);
+        Page<AdmUser> page=admUserRepository.findAll(spec,pageable);
         Iterable<AdmRole> roleIterable=admRoleRepository.findAll();
 
-        List<UserListDto> list=new ArrayList<>();
-        for(AdmUser user:userPage.getContent()){
-            UserListDto dto=new UserListDto();
-            BeanUtils.copyProperties(user,dto);
+        List<AdmUserDto> list=new ArrayList<>();
+        for(AdmUser entity:page.getContent()){
+            AdmUserDto dto=new AdmUserDto();
+            BeanUtils.copyProperties(entity,dto);
             for(AdmRole role:roleIterable){
-                if(user.getRoleId().equals(role.getId())){
+                if(entity.getRoleId().equals(role.getId())){
                     dto.setRoleName(role.getName());
                     break;
                 }
             }
             list.add(dto);
         }
-        return PageResultDtoFactory.toSuccess("查询成功",list,userPage.getTotalElements());
+        return PageResultDtoFactory.toSuccess("查询成功",list,page.getTotalElements(),page.getTotalPages());
     }
 
     @Override

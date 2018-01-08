@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2018-01-07 13:45:11
+Date: 2018-01-08 14:39:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `adm_log` (
   `create_dt` datetime DEFAULT NULL,
   `create_by` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adm_log
@@ -35,6 +35,7 @@ INSERT INTO `adm_log` VALUES ('2', '4', '192.168.1.1', '2018-01-07 13:32:02', '�
 INSERT INTO `adm_log` VALUES ('3', '4', '0:0:0:0:0:0:0:1', '2018-01-07 13:38:56', '管理员');
 INSERT INTO `adm_log` VALUES ('4', '4', '0:0:0:0:0:0:0:1', '2018-01-07 13:44:29', '管理员');
 INSERT INTO `adm_log` VALUES ('5', '4', '0:0:0:0:0:0:0:1', '2018-01-07 13:44:43', '管理员');
+INSERT INTO `adm_log` VALUES ('6', '4', '0:0:0:0:0:0:0:1', '2018-01-08 09:00:55', '管理员');
 
 -- ----------------------------
 -- Table structure for adm_menu
@@ -53,7 +54,7 @@ CREATE TABLE `adm_menu` (
   `create_by` varchar(25) DEFAULT NULL,
   `order_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adm_menu
@@ -73,6 +74,7 @@ INSERT INTO `adm_menu` VALUES ('12', '角色列表', 'larry-jiaoseguanli1', '/ro
 INSERT INTO `adm_menu` VALUES ('13', '菜单管理', 'larry-caidanguanli', '/menu/index', '0', '7', '1', '0', null, null, null);
 INSERT INTO `adm_menu` VALUES ('14', '顶替', 'larry-neirongguanli', '/TEST', null, null, '0', '0', '2018-01-03 16:43:10', 'admin', null);
 INSERT INTO `adm_menu` VALUES ('15', '顶替2', 'larry-neirongguanli', '/TEST2', null, '14', '1', '1', '2018-01-03 16:44:27', 'admin', null);
+INSERT INTO `adm_menu` VALUES ('17', '图片管理', 'larry-rizhi2', '/photo/index', null, '6', '1', '0', '2018-01-08 11:24:36', 'admin', null);
 
 -- ----------------------------
 -- Table structure for adm_role
@@ -109,7 +111,7 @@ CREATE TABLE `adm_role_menu` (
   `create_by` varchar(255) DEFAULT NULL,
   `create_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=359 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=375 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adm_role_menu
@@ -143,21 +145,6 @@ INSERT INTO `adm_role_menu` VALUES ('331', '7', '13', '管理员2', '2018-01-07 
 INSERT INTO `adm_role_menu` VALUES ('332', '7', '2', '管理员2', '2018-01-07 12:04:27');
 INSERT INTO `adm_role_menu` VALUES ('333', '7', '14', '管理员2', '2018-01-07 12:04:27');
 INSERT INTO `adm_role_menu` VALUES ('334', '7', '15', '管理员2', '2018-01-07 12:04:27');
-INSERT INTO `adm_role_menu` VALUES ('335', '1', '1', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('336', '1', '5', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('337', '1', '6', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('338', '1', '8', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('339', '1', '9', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('340', '1', '10', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('341', '1', '7', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('342', '1', '11', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('343', '1', '12', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('344', '1', '13', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('345', '1', '2', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('346', '1', '3', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('347', '1', '4', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('348', '1', '14', '管理员2', '2018-01-07 12:18:26');
-INSERT INTO `adm_role_menu` VALUES ('349', '1', '15', '管理员2', '2018-01-07 12:18:26');
 INSERT INTO `adm_role_menu` VALUES ('350', '2', '1', '管理员2', '2018-01-07 12:24:52');
 INSERT INTO `adm_role_menu` VALUES ('351', '2', '6', '管理员2', '2018-01-07 12:24:52');
 INSERT INTO `adm_role_menu` VALUES ('352', '2', '8', '管理员2', '2018-01-07 12:24:52');
@@ -167,6 +154,22 @@ INSERT INTO `adm_role_menu` VALUES ('355', '2', '7', '管理员2', '2018-01-07 1
 INSERT INTO `adm_role_menu` VALUES ('356', '2', '11', '管理员2', '2018-01-07 12:24:52');
 INSERT INTO `adm_role_menu` VALUES ('357', '2', '12', '管理员2', '2018-01-07 12:24:52');
 INSERT INTO `adm_role_menu` VALUES ('358', '2', '13', '管理员2', '2018-01-07 12:24:52');
+INSERT INTO `adm_role_menu` VALUES ('359', '1', '1', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('360', '1', '5', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('361', '1', '6', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('362', '1', '8', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('363', '1', '9', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('364', '1', '10', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('365', '1', '17', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('366', '1', '7', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('367', '1', '11', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('368', '1', '12', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('369', '1', '13', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('370', '1', '2', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('371', '1', '3', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('372', '1', '4', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('373', '1', '14', '管理员', '2018-01-08 11:24:47');
+INSERT INTO `adm_role_menu` VALUES ('374', '1', '15', '管理员', '2018-01-08 11:24:47');
 
 -- ----------------------------
 -- Table structure for adm_user
@@ -192,10 +195,46 @@ CREATE TABLE `adm_user` (
 -- ----------------------------
 -- Records of adm_user
 -- ----------------------------
-INSERT INTO `adm_user` VALUES ('4', 'admin', '管理员', 'admin', '0', '2017-12-26 14:38:32', 'admin', '0', '17688888888', 'admin44@datuzi.com', '0937c165-8ab9-49e9-a518-9190e26dcea9.png', '', '1');
+INSERT INTO `adm_user` VALUES ('4', 'admin', '管理员', 'admin', '0', '2017-12-26 14:38:32', 'admin', '0', '17688888888', 'admin44@datuzi.com', '64e4e658-bec1-43d0-9f30-fea4f412e626.png', '', '1');
 INSERT INTO `adm_user` VALUES ('6', 'xiaozhang', '小张', 'xiaozhang', '0', '2018-01-03 14:26:19', 'admin', '0', '17688882636', 'asdf@adsf.com', null, '就是装X', '2');
 INSERT INTO `adm_user` VALUES ('7', 'xiaoli', '小李', 'xiaoli', '0', '2018-01-03 14:29:50', 'admin', '1', '17699632658', 'asdf@asdf.com', null, '测试', '4');
 INSERT INTO `adm_user` VALUES ('8', 'test', 'Test用户', 'test1', '0', '2018-01-07 12:30:54', 'admin', '0', '18688888888', '452@saf.com', null, '', '5');
+
+-- ----------------------------
+-- Table structure for user_photo
+-- ----------------------------
+DROP TABLE IF EXISTS `user_photo`;
+CREATE TABLE `user_photo` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `img_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `img_src` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `create_dt` datetime DEFAULT NULL,
+  `create_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of user_photo
+-- ----------------------------
+INSERT INTO `user_photo` VALUES ('1', '4', '车头照', '0e903467-32f4-4800-b37f-39176f0deb85.png', '2018-01-08 11:15:53', 'admin');
+INSERT INTO `user_photo` VALUES ('2', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('3', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('4', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('5', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('6', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('7', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('8', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('9', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('10', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('11', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('12', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('13', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('14', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('15', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('16', '4', '基本原则', 'userface2.jpg', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('17', '4', '基本原则', '0e903467-32f4-4800-b37f-39176f0deb85.png', '2018-01-08 11:16:16', 'admin');
+INSERT INTO `user_photo` VALUES ('18', '4', '基本原则', 'userface1.jpg', '2018-01-08 11:16:16', 'admin');
 
 -- ----------------------------
 -- Function structure for getChild

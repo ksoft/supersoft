@@ -22,6 +22,7 @@ public class AdmUserDto implements Serializable {
     private String headIcon;
     private Long roleId;
     private String motto;
+    private String roleName;
     private Date createDt;
     private String createBy;
 }

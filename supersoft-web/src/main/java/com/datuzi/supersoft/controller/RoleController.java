@@ -51,7 +51,7 @@ public class RoleController extends BaseController{
      */
     @GetMapping(value = "/view/{id}")
     public String view(@PathVariable Long id, Model model) {
-        ResponseDto<RoleListDto> dto=admRoleFeign.findById(id);
+        ResponseDto<AdmRoleDto> dto=admRoleFeign.findById(id);
         model.addAttribute("role",dto.getData());
         return "role/view";
     }
@@ -62,7 +62,7 @@ public class RoleController extends BaseController{
      */
     @GetMapping(value = "/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        ResponseDto<RoleListDto> dto=admRoleFeign.findById(id);
+        ResponseDto<AdmRoleDto> dto=admRoleFeign.findById(id);
         model.addAttribute("role",dto.getData());
         return "role/edit";
     }
@@ -73,7 +73,7 @@ public class RoleController extends BaseController{
      */
     @GetMapping(value = "/auth/{id}")
     public String auth(@PathVariable Long id, Model model) {
-        ResponseDto<RoleListDto> role=admRoleFeign.findById(id);
+        ResponseDto<AdmRoleDto> role=admRoleFeign.findById(id);
         model.addAttribute("role",role.getData());
         return "role/auth";
     }
@@ -129,7 +129,7 @@ public class RoleController extends BaseController{
      */
     @PostMapping(value = "/list")
     @ResponseBody
-    public PageResultDto<List<RoleListDto>> list(@RequestBody BasePageDto searchDto){
+    public PageResultDto<List<AdmRoleDto>> list(@RequestBody BasePageDto searchDto){
         return admRoleFeign.findByPage(searchDto);
     }
 

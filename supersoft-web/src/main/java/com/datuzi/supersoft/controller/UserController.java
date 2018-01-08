@@ -42,7 +42,7 @@ public class UserController extends BaseController {
      */
     @GetMapping(value = "/add")
     public String add(Model model) {
-        ResponseDto<List<RoleListDto>> responseDto=admRoleFeign.findAll();
+        ResponseDto<List<AdmRoleDto>> responseDto=admRoleFeign.findAll();
         model.addAttribute("roles",responseDto.getData());
         return "user/add";
     }
@@ -53,9 +53,9 @@ public class UserController extends BaseController {
      */
     @GetMapping(value = "/view/{id}")
     public String view(@PathVariable Long id, Model model) {
-        ResponseDto<UserListDto> dto=admUserFeign.findById(id);
+        ResponseDto<AdmUserDto> dto=admUserFeign.findById(id);
         model.addAttribute("user",dto.getData());
-        ResponseDto<List<RoleListDto>> responseDto=admRoleFeign.findAll();
+        ResponseDto<List<AdmRoleDto>> responseDto=admRoleFeign.findAll();
         model.addAttribute("roles",responseDto.getData());
         return "user/view";
     }
@@ -66,9 +66,9 @@ public class UserController extends BaseController {
      */
     @GetMapping(value = "/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        ResponseDto<UserListDto> dto=admUserFeign.findById(id);
+        ResponseDto<AdmUserDto> dto=admUserFeign.findById(id);
         model.addAttribute("user",dto.getData());
-        ResponseDto<List<RoleListDto>> responseDto=admRoleFeign.findAll();
+        ResponseDto<List<AdmRoleDto>> responseDto=admRoleFeign.findAll();
         model.addAttribute("roles",responseDto.getData());
         return "user/edit";
     }
@@ -103,7 +103,7 @@ public class UserController extends BaseController {
      */
     @PostMapping(value = "/list")
     @ResponseBody
-    public PageResultDto<List<UserListDto>> list(@RequestBody BasePageDto searchDto){
+    public PageResultDto<List<AdmUserDto>> list(@RequestBody BasePageDto searchDto){
         return admUserFeign.findByPage(searchDto);
     }
 
@@ -174,8 +174,8 @@ public class UserController extends BaseController {
      */
     @GetMapping(value = "/myInfo")
     public String myInfo(HttpServletRequest request,Model model) {
-        ResponseDto<UserListDto> responseDto=admUserFeign.findById(super.getCurrent().getId());
-        UserListDto userListDto=responseDto.getData();
+        ResponseDto<AdmUserDto> responseDto=admUserFeign.findById(super.getCurrent().getId());
+        AdmUserDto userListDto=responseDto.getData();
         AdmUserDto admUserDto=new AdmUserDto();
         BeanUtils.copyProperties(userListDto,admUserDto);
         super.refreshCurrent(request,admUserDto);

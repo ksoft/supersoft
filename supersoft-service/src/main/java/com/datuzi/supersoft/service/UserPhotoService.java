@@ -1,48 +1,50 @@
 package com.datuzi.supersoft.service;
 
-import com.datuzi.supersoft.dto.*;
-import com.datuzi.supersoft.entity.AdmRole;
+import com.datuzi.supersoft.dto.BasePageDto;
+import com.datuzi.supersoft.dto.PageResultDto;
+import com.datuzi.supersoft.dto.ResponseDto;
+import com.datuzi.supersoft.dto.UserPhotoDto;
 
 import java.util.List;
 
 /**
  * @author zhangjianbo
- * @date 2017/12/11
+ * @date 2018/1/8
  */
-public interface AdmRoleService {
+public interface UserPhotoService {
     /**
      * 查找
      * @param id
      * @return
      */
-    ResponseDto<AdmRoleDto> findById(Long id);
+    ResponseDto<UserPhotoDto> findById(Long id);
 
     /**
      * 获取全部菜单
      * @return
      */
-    ResponseDto<List<AdmRoleDto>> findAll();
+    ResponseDto<List<UserPhotoDto>> findAll();
 
     /**
      * 保存
      * @param dto
      * @return
      */
-    ResponseDto<Boolean> save(AdmRoleDto dto);
+    ResponseDto<Boolean> save(UserPhotoDto dto);
 
     /**
      * 更新
      * @param dto
      * @return
      */
-    ResponseDto<Boolean> update(AdmRoleDto dto);
+    ResponseDto<Boolean> update(UserPhotoDto dto);
 
     /**
      * 列表分页
      * @param searchDto
      * @return
      */
-    PageResultDto<List<AdmRoleDto>> findByPage(final BasePageDto searchDto);
+    PageResultDto<List<UserPhotoDto>> findByPage(final BasePageDto searchDto);
 
     /**
      * 删除

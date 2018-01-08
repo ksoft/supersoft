@@ -26,21 +26,22 @@ public final class PageResultDtoFactory {
     }
 
     public static <T> PageResultDto<T> toSuccess(String rspMsg){
-        return toSuccess(rspMsg, null, 0L);
+        return toSuccess(rspMsg, null, 0L,0);
     }
 
-    public static <T> PageResultDto<T> toSuccess(T data,long count){
-        return toSuccess("", "", data,count);
+    public static <T> PageResultDto<T> toSuccess(T data,long count,int totalPages){
+        return toSuccess("", "", data,count,totalPages);
     }
 
-    public static <T> PageResultDto<T> toSuccess(String rspMsg, T data, long count){
-        return toSuccess("", rspMsg, data,count);
+    public static <T> PageResultDto<T> toSuccess(String rspMsg, T data, long count,int totalPages){
+        return toSuccess("", rspMsg, data,count,totalPages);
     }
 
-    public static <T> PageResultDto<T> toSuccess(String code, String rspMsg, T data,long count){
+    public static <T> PageResultDto<T> toSuccess(String code, String rspMsg, T data,long count,int totalPages){
         PageResultDto<T> dto = new PageResultDto<T>();
         dto.setCode(RespCode.ACK.getName());
         dto.setCount(count);
+        dto.setTotalPages(totalPages);
         dto.setMsg(rspMsg);
         dto.setData(data);
         return dto;

@@ -116,7 +116,7 @@ public class AdmMenuServiceImpl implements AdmMenuService{
     }
 
     @Override
-    public PageResultDto<List<MenuListDto>> findByPage(final BasePageDto searchDto) {
+    public PageResultDto<List<AdmMenuDto>> findByPage(final BasePageDto searchDto) {
         Pageable pageable=new PageRequest(searchDto.getPage()-1,searchDto.getLimit());
 
         //查询条件构造
@@ -133,18 +133,18 @@ public class AdmMenuServiceImpl implements AdmMenuService{
             }
         };
         Page<AdmMenu> page=admMenuRepository.findAll(spec,pageable);
-        List<MenuListDto> list=new ArrayList<>();
+        List<AdmMenuDto> list=new ArrayList<>();
         for(AdmMenu role:page.getContent()){
-            MenuListDto dto=new MenuListDto();
+            AdmMenuDto dto=new AdmMenuDto();
             BeanUtils.copyProperties(role,dto);
             list.add(dto);
         }
-        return PageResultDtoFactory.toSuccess("查询成功",list,page.getTotalElements());
+        return PageResultDtoFactory.toSuccess("查询成功",list,page.getTotalElements(),page.getTotalPages());
     }
 
     @Override
-    public ResponseDto<MenuListDto> findById(Long id) {
-        MenuListDto listDto=new MenuListDto();
+    public ResponseDto<AdmMenuDto> findById(Long id) {
+        AdmMenuDto listDto=new AdmMenuDto();
         AdmMenu role=admMenuRepository.findOne(id);
         if(role!=null){
             BeanUtils.copyProperties(role,listDto);
@@ -164,11 +164,11 @@ public class AdmMenuServiceImpl implements AdmMenuService{
     }
 
     @Override
-    public ResponseDto<List<MenuListDto>> findAll() {
-        List<MenuListDto> list=new ArrayList<>();
+    public ResponseDto<List<AdmMenuDto>> findAll() {
+        List<AdmMenuDto> list=new ArrayList<>();
         Iterable<AdmMenu> ite=admMenuRepository.findAll();
         for(AdmMenu menu:ite){
-            MenuListDto dto=new MenuListDto();
+            AdmMenuDto dto=new AdmMenuDto();
             BeanUtils.copyProperties(menu,dto);
             list.add(dto);
         }

@@ -28,9 +28,9 @@ public class AdmRoleMenuServiceImpl implements AdmRoleMenuService{
     public ResponseDto<Boolean> save(List<AdmRoleMenuDto> roleMenuDtoList) {
         Long roleId=roleMenuDtoList.get(0).getRoleId();
         admRoleMenuRepository.deleteByRoleId(roleId);
-        for(AdmRoleMenuDto admRoleMenuDto:roleMenuDtoList) {
-            AdmRoleMenu admRoleMenu=EntityUtil.translate(admRoleMenuDto,AdmRoleMenu.class);
-            admRoleMenuRepository.save(admRoleMenu);
+        for(AdmRoleMenuDto dto:roleMenuDtoList) {
+            AdmRoleMenu entity=EntityUtil.translate(dto,AdmRoleMenu.class);
+            admRoleMenuRepository.save(entity);
         }
         return ResponseDtoFactory.toSuccess("保存成功",Boolean.TRUE);
     }

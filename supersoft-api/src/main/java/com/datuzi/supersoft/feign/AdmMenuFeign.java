@@ -27,7 +27,7 @@ public interface AdmMenuFeign {
      */
     @RequestMapping(value = "/menu/findByPage",method = RequestMethod.POST)
     @ResponseBody
-    PageResultDto<List<MenuListDto>> findByPage(@RequestBody BasePageDto searchDto);
+    PageResultDto<List<AdmMenuDto>> findByPage(@RequestBody BasePageDto searchDto);
 
     /**
      * 删除
@@ -44,7 +44,7 @@ public interface AdmMenuFeign {
      */
     @RequestMapping(value = "/menu/findAll",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<List<MenuListDto>> findAll();
+    ResponseDto<List<AdmMenuDto>> findAll();
 
     /**
      * 查找
@@ -61,7 +61,7 @@ public interface AdmMenuFeign {
      */
     @RequestMapping(value = "/menu/findById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<MenuListDto> findById(@PathVariable("id") Long id);
+    ResponseDto<AdmMenuDto> findById(@PathVariable("id") Long id);
 
     /**
      * 保存

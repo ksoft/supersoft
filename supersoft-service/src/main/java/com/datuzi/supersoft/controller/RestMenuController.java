@@ -36,7 +36,7 @@ public class RestMenuController {
 
     @RequestMapping(value = "/findByPage",method = RequestMethod.POST)
     @ResponseBody
-    public PageResultDto<List<MenuListDto>> findByPage(@RequestBody BasePageDto searchDto) {
+    public PageResultDto<List<AdmMenuDto>> findByPage(@RequestBody BasePageDto searchDto) {
         return admMenuService.findByPage(searchDto);
     }
 
@@ -48,13 +48,13 @@ public class RestMenuController {
 
     @RequestMapping(value = "/findAll",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<List<MenuListDto>> findAll(){
+    ResponseDto<List<AdmMenuDto>> findAll(){
         return admMenuService.findAll();
     }
 
     @RequestMapping(value = "/findById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto<MenuListDto> findById(@PathVariable("id") Long id) {
+    public ResponseDto<AdmMenuDto> findById(@PathVariable("id") Long id) {
         return admMenuService.findById(id);
     }
 

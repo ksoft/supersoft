@@ -38,7 +38,7 @@ public interface AdmRoleFeign {
      */
     @RequestMapping(value = "/role/findById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<RoleListDto> findById(@PathVariable("id") Long id);
+    ResponseDto<AdmRoleDto> findById(@PathVariable("id") Long id);
 
     /**
      * 查找全部
@@ -46,7 +46,7 @@ public interface AdmRoleFeign {
      */
     @RequestMapping(value = "/role/findAll",method = RequestMethod.POST)
     @ResponseBody
-    ResponseDto<List<RoleListDto>> findAll();
+    ResponseDto<List<AdmRoleDto>> findAll();
 
     /**
      * 删除
@@ -65,5 +65,5 @@ public interface AdmRoleFeign {
      */
     @RequestMapping(value = "/role/findByPage",method = RequestMethod.POST)
     @ResponseBody
-    PageResultDto<List<RoleListDto>> findByPage(@RequestBody BasePageDto searchDto);
+    PageResultDto<List<AdmRoleDto>> findByPage(@RequestBody BasePageDto searchDto);
 }

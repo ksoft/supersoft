@@ -21,7 +21,7 @@ public interface AdmUserService {
      * @param id
      * @return
      */
-    ResponseDto<UserListDto> findById(Long id);
+    ResponseDto<AdmUserDto> findById(Long id);
 
     /**
      * 保存
@@ -42,7 +42,7 @@ public interface AdmUserService {
      * @param searchDto
      * @return
      */
-    PageResultDto<List<UserListDto>> findByPage(BasePageDto searchDto);
+    PageResultDto<List<AdmUserDto>> findByPage(final BasePageDto searchDto);
 
     /**
      * 删除

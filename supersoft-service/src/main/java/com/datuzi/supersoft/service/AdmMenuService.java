@@ -34,14 +34,14 @@ public interface AdmMenuService {
      * @param searchDto
      * @return
      */
-    PageResultDto<List<MenuListDto>> findByPage(BasePageDto searchDto);
+    PageResultDto<List<AdmMenuDto>> findByPage(BasePageDto searchDto);
 
     /**
      * 查找
      * @param id
      * @return
      */
-    ResponseDto<MenuListDto> findById(Long id);
+    ResponseDto<AdmMenuDto> findById(Long id);
 
     /**
      * 删除
@@ -54,7 +54,7 @@ public interface AdmMenuService {
      * 获取全部菜单
      * @return
      */
-    ResponseDto<List<MenuListDto>> findAll();
+    ResponseDto<List<AdmMenuDto>> findAll();
 
     /**
      * 保存
