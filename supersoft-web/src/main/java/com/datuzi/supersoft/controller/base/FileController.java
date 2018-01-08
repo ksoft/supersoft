@@ -23,16 +23,16 @@ public class FileController {
     private ServerConfig config;
 
     /**
-     * 修改
+     *上传图片
      * @param file
      * @return
      */
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto<String> upload(MultipartFile file) {
+    public ResponseDto<String> upload(MultipartFile file,Boolean showPath) {
         try {
             String path = config.getFtpFileBase();
-            String fileName = UploadUtil.upload(file, path);
+            String fileName = UploadUtil.upload(file, path,showPath);
             return ResponseDtoFactory.toSuccess("上传成功",fileName);
         }catch (Exception e){
             return ResponseDtoFactory.toError("上传失败");

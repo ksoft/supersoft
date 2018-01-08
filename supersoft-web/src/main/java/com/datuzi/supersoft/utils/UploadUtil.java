@@ -10,12 +10,17 @@ import java.util.UUID;
  * @date 2017/12/27
  */
 public class UploadUtil {
-    public static String upload(MultipartFile file,String path) throws Exception{
+    public static String upload(MultipartFile file,String path,Boolean showPath) throws Exception{
         String fileName=file.getOriginalFilename();
         String suffixName=fileName.substring(fileName.lastIndexOf("."));
-        File tempfile=new File(path, UUID.randomUUID().toString()+suffixName);
+        String fileFinalName=UUID.randomUUID().toString()+suffixName;
+        File tempfile=new File(path, fileFinalName);
         tempfile.createNewFile();
         file.transferTo(tempfile);
-        return tempfile.getName();
+        if(showPath!=null && showPath){
+            return tempfile.getName();
+        }else{
+            return fileFinalName;
+        }
     }
 }

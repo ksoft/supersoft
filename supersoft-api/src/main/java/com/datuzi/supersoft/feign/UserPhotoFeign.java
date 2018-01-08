@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2018/1/8
  */
 @FeignClient(name= Constants.SERVICE_PROVIDER)
-@RequestMapping(value = "/photo")
+@RequestMapping(value = "/feign/photo")
 public interface UserPhotoFeign {
     /**
      * 保存

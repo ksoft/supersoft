@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2018/1/8
  */
 @RestController
-@RequestMapping("/photo")
+@RequestMapping("/feign/photo")
 public class RestPhotoController {
     @Autowired
     private UserPhotoService userPhotoService;

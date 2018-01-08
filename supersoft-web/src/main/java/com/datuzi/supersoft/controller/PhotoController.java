@@ -5,7 +5,6 @@ import com.datuzi.supersoft.dto.*;
 import com.datuzi.supersoft.feign.UserPhotoFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +29,15 @@ public class PhotoController extends BaseController{
     }
 
     /**
+     * 新增
+     * @return
+     */
+    @GetMapping(value = "/add")
+    public String add() {
+        return "photo/add";
+    }
+
+    /**
      * 删除
      * @return
      */
@@ -49,4 +57,18 @@ public class PhotoController extends BaseController{
         return userPhotoFeign.findByPage(searchDto);
     }
 
+    /**
+     * 新增
+     * @param dto
+     * @return
+     */
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto<Boolean> save(@RequestBody UserPhotoDto dto) {
+        AdmUserDto currentUser=getCurrent();
+        dto.setCreateBy(currentUser.getUserCode());
+        dto.setUserId(currentUser.getId());
+        dto.setUserName(currentUser.getUserName());
+        return userPhotoFeign.save(dto);
+    }
 }
