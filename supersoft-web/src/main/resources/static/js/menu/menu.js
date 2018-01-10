@@ -18,13 +18,13 @@ layui.use(['jquery','layer','form','table','upload'],function(){
         ,cols: [[ //表头
             {type:'checkbox'}
             ,{field: 'id', title: 'ID', width:'5%', sort: true}
-            ,{field: 'title', title: '菜单名称', width:'15%', sort: true}
-            ,{field: 'icon', title: '图标',templet:'#iconTpl',unresize:true, width: '20%', sort: true}
+            ,{field: 'title', title: '菜单名称', width:'20%', sort: true}
+            ,{field: 'icon', title: '图标',templet:'#iconTpl',unresize:true, width: '5%', sort: true}
             ,{field: 'type', title: '菜单类型', templet: '#typeTpl', unresize: true, width: '10%', sort: true}
             ,{field: 'createDt', title: '创建时间', width:'15%', sort: true}
-            ,{field: 'createBy', title: '创建人', width: '10%', sort: true}
+            ,{field: 'createBy', title: '创建人', width: '15%', sort: true}
             ,{field: 'status', title: '状态', templet: '#statusTpl', unresize: true, width: '5%', sort: true}
-            ,{field: 'opt', title: '操作', width: '30%', sort: true, toolbar: '#operateBar'}
+            ,{field: 'opt', title: '操作', width: '20%', sort: true, toolbar: '#operateBar'}
         ]]
     });
 
