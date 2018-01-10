@@ -22,6 +22,7 @@
 <body>
 <form class="layui-form" action="" style="margin-top: 20px;">
     <input type="hidden" name="id" th:value="${menu.id}">
+    <input type="hidden" id="icon" name="icon" th:value="${menu.icon}">
     <div class="layui-form-item">
         <label class="layui-form-label">菜单类别</label>
         <div class="layui-input-block">
@@ -45,15 +46,28 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">图标样式</label>
         <div class="layui-input-inline">
-            <input type="text" name="icon" th:value="${menu.icon}"  lay-verify="required" placeholder="请输入图标样式" autocomplete="off" class="layui-input">
+            <label class="layui-form-label">图标样式</label>
+            <i class="layui-icon" style="font-size: 40px;" id="iconPreview">
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    var icon=[[${menu.icon}]];
+                    function decode(str) {
+                        return unescape(str.replace(/&#x/g,'%u').replace(/;/g,''))
+                    }
+                    document.write(decode(icon))
+                    /*]]>*/
+                </script>
+            </i>
+        </div>
+        <div class="layui-input-inline">
+            <i class="layui-icon" id="iconAdd" style="font-size: 40px; color: #1E9FFF;" placeholder="请选择图标样式">&#xe61f;</i>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">菜单URL</label>
         <div class="layui-input-inline">
-            <input type="text" name="href" th:value="${menu.href}"  lay-verify="required" placeholder="请输入菜单URL" autocomplete="off" class="layui-input">
+            <input type="text" name="href" th:value="${menu.href}"  placeholder="请输入菜单URL" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -70,4 +84,5 @@
         </div>
     </div>
 </form>
+<div th:include="/menu/icon :: iconDiv" id="iconMenuPage" style="display: none;"></div>
 </body>

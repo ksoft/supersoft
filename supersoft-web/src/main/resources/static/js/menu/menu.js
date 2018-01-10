@@ -19,7 +19,7 @@ layui.use(['jquery','layer','form','table','upload'],function(){
             {type:'checkbox'}
             ,{field: 'id', title: 'ID', width:'5%', sort: true}
             ,{field: 'title', title: '菜单名称', width:'15%', sort: true}
-            ,{field: 'icon', title: '图标', width: '20%', sort: true}
+            ,{field: 'icon', title: '图标',templet:'#iconTpl',unresize:true, width: '20%', sort: true}
             ,{field: 'type', title: '菜单类型', templet: '#typeTpl', unresize: true, width: '10%', sort: true}
             ,{field: 'createDt', title: '创建时间', width:'15%', sort: true}
             ,{field: 'createBy', title: '创建人', width: '10%', sort: true}
@@ -200,5 +200,26 @@ layui.use(['jquery','layer','form','table','upload'],function(){
     $('.headerTable .layui-btn').on('click', function(){
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
+    });
+
+     function decode(str) {
+         return unescape(str.replace(/&#x/g,'%u').replace(/;/g,''))
+     }
+
+    var iconLayerIndex;
+    $("#iconAdd").on('click',function () {
+        iconLayerIndex=layer.open({
+            type: 1,
+            title:"请选择菜单图标",
+            area: ['80%', '80%'],
+            content: $('#iconMenuPage')
+        });
+    });
+
+    $(".site-doc-icon > li").on('click',function () {
+        var iconCode=$(this).find("div.code").text();
+        $("#iconPreview").text(decode(iconCode));
+        $("#icon").val(iconCode);
+        layer.close(iconLayerIndex);
     });
 });

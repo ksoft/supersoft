@@ -47,6 +47,9 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+<script type="text/html" id="iconTpl">
+    <i class="layui-icon">{{d.icon}}</i>
+</script>
 <script type="text/html" id="typeTpl">
     <input type="checkbox" name="status" value="{{d.type}}" disabled lay-skin="switch" lay-text="顶部|左侧" lay-filter="statusFilter" {{ d.type == 'TOP' ? 'checked' : '' }}>
 </script>

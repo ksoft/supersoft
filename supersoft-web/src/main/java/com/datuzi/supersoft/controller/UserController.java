@@ -180,6 +180,8 @@ public class UserController extends BaseController {
         BeanUtils.copyProperties(userListDto,admUserDto);
         super.refreshCurrent(request,admUserDto);
         model.addAttribute("user",admUserDto);
+        ResponseDto<List<AdmRoleDto>> rolesRespon=admRoleFeign.findAll();
+        model.addAttribute("roles",rolesRespon.getData());
         return "user/myInfo";
     }
 }
